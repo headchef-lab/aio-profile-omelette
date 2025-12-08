@@ -11,6 +11,7 @@
       --bg: #f9fafb; --bg-alt: #ffffff; --yolk: #fdd835; --yolk-deep: #f59e0b;
       --accent-soft: #fef3c7; --accent-alt: #14b8a6; --ink: #111827; --muted: #6b7280;
       --border: #e5e7eb; --radius-lg: 18px; --radius-md: 12px;
+      --brand-blue: #19aff0;
     }
     html { scroll-behavior: smooth; }
     body { font-family: "Inter", system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; }
@@ -215,6 +216,94 @@
     .tt-bio { font-size: 0.9rem; color: #fff; line-height: 1.4; text-align: center; }
     .tt-char-count { font-size: 0.72rem; color: #8a8b91; margin-top: 12px; }
 
+    /* YOUTUBE MOCKUP */
+    .yt-mockup { background: #0f0f0f; color: #fff; font-family: "Roboto", -apple-system, BlinkMacSystemFont, sans-serif; }
+    .yt-mockup .mockup-copy-row { background: #1a1a1a; border-color: #303030; }
+    .yt-mockup .mockup-platform-label { color: #aaa; }
+    .yt-banner { height: 90px; background: linear-gradient(135deg, #282828 0%, #1a1a1a 100%); position: relative; }
+    .yt-banner::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 40px; background: linear-gradient(to top, #0f0f0f, transparent); }
+    .yt-profile { padding: 16px 20px; }
+    .yt-top-row { display: flex; align-items: center; gap: 16px; }
+    .yt-avatar { width: 80px; height: 80px; border-radius: 50%; background: #303030; overflow: hidden; flex-shrink: 0; }
+    .yt-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .yt-info { flex: 1; }
+    .yt-channel-name { font-size: 1.3rem; font-weight: 500; color: #fff; display: flex; align-items: center; gap: 6px; }
+    .yt-verified { width: 14px; height: 14px; background: #aaa; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; }
+    .yt-meta { font-size: 0.85rem; color: #aaa; margin-top: 4px; }
+    .yt-meta span { margin-right: 8px; }
+    .yt-actions { display: flex; gap: 8px; margin-top: 16px; }
+    .yt-subscribe-btn { padding: 10px 20px; border-radius: 999px; border: none; background: #ff0000; color: #fff; font-weight: 500; font-size: 0.9rem; }
+    .yt-join-btn { padding: 10px 20px; border-radius: 999px; border: 1px solid #303030; background: transparent; color: #fff; font-weight: 500; font-size: 0.9rem; }
+    .yt-about { margin-top: 20px; padding-top: 16px; border-top: 1px solid #303030; }
+    .yt-about-text { font-size: 0.9rem; color: #aaa; line-height: 1.5; }
+    .yt-links { margin-top: 12px; display: flex; gap: 16px; }
+    .yt-link { font-size: 0.85rem; color: #3ea6ff; text-decoration: none; }
+    .yt-char-count { font-size: 0.72rem; color: #717171; margin-top: 12px; text-align: right; }
+
+    /* FACEBOOK MOCKUP */
+    .fb-mockup { background: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .fb-cover { height: 100px; background: linear-gradient(135deg, #4267B2 0%, #3b5998 50%, #8b9dc3 100%); position: relative; }
+    .fb-profile { padding: 0 16px 16px; position: relative; }
+    .fb-avatar { width: 96px; height: 96px; border-radius: 50%; border: 4px solid #fff; position: absolute; top: -48px; left: 16px; background: #e4e6eb; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    .fb-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .fb-actions { display: flex; justify-content: flex-end; gap: 8px; padding: 12px 0; }
+    .fb-add-btn { padding: 8px 16px; border-radius: 6px; border: none; background: #1877f2; color: #fff; font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; }
+    .fb-message-btn { padding: 8px 16px; border-radius: 6px; border: none; background: #e4e6eb; color: #050505; font-weight: 600; font-size: 0.85rem; }
+    .fb-name { font-size: 1.4rem; font-weight: 700; color: #050505; margin-top: 8px; }
+    .fb-friends { font-size: 0.9rem; color: #65676b; margin-top: 4px; }
+    .fb-bio-section { margin-top: 16px; padding: 16px; background: #f0f2f5; border-radius: 8px; }
+    .fb-bio-label { font-size: 0.8rem; color: #65676b; margin-bottom: 6px; font-weight: 600; }
+    .fb-bio-text { font-size: 0.95rem; color: #050505; line-height: 1.5; }
+    .fb-details { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+    .fb-detail { font-size: 0.9rem; color: #050505; display: flex; align-items: center; gap: 8px; }
+    .fb-detail-icon { color: #65676b; }
+    .fb-char-count { font-size: 0.72rem; color: #65676b; margin-top: 12px; text-align: right; }
+
+    /* GOOGLE BUSINESS MOCKUP */
+    .gb-mockup { background: #fff; font-family: "Google Sans", -apple-system, BlinkMacSystemFont, sans-serif; }
+    .gb-header { background: #fff; padding: 16px; border-bottom: 1px solid #e0e0e0; }
+    .gb-search-bar { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: #f1f3f4; border-radius: 24px; }
+    .gb-search-icon { color: #5f6368; font-size: 18px; }
+    .gb-search-text { color: #202124; font-size: 0.95rem; flex: 1; }
+    .gb-profile { padding: 16px; }
+    .gb-top-row { display: flex; gap: 16px; }
+    .gb-avatar { width: 72px; height: 72px; border-radius: 50%; background: #e8eaed; overflow: hidden; flex-shrink: 0; }
+    .gb-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .gb-info { flex: 1; }
+    .gb-name { font-size: 1.25rem; font-weight: 500; color: #202124; }
+    .gb-category { font-size: 0.85rem; color: #5f6368; margin-top: 2px; }
+    .gb-rating { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
+    .gb-stars { color: #fbbc04; font-size: 0.9rem; letter-spacing: 1px; }
+    .gb-rating-text { font-size: 0.85rem; color: #5f6368; }
+    .gb-actions { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+    .gb-action-btn { padding: 10px 20px; border-radius: 999px; border: 1px solid #dadce0; background: #fff; color: #1a73e8; font-weight: 500; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; }
+    .gb-action-btn.primary { background: #1a73e8; color: #fff; border-color: #1a73e8; }
+    .gb-about { margin-top: 20px; padding-top: 16px; border-top: 1px solid #e0e0e0; }
+    .gb-about-title { font-size: 0.9rem; font-weight: 500; color: #202124; margin-bottom: 8px; }
+    .gb-about-text { font-size: 0.9rem; color: #5f6368; line-height: 1.5; }
+    .gb-details { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .gb-detail { font-size: 0.9rem; color: #202124; display: flex; align-items: center; gap: 10px; }
+    .gb-detail-icon { color: #5f6368; width: 20px; text-align: center; }
+    .gb-char-count { font-size: 0.72rem; color: #5f6368; margin-top: 12px; text-align: right; }
+
+    /* THREADS MOCKUP */
+    .threads-mockup { background: #101010; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .threads-mockup .mockup-copy-row { background: #1a1a1a; border-color: #333; }
+    .threads-mockup .mockup-platform-label { color: #777; }
+    .threads-profile { padding: 20px; }
+    .threads-top-row { display: flex; justify-content: space-between; align-items: flex-start; }
+    .threads-info { flex: 1; }
+    .threads-name { font-size: 1.2rem; font-weight: 700; color: #fff; }
+    .threads-handle { font-size: 0.95rem; color: #777; margin-top: 2px; }
+    .threads-avatar { width: 64px; height: 64px; border-radius: 50%; background: #333; overflow: hidden; }
+    .threads-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .threads-bio { font-size: 0.95rem; color: #fff; margin-top: 12px; line-height: 1.4; }
+    .threads-followers { font-size: 0.9rem; color: #777; margin-top: 12px; }
+    .threads-actions { display: flex; gap: 8px; margin-top: 16px; }
+    .threads-follow-btn { flex: 1; padding: 10px; border-radius: 10px; border: 1px solid #333; background: #fff; color: #000; font-weight: 600; font-size: 0.9rem; text-align: center; }
+    .threads-mention-btn { flex: 1; padding: 10px; border-radius: 10px; border: 1px solid #333; background: transparent; color: #fff; font-weight: 600; font-size: 0.9rem; text-align: center; }
+    .threads-char-count { font-size: 0.72rem; color: #555; margin-top: 12px; text-align: right; }
+
     /* GENERIC MOCKUP */
     .generic-mockup { background: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
     .generic-profile { padding: 20px; display: flex; gap: 16px; align-items: flex-start; }
@@ -226,11 +315,11 @@
     .generic-bio { font-size: 0.9rem; color: #374151; margin-top: 10px; line-height: 1.5; }
     .generic-char-count { font-size: 0.72rem; color: #9ca3af; margin-top: 8px; }
 
-    /* Brand summary */
-    .brand-summary { background: linear-gradient(135deg, var(--yolk) 0%, var(--yolk-deep) 100%); border-radius: 16px; padding: 20px; margin-bottom: 28px; color: var(--ink); }
+    /* Brand summary - NOW BLUE */
+    .brand-summary { background: linear-gradient(135deg, #19aff0 0%, #0d8ecf 100%); border-radius: 16px; padding: 20px; margin-bottom: 28px; color: #fff; }
     .brand-summary-row { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
     .brand-summary-item { flex: 1; min-width: 140px; }
-    .brand-summary-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; margin-bottom: 4px; }
+    .brand-summary-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.85; margin-bottom: 4px; }
     .brand-summary-value { font-size: 16px; font-weight: 600; }
     .brand-summary-alts { font-size: 12px; opacity: 0.8; margin-top: 4px; }
     .footer-buttons { display: flex; gap: 12px; }
@@ -296,9 +385,9 @@
           <div class="hero-examples-header">
             <span class="badge">Live Preview</span>
             <div class="hero-tab-list">
-              <div class="hero-tab active" onclick="showHeroTab('linkedin')">LinkedIn</div>
-              <div class="hero-tab" onclick="showHeroTab('instagram')">Instagram</div>
-              <div class="hero-tab" onclick="showHeroTab('twitter')">X / Twitter</div>
+              <div class="hero-tab active" onclick="showHeroTab(event, 'linkedin')">LinkedIn</div>
+              <div class="hero-tab" onclick="showHeroTab(event, 'instagram')">Instagram</div>
+              <div class="hero-tab" onclick="showHeroTab(event, 'twitter')">X / Twitter</div>
             </div>
           </div>
           <div class="hero-example-block" id="heroExampleLinkedin">
@@ -485,7 +574,7 @@
           <header class="results-header"><h2 class="results-title">Your profiles are cooked! 🍳</h2><p class="results-subtitle">Copy and paste into each platform.</p></header>
           <div class="brand-summary" id="brandSummary"></div>
           <div id="resultsContainer"></div>
-          <div class="button-row" style="margin-top:32px;"><button class="btn-back" onclick="goToStep(1)">Start Over</button><div class="footer-buttons"><button class="btn-secondary" onclick="copyAllProfiles()">📋 Copy All</button><button class="btn-next" onclick="downloadText()">📄 Download</button></div></div>
+          <div class="button-row" style="margin-top:32px;"><button class="btn-back" onclick="goToStep(1)">Start Over</button><div class="footer-buttons"><button class="btn-secondary" onclick="copyAllProfiles(event)">📋 Copy All</button><button class="btn-next" onclick="downloadText()">📄 Download</button></div></div>
         </div>
       </div>
     </div>
@@ -531,23 +620,17 @@ let generatedResults = null;
 let brandFoundation = null;
 let uploadedImageDataUrl = null;
 
-// Image upload - FIXED
 function handleImageUpload(input) {
   const file = input.files[0];
   if (!file) return;
-  const preview = document.getElementById('brandImagePreview');
-  const placeholder = document.getElementById('uploadPlaceholder');
-  const nameEl = document.getElementById('brandImageName');
-  const removeBtn = document.getElementById('removeImageBtn');
   const reader = new FileReader();
   reader.onload = function(e) {
     uploadedImageDataUrl = e.target.result;
-    console.log('Image uploaded, data URL length:', uploadedImageDataUrl.length);
-    preview.src = uploadedImageDataUrl;
-    preview.style.display = 'block';
-    placeholder.style.display = 'none';
-    nameEl.textContent = file.name;
-    removeBtn.style.display = 'block';
+    document.getElementById('brandImagePreview').src = uploadedImageDataUrl;
+    document.getElementById('brandImagePreview').style.display = 'block';
+    document.getElementById('uploadPlaceholder').style.display = 'none';
+    document.getElementById('brandImageName').textContent = file.name;
+    document.getElementById('removeImageBtn').style.display = 'block';
   };
   reader.readAsDataURL(file);
 }
@@ -561,15 +644,13 @@ function removeImage() {
   document.getElementById('brandImageInput').value = '';
 }
 
-// Hero tabs
-function showHeroTab(tab) {
+function showHeroTab(e, tab) {
   document.querySelectorAll('.hero-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('[id^="heroExample"]').forEach(b => b.style.display = 'none');
-  event.target.classList.add('active');
+  e.target.classList.add('active');
   document.getElementById('heroExample' + tab.charAt(0).toUpperCase() + tab.slice(1)).style.display = 'block';
 }
 
-// Validation
 function validateStep1() {
   const name = document.getElementById('businessName')?.value?.trim() || '';
   const industry = document.getElementById('industry')?.value?.trim() || '';
@@ -584,11 +665,10 @@ function validateAndProceed(step) {
 
 ['businessName', 'industry', 'oneLiner'].forEach(id => {
   const el = document.getElementById(id);
-  if (el) { el.addEventListener('input', validateStep1); }
+  if (el) el.addEventListener('input', validateStep1);
 });
 setTimeout(validateStep1, 100);
 
-// Navigation
 function goToStep(step) {
   document.querySelectorAll('.step-container').forEach(s => s.classList.remove('active'));
   document.getElementById('step' + step).classList.add('active');
@@ -603,14 +683,11 @@ function goToStep(step) {
   document.getElementById('wizard').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// Chips
 document.getElementById('audienceGrid').addEventListener('click', e => {
   if (e.target.classList.contains('audience-chip')) {
     e.target.classList.toggle('active');
     const val = e.target.dataset.audience;
-    selectedAudiences = e.target.classList.contains('active') 
-      ? [...selectedAudiences, val] 
-      : selectedAudiences.filter(a => a !== val);
+    selectedAudiences = e.target.classList.contains('active') ? [...selectedAudiences, val] : selectedAudiences.filter(a => a !== val);
   }
 });
 
@@ -618,13 +695,10 @@ document.getElementById('vibeGrid').addEventListener('click', e => {
   if (e.target.classList.contains('vibe-chip')) {
     e.target.classList.toggle('active');
     const val = e.target.dataset.vibe;
-    selectedVibes = e.target.classList.contains('active')
-      ? [...selectedVibes, val]
-      : selectedVibes.filter(v => v !== val);
+    selectedVibes = e.target.classList.contains('active') ? [...selectedVibes, val] : selectedVibes.filter(v => v !== val);
   }
 });
 
-// Platforms
 document.getElementById('platformGrid').addEventListener('click', e => {
   const card = e.target.closest('.platform-card');
   if (!card) return;
@@ -645,7 +719,6 @@ document.getElementById('platformGrid').addEventListener('click', e => {
   document.getElementById('selectedCount').textContent = selectedPlatforms.length + ' platforms selected';
 });
 
-// Toggles
 function setTaglineMode(mode) {
   taglineMode = mode;
   document.querySelectorAll('#taglineSection .toggle-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
@@ -660,7 +733,6 @@ function setHandleMode(mode) {
   document.getElementById('handleHint').classList.toggle('hidden', mode === 'input');
 }
 
-// Platform metadata
 const platformMeta = {
   instagram: { icon: '📸', name: 'Instagram', charLimit: 150 },
   tiktok: { icon: '🎵', name: 'TikTok', charLimit: 150 },
@@ -672,7 +744,6 @@ const platformMeta = {
   threads: { icon: '🧵', name: 'Threads', charLimit: 150 }
 };
 
-// Generate
 async function generateProfiles() {
   const btn = document.getElementById('generateBtn');
   btn.disabled = true;
@@ -682,11 +753,12 @@ async function generateProfiles() {
   const founderName = document.getElementById('founderName').value || '';
   const website = document.getElementById('website').value || '';
   const location = document.getElementById('location').value || 'Remote';
+  const industry = document.getElementById('industry').value || 'General';
 
   const payload = {
     business_name: businessName,
     founder_name: founderName,
-    industry_category: document.getElementById('industry').value || 'General',
+    industry_category: industry,
     one_line_what_you_do: document.getElementById('oneLiner').value || 'We do great things',
     long_description: document.getElementById('longDesc').value || '',
     website_url: website,
@@ -715,7 +787,8 @@ async function generateProfiles() {
       handleAlts: data.brand_foundation?.handle_alternatives || [],
       displayName: founderName || businessName,
       website: website,
-      location: location
+      location: location,
+      industry: industry
     };
 
     generatedResults = [];
@@ -736,9 +809,9 @@ async function generateProfiles() {
         displayName: brandFoundation.displayName,
         bio: profileData.bio || profileData.about || profileData.description || data.global_tagline || 'Profile bio',
         headline: profileData.headline || brandFoundation.tagline || '',
-        handleAlts: profileData.handle_alternatives || brandFoundation.handleAlts || [],
         website: brandFoundation.website,
-        location: brandFoundation.location
+        location: brandFoundation.location,
+        industry: brandFoundation.industry
       });
     });
 
@@ -746,153 +819,16 @@ async function generateProfiles() {
     goToStep(4);
   } catch (error) {
     console.error('Error:', error);
-    alert('Error generating profiles: ' + error.message);
+    alert('Error: ' + error.message);
   }
 
   btn.disabled = false;
   btn.innerHTML = '🍳 Cook My Profiles';
 }
-
-// Render platform mockups - FIXED IMAGE HANDLING
-function renderResults() {
-  const summaryContainer = document.getElementById('brandSummary');
-  
-  // Use uploaded image or default placeholder
-  const avatarSrc = uploadedImageDataUrl || '';
-  const defaultAvatar = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23e5e7eb'/%3E%3Ccircle cx='50' cy='38' r='18' fill='%239ca3af'/%3E%3Cellipse cx='50' cy='80' rx='28' ry='22' fill='%239ca3af'/%3E%3C/svg%3E";
-  const finalAvatar = avatarSrc || defaultAvatar;
-  
-  console.log('Rendering with avatar:', avatarSrc ? 'User uploaded' : 'Default placeholder');
-
-  // Brand summary
-  if (brandFoundation && (brandFoundation.tagline || brandFoundation.handle || avatarSrc)) {
-    let html = '<div class="brand-summary-row">';
-    if (avatarSrc) {
-      html += '<div style="flex:0 0 auto;"><img src="' + avatarSrc + '" style="width:56px;height:56px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,0.3);"></div>';
-    }
-    if (brandFoundation.tagline) {
-      html += '<div class="brand-summary-item"><div class="brand-summary-label">Tagline</div><div class="brand-summary-value">' + brandFoundation.tagline + '</div></div>';
-    }
-    if (brandFoundation.handle) {
-      html += '<div class="brand-summary-item"><div class="brand-summary-label">Handle</div><div class="brand-summary-value">@' + brandFoundation.handle + '</div>';
-      if (brandFoundation.handleAlts.length) {
-        html += '<div class="brand-summary-alts">Also: ' + brandFoundation.handleAlts.map(h => '@' + h).join(', ') + '</div>';
-      }
-      html += '</div>';
-    }
-    html += '</div>';
-    summaryContainer.innerHTML = html;
-  } else {
-    summaryContainer.innerHTML = '';
   }
 
-  // Platform mockups
-  const container = document.getElementById('resultsContainer');
-  container.innerHTML = generatedResults.map(r => renderPlatformMockup(r, finalAvatar)).join('');
-}
-
-function renderPlatformMockup(r, avatar) {
-  const p = r.platform;
-
-  // INSTAGRAM
-  if (p === 'instagram') {
-    return '<div class="mockup-card ig-mockup">' +
-      '<div class="mockup-copy-row"><span class="mockup-platform-label">📸 Instagram</span><button class="mockup-copy-btn" onclick="copyProfile(\'' + p + '\', this)">Copy Bio</button></div>' +
-      '<div class="ig-profile">' +
-        '<div class="ig-top-row">' +
-          '<div class="ig-avatar"><img src="' + avatar + '" alt=""></div>' +
-          '<div class="ig-stats">' +
-            '<div><div class="ig-stat-num">128</div><div class="ig-stat-label">posts</div></div>' +
-            '<div><div class="ig-stat-num">4.2K</div><div class="ig-stat-label">followers</div></div>' +
-            '<div><div class="ig-stat-num">892</div><div class="ig-stat-label">following</div></div>' +
-          '</div>' +
-        '</div>' +
-        '<div class="ig-name">' + r.displayName + '</div>' +
-        '<div class="ig-bio">' + r.bio + '</div>' +
-        (r.website ? '<div class="ig-website">' + r.website.replace(/^https?:\/\//, '') + '</div>' : '') +
-        '<button class="ig-edit-btn">Edit profile</button>' +
-        '<div class="ig-char-count">' + r.bio.length + ' / ' + r.charLimit + ' characters</div>' +
-      '</div>' +
-    '</div>';
-  }
-
-  // X / TWITTER
-  if (p === 'x') {
-    return '<div class="mockup-card x-mockup">' +
-      '<div class="mockup-copy-row"><span class="mockup-platform-label">𝕏 X / Twitter</span><button class="mockup-copy-btn" onclick="copyProfile(\'' + p + '\', this)">Copy Bio</button></div>' +
-      '<div class="x-header"></div>' +
-      '<div class="x-profile">' +
-        '<div class="x-avatar"><img src="' + avatar + '" alt=""></div>' +
-        '<div class="x-actions"><button class="x-follow-btn">Follow</button></div>' +
-        '<div class="x-name-row">' +
-          '<div class="x-display-name">' + r.displayName + ' <span class="x-verified">✓</span></div>' +
-          '<div class="x-handle">' + r.handle + '</div>' +
-        '</div>' +
-        '<div class="x-bio">' + r.bio + '</div>' +
-        '<div class="x-meta">' +
-          (r.location ? '<span>📍 ' + r.location + '</span>' : '') +
-          (r.website ? '<span>🔗 ' + r.website.replace(/^https?:\/\//, '') + '</span>' : '') +
-          '<span>📅 Joined 2024</span>' +
-        '</div>' +
-        '<div class="x-stats"><span><strong>892</strong> Following</span><span><strong>4.2K</strong> Followers</span></div>' +
-        '<div class="x-char-count">' + r.bio.length + ' / ' + r.charLimit + ' characters</div>' +
-      '</div>' +
-    '</div>';
-  }
-
-  // LINKEDIN
-  if (p === 'linkedin') {
-    return '<div class="mockup-card li-mockup">' +
-      '<div class="mockup-copy-row"><span class="mockup-platform-label">💼 LinkedIn</span><button class="mockup-copy-btn" onclick="copyProfile(\'' + p + '\', this)">Copy Profile</button></div>' +
-      '<div class="li-banner"></div>' +
-      '<div class="li-profile">' +
-        '<div class="li-avatar"><img src="' + avatar + '" alt=""></div>' +
-        '<div class="li-actions"><button class="li-connect-btn">Connect</button><button class="li-message-btn">Message</button></div>' +
-        '<div class="li-name">' + r.displayName + '</div>' +
-        '<div class="li-headline">' + (r.headline || r.bio.substring(0, 100)) + '</div>' +
-        '<div class="li-location">' + (r.location || 'Remote') + ' · <span class="li-connections">500+ connections</span></div>' +
-        '<div class="li-about-section">' +
-          '<div class="li-about-title">About</div>' +
-          '<div class="li-about-text">' + r.bio + '</div>' +
-        '</div>' +
-        '<div class="li-char-count">' + r.bio.length + ' / ' + r.charLimit + ' characters</div>' +
-      '</div>' +
-    '</div>';
-  }
-
-  // TIKTOK
-  if (p === 'tiktok') {
-    return '<div class="mockup-card tt-mockup">' +
-      '<div class="mockup-copy-row"><span class="mockup-platform-label">🎵 TikTok</span><button class="mockup-copy-btn" onclick="copyProfile(\'' + p + '\', this)">Copy Bio</button></div>' +
-      '<div class="tt-profile">' +
-        '<div class="tt-avatar"><img src="' + avatar + '" alt=""></div>' +
-        '<div class="tt-handle">' + r.handle + '</div>' +
-        '<div class="tt-name">' + r.displayName + '</div>' +
-        '<div class="tt-stats">' +
-          '<div class="tt-stat"><div class="tt-stat-num">42</div><div class="tt-stat-label">Following</div></div>' +
-          '<div class="tt-stat"><div class="tt-stat-num">8.2K</div><div class="tt-stat-label">Followers</div></div>' +
-          '<div class="tt-stat"><div class="tt-stat-num">156K</div><div class="tt-stat-label">Likes</div></div>' +
-        '</div>' +
-        '<div class="tt-actions"><button class="tt-follow-btn">Follow</button><button class="tt-message-btn">✉</button></div>' +
-        '<div class="tt-bio">' + r.bio + '</div>' +
-        '<div class="tt-char-count">' + r.bio.length + ' / ' + r.charLimit + ' characters</div>' +
-      '</div>' +
-    '</div>';
-  }
-
-  // GENERIC (YouTube, Facebook, Google, Threads)
-  return '<div class="mockup-card generic-mockup">' +
-    '<div class="mockup-copy-row"><span class="mockup-platform-label">' + r.icon + ' ' + r.name + '</span><button class="mockup-copy-btn" onclick="copyProfile(\'' + p + '\', this)">Copy Bio</button></div>' +
-    '<div class="generic-profile">' +
-      '<div class="generic-avatar"><img src="' + avatar + '" alt=""></div>' +
-      '<div class="generic-info">' +
-        '<div class="generic-name">' + r.displayName + '</div>' +
-        '<div class="generic-handle">' + r.handle + '</div>' +
-        '<div class="generic-bio">' + r.bio + '</div>' +
-        '<div class="generic-char-count">' + r.bio.length + ' / ' + r.charLimit + ' characters</div>' +
-      '</div>' +
-    '</div>' +
-  '</div>';
+  // GENERIC fallback
+  return '<div class="mockup-card generic-mockup"><div class="mockup-copy-row"><span class="mockup-platform-label">' + r.icon + ' ' + r.name + '</span><button class="mockup-copy-btn" onclick="copyProfile(\'' + p + '\', this)">Copy Bio</button></div><div class="generic-profile"><div class="generic-avatar"><img src="' + avatar + '"></div><div class="generic-info"><div class="generic-name">' + r.displayName + '</div><div class="generic-handle">' + r.handle + '</div><div class="generic-bio">' + r.bio + '</div><div class="generic-char-count">' + r.bio.length + ' / ' + r.charLimit + ' characters</div></div></div></div>';
 }
 
 function copyProfile(platform, btn) {
@@ -904,7 +840,7 @@ function copyProfile(platform, btn) {
   setTimeout(() => btn.textContent = 'Copy Bio', 1500);
 }
 
-function copyAllProfiles() {
+function copyAllProfiles(e) {
   let text = '🍳 AiO PROFILE OMELETTE RESULTS\n' + '═'.repeat(40) + '\n\n';
   if (brandFoundation?.tagline) text += 'TAGLINE: ' + brandFoundation.tagline + '\n';
   if (brandFoundation?.handle) text += 'HANDLE: @' + brandFoundation.handle + '\n\n';
@@ -916,8 +852,8 @@ function copyAllProfiles() {
   });
   text += '─'.repeat(40) + '\nGenerated by AiO Profile Omelette™\nhttps://aiomelette.com';
   navigator.clipboard.writeText(text);
-  event.target.textContent = '✅ Copied!';
-  setTimeout(() => event.target.textContent = '📋 Copy All', 2000);
+  e.target.textContent = '✅ Copied!';
+  setTimeout(() => e.target.textContent = '📋 Copy All', 2000);
 }
 
 function downloadText() {
