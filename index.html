@@ -1,170 +1,413 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AiO Profile Omelette™ - Digital Presence Creator by Ai Omelette</title>
+  <meta charset="UTF-8" />
+  <title>AiO Profile Omelette™ – Digital Profile Builder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    html { scroll-behavior: smooth; }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      /* Brand Canon Colors */
       --yolk: #FCD205;
-      --accent-strong: #F59E0B;
-      --accent-soft: #FEF3C7;
+      --yolk-deep: #F59E0B;
       --accent-alt: #14B8A6;
       --ink: #111827;
       --muted: #6B7280;
       --border: #E5E7EB;
       --bg: #F9FAFB;
-      --bg-alt: #FFFFFF;
-      --wordmark: #1E293B;
+      --card-bg: #FFFFFF;
     }
-    
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    .page {
       min-height: 100vh;
-      background: linear-gradient(135deg, var(--bg) 0%, var(--accent-soft) 50%, #FDE68A 100%);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      position: relative;
-      overflow-x: hidden;
-      color: var(--ink);
     }
-    
-    h1, h2, h3, h4, .logo-text {
-      font-family: 'Poppins', sans-serif;
-    }
-    
-    .bg-pattern {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: 
-        radial-gradient(circle at 20% 50%, rgba(252, 210, 5, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.1) 0%, transparent 40%);
-      pointer-events: none;
-      z-index: 0;
-    }
-    
-    header {
-      text-align: center;
-      padding: 40px 20px 20px;
-      position: relative;
-      z-index: 1;
-    }
-    
-    .logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-    }
-    
-    .logo-icon {
-      width: 56px;
-      height: 56px;
-      filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1));
-      transition: transform 0.3s ease;
-    }
-    
-    .logo:hover .logo-icon {
-      transform: rotate(-3deg) scale(1.05);
-    }
-    
-    .logo-text {
-      font-size: 36px;
-      font-weight: 700;
-      color: var(--wordmark);
-      letter-spacing: -1px;
-    }
-    
-    .tagline {
-      margin-top: 8px;
-      font-size: 18px;
-      color: var(--muted);
-      font-weight: 400;
-    }
-    
-    .header-divider {
-      width: 200px;
-      height: 1px;
-      background: var(--muted);
-      opacity: 0.15;
-      margin: 16px auto;
-    }
-    
-    .micro-headline {
-      font-size: 15px;
-      color: var(--ink);
-      font-weight: 500;
-      margin-bottom: 6px;
-    }
-    
-    .micro-story {
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 13px;
-      font-style: italic;
-      opacity: 0.75;
-    }
-    
-    .trust-bar {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 20px;
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      font-size: 13px;
-      color: var(--muted);
-      flex-wrap: wrap;
-    }
-    
-    .trust-item {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    
-    .trust-divider {
-      color: var(--border);
-    }
-    
-    @media (max-width: 600px) {
-      .trust-divider { display: none; }
-      .trust-bar { gap: 8px 16px; }
-    }
-    
-    .progress-container {
-      max-width: 600px;
+
+    .container {
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 20px;
-      position: relative;
-      z-index: 1;
+      padding: 72px 20px;
     }
-    
+
+    .container-narrow {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    h1, h2, h3 {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    h1 { font-size: 2.4rem; margin-bottom: 16px; }
+    h2 { font-size: 1.8rem; margin-bottom: 12px; }
+    h3 { font-size: 1.2rem; margin-bottom: 4px; }
+
+    p { color: var(--muted); font-size: 0.98rem; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: #FEF3C7;
+      color: #92400E;
+      margin-bottom: 10px;
+    }
+
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--yolk-deep);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 18px;
+      border-radius: 999px;
+      border: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: var(--yolk);
+      color: #1F2933;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.08s ease, background 0.08s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      background: #FDE047;
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.08s ease, box-shadow 0.08s ease, transform 0.08s ease;
+    }
+
+    .btn-ghost:hover {
+      background: #F3F4F6;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.10);
+      transform: translateY(-1px);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: #EFF6FF;
+      color: #1D4ED8;
+    }
+
+    .row {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 880px) {
+      .row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      h1 { font-size: 2rem; }
+    }
+
+    .section-heading {
+      margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+      margin-bottom: 20px;
+      max-width: 560px;
+    }
+
+    .list-inline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      margin-top: 16px;
+      padding: 0;
+    }
+
+    .list-inline li {
+      list-style: none;
+      font-size: 0.9rem;
+      color: var(--muted);
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .list-inline li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--yolk-deep);
+    }
+
+    /* === SECTION 1: HERO === */
+    .hero {
+      background: #ffffff;
+      border-bottom: 1px solid #F3F4F6;
+    }
+
+    .hero-main { flex: 1.2; }
+    .hero-side { flex: 1; min-width: 280px; }
+
+    .hero-examples {
+      background: #F9FAFB;
+      border-radius: 18px;
+      padding: 16px 18px;
+      border: 1px solid #E5E7EB;
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.06);
+      font-size: 0.85rem;
+    }
+
+    .hero-examples-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .hero-tab-list { display: flex; gap: 6px; }
+
+    .hero-tab {
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .hero-tab.active {
+      border-color: #E5E7EB;
+      background: #fff;
+      font-weight: 500;
+    }
+
+    .hero-example-block {
+      background: #fff;
+      border-radius: 12px;
+      padding: 10px 12px;
+      border: 1px solid #E5E7EB;
+    }
+
+    .hero-example-platform {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6B7280;
+      margin-bottom: 4px;
+    }
+
+    .hero-example-headline {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+
+    .hero-example-body {
+      font-size: 0.82rem;
+      color: #4B5563;
+    }
+
+    .hero-example-footer {
+      margin-top: 10px;
+      font-size: 0.75rem;
+      color: #9CA3AF;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* === SECTION 2: PROFILE EXAMPLES === */
+    .profiles {
+      background: #ffffff;
+      border-bottom: 1px solid #F3F4F6;
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 28px;
+    }
+
+    @media (max-width: 960px) {
+      .profile-grid { grid-template-columns: 1fr; }
+    }
+
+    .profile-card {
+      border-radius: 18px;
+      border: 1px solid #E5E7EB;
+      padding: 16px;
+      background: #F9FAFB;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .profile-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .profile-platform {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .profile-tag {
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #E0F2FE;
+      color: #0369A1;
+    }
+
+    .profile-text {
+      font-size: 0.86rem;
+      color: #4B5563;
+      line-height: 1.6;
+    }
+
+    .profile-why {
+      border-top: 1px dashed #E5E7EB;
+      padding-top: 8px;
+      margin-top: 6px;
+    }
+
+    .profile-why-title {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9CA3AF;
+      margin-bottom: 4px;
+    }
+
+    .check-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 0;
+    }
+
+    .check-list li {
+      font-size: 0.8rem;
+      color: #4B5563;
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .check-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      font-size: 0.75rem;
+      color: #16A34A;
+    }
+
+    /* === SECTION 3: WIZARD === */
+    .wizard-section {
+      background: radial-gradient(circle at top, #FEF3C7 0, transparent 50%), #FFF7DF;
+      border-top: 1px solid #FEF3C7;
+      border-bottom: 1px solid #FEF3C7;
+      padding: 60px 20px;
+    }
+
+    .wizard-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .wizard-intro {
+      text-align: center;
+      max-width: 640px;
+      margin-bottom: 12px;
+    }
+
+    .wizard-card {
+      width: 100%;
+      max-width: 760px;
+      border-radius: 24px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      background: #ffffff;
+      box-shadow: 0 18px 60px rgba(15, 23, 42, 0.15), 0 0 0 1px rgba(255,255,255,0.65) inset;
+      padding: 32px;
+    }
+
+    @media (max-width: 640px) {
+      .wizard-card { padding: 20px 18px; }
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      margin-bottom: 24px;
+    }
+
     .progress-track {
       height: 4px;
-      background: rgba(255,255,255,0.5);
+      background: rgba(0,0,0,0.08);
       border-radius: 2px;
       overflow: hidden;
     }
-    
+
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--yolk), var(--accent-strong));
+      background: linear-gradient(90deg, var(--yolk), var(--yolk-deep));
       border-radius: 2px;
       transition: width 0.4s ease;
     }
-    
+
     .progress-steps {
       display: flex;
       justify-content: space-between;
       margin-top: 12px;
     }
-    
+
     .progress-step {
       display: flex;
       flex-direction: column;
@@ -173,17 +416,14 @@
       opacity: 0.5;
       transition: opacity 0.3s;
     }
-    
-    .progress-step.active,
-    .progress-step.current {
-      opacity: 1;
-    }
-    
+
+    .progress-step.active, .progress-step.current { opacity: 1; }
+
     .progress-dot {
       width: 28px;
       height: 28px;
       border-radius: 50%;
-      background: var(--bg-alt);
+      background: #fff;
       border: 2px solid var(--border);
       display: flex;
       align-items: center;
@@ -193,71 +433,57 @@
       color: var(--muted);
       transition: all 0.3s;
     }
-    
+
     .progress-step.active .progress-dot {
       background: var(--yolk);
       border-color: var(--yolk);
       color: var(--ink);
     }
-    
+
     .progress-step.current .progress-dot {
       border-color: var(--yolk);
-      color: var(--yolk);
+      color: var(--yolk-deep);
     }
-    
+
     .progress-label {
       font-size: 12px;
       color: var(--muted);
     }
-    
-    main {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      position: relative;
-      z-index: 1;
-    }
-    
-    .step-container {
-      display: none;
-      background: var(--bg-alt);
-      border-radius: 16px;
-      padding: 32px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-    }
-    
-    .step-container.active {
-      display: block;
-      animation: fadeIn 0.3s ease;
-    }
-    
+
+    /* Step containers */
+    .step-container { display: none; }
+    .step-container.active { display: block; animation: fadeIn 0.3s ease; }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    
+
     .step-title {
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 700;
-      color: var(--ink);
       margin-bottom: 8px;
     }
-    
+
     .step-subtitle {
       color: var(--muted);
       margin-bottom: 24px;
+      font-size: 15px;
     }
-    
+
+    /* Form elements */
     .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
     }
-    
-    .field-full {
-      grid-column: 1 / -1;
+
+    .field-full { grid-column: 1 / -1; }
+
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
     }
-    
+
     label {
       display: block;
       font-size: 14px;
@@ -265,11 +491,9 @@
       color: var(--ink);
       margin-bottom: 6px;
     }
-    
-    label .required {
-      color: var(--accent-strong);
-    }
-    
+
+    label .required { color: var(--yolk-deep); }
+
     input, textarea, select {
       width: 100%;
       padding: 12px 16px;
@@ -279,42 +503,38 @@
       font-family: inherit;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
-    
-    input::placeholder, textarea::placeholder {
-      color: #9CA3AF;
-    }
-    
+
+    input::placeholder, textarea::placeholder { color: #9CA3AF; }
+
     input:focus, textarea:focus, select:focus {
       outline: none;
       border-color: var(--yolk);
       box-shadow: 0 0 0 3px rgba(252, 210, 5, 0.2);
     }
-    
+
+    textarea { resize: vertical; min-height: 100px; }
+
     .helper-text {
       font-size: 12px;
       color: var(--muted);
       margin-top: 4px;
     }
-    
+
     .form-hint {
       text-align: center;
       font-size: 13px;
       color: var(--muted);
       margin-top: 12px;
     }
-    
-    textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-    
+
+    /* Buttons */
     .button-row {
       display: flex;
       justify-content: space-between;
       margin-top: 32px;
       gap: 12px;
     }
-    
+
     .btn-back {
       padding: 12px 24px;
       background: var(--bg);
@@ -325,14 +545,12 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    
-    .btn-back:hover {
-      background: var(--border);
-    }
-    
+
+    .btn-back:hover { background: var(--border); }
+
     .btn-next, .btn-generate {
       padding: 12px 24px;
-      background: #FCD205;
+      background: var(--yolk);
       border: none;
       border-radius: 8px;
       font-size: 15px;
@@ -341,42 +559,31 @@
       transition: all 0.2s;
       color: var(--ink);
     }
-    
+
     .btn-next:hover, .btn-generate:hover {
       background: #FDE047;
       transform: translateY(-1px);
     }
-    
+
     .btn-next:disabled, .btn-generate:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       transform: none;
     }
-    
-    .btn-next:disabled:hover, .btn-generate:disabled:hover {
-      background: #FCD205;
-      transform: none;
-    }
-    
+
     .btn-generate {
       padding: 16px 32px;
       font-size: 17px;
     }
-    
-    .btn-generate:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-      transform: none;
-    }
-    
-    /* Audience Chips */
+
+    /* Chips */
     .audience-grid, .vibe-grid {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       margin-top: 8px;
     }
-    
+
     .audience-chip, .vibe-chip {
       padding: 8px 16px;
       background: var(--bg);
@@ -387,25 +594,24 @@
       transition: all 0.2s;
       user-select: none;
     }
-    
-    .audience-chip:hover, .vibe-chip:hover {
-      border-color: var(--yolk);
-    }
-    
+
+    .audience-chip:hover, .vibe-chip:hover { border-color: var(--yolk); }
+
     .audience-chip.active, .vibe-chip.active {
-      background: #FCD205;
-      border-color: #FCD205;
+      background: var(--yolk);
+      border-color: var(--yolk);
       color: var(--ink);
       font-weight: 500;
     }
-    
-    /* Emoji radios */
+
+    /* Emoji options */
     .emoji-options {
       display: flex;
       gap: 16px;
       margin-top: 8px;
+      flex-wrap: wrap;
     }
-    
+
     .emoji-option {
       display: flex;
       align-items: center;
@@ -413,11 +619,9 @@
       cursor: pointer;
       font-size: 14px;
     }
-    
-    .emoji-option input {
-      width: auto;
-    }
-    
+
+    .emoji-option input { width: auto; }
+
     /* Toggle sections */
     .toggle-section {
       background: var(--bg);
@@ -425,98 +629,78 @@
       padding: 16px;
       margin-top: 16px;
     }
-    
+
     .toggle-title {
       font-size: 15px;
       font-weight: 600;
       margin-bottom: 12px;
     }
-    
-    .toggle-buttons {
-      display: flex;
-      gap: 8px;
-    }
-    
+
+    .toggle-buttons { display: flex; gap: 8px; }
+
     .toggle-btn {
       padding: 8px 16px;
-      background: var(--bg-alt);
+      background: #fff;
       border: 1px solid var(--border);
       border-radius: 6px;
       font-size: 14px;
       cursor: pointer;
       transition: all 0.2s;
     }
-    
+
     .toggle-btn.active {
-      background: #FCD205;
-      border-color: #FCD205;
+      background: var(--yolk);
+      border-color: var(--yolk);
       font-weight: 500;
     }
-    
-    .toggle-input {
-      margin-top: 12px;
-    }
-    
-    .toggle-input.hidden {
-      display: none;
-    }
-    
+
+    .toggle-input { margin-top: 12px; }
+    .toggle-input.hidden { display: none; }
+
     .toggle-hint {
       margin-top: 8px;
       font-size: 13px;
       color: var(--muted);
       font-style: italic;
     }
-    
+
+    .toggle-hint.hidden { display: none; }
+
     /* Platform grid */
     .platform-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 12px;
     }
-    
+
     @media (max-width: 600px) {
-      .platform-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .tagline .emoji {
-        display: none;
-      }
+      .platform-grid { grid-template-columns: repeat(2, 1fr); }
     }
-    
+
     .platform-card {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 8px;
       padding: 16px 12px;
-      background: var(--bg-alt);
+      background: #fff;
       border: 2px solid var(--border);
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.2s;
       position: relative;
     }
-    
-    .platform-card:hover {
-      border-color: var(--yolk);
-    }
-    
+
+    .platform-card:hover { border-color: var(--yolk); }
+
     .platform-card.active {
       border-color: var(--yolk);
       background: rgba(252, 210, 5, 0.1);
     }
-    
-    .platform-icon {
-      font-size: 28px;
-    }
-    
-    .platform-label {
-      font-size: 13px;
-      font-weight: 500;
-      text-align: center;
-    }
-    
+
+    .platform-icon { font-size: 28px; }
+    .platform-label { font-size: 13px; font-weight: 500; text-align: center; }
+
     .platform-check {
       position: absolute;
       top: 8px;
@@ -530,48 +714,42 @@
       align-items: center;
       justify-content: center;
     }
-    
+
     .selected-count {
       text-align: center;
       margin-top: 16px;
       color: var(--muted);
       font-size: 14px;
     }
-    
+
     /* Results */
     .results-container {
       display: flex;
       flex-direction: column;
       gap: 16px;
     }
-    
+
     .result-card {
       background: var(--bg);
       border-radius: 12px;
       overflow: hidden;
     }
-    
+
     .result-header {
       display: flex;
       align-items: center;
       gap: 12px;
       padding: 16px;
-      background: var(--bg-alt);
+      background: #fff;
       border-bottom: 1px solid var(--border);
     }
-    
-    .result-icon {
-      font-size: 24px;
-    }
-    
-    .result-platform {
-      font-weight: 600;
-      flex: 1;
-    }
-    
+
+    .result-icon { font-size: 24px; }
+    .result-platform { font-weight: 600; flex: 1; }
+
     .btn-copy {
       padding: 8px 16px;
-      background: #FCD205;
+      background: var(--yolk);
       border: none;
       border-radius: 6px;
       font-size: 13px;
@@ -579,23 +757,14 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    
-    .btn-copy:hover {
-      background: #FDE047;
-    }
-    
-    .result-body {
-      padding: 16px;
-    }
-    
-    .result-field {
-      margin-bottom: 12px;
-    }
-    
-    .result-field:last-child {
-      margin-bottom: 0;
-    }
-    
+
+    .btn-copy:hover { background: #FDE047; }
+
+    .result-body { padding: 16px; }
+
+    .result-field { margin-bottom: 12px; }
+    .result-field:last-child { margin-bottom: 0; }
+
     .result-label {
       font-size: 12px;
       font-weight: 500;
@@ -603,62 +772,38 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-    
+
     .result-value {
       display: block;
       margin-top: 4px;
       font-size: 15px;
       line-height: 1.5;
+      color: var(--ink);
     }
-    
+
     .char-count {
       font-size: 12px;
       color: var(--muted);
       margin-top: 4px;
     }
-    
-    /* Footer buttons */
-    .footer-buttons {
-      display: flex;
-      gap: 12px;
-      justify-content: flex-end;
-    }
-    
-    .btn-secondary {
-      padding: 12px 20px;
-      background: var(--bg-alt);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    
-    .btn-secondary:hover {
-      background: var(--bg);
-    }
-    
-    /* Brand Summary */
+
+    /* Brand summary */
     .brand-summary {
-      background: linear-gradient(135deg, var(--yolk) 0%, var(--accent-strong) 100%);
+      background: linear-gradient(135deg, var(--yolk) 0%, var(--yolk-deep) 100%);
       border-radius: 12px;
       padding: 20px 24px;
       margin-bottom: 20px;
       color: var(--ink);
     }
-    
+
     .brand-summary-row {
       display: flex;
       gap: 32px;
       flex-wrap: wrap;
     }
-    
-    .brand-summary-item {
-      flex: 1;
-      min-width: 200px;
-    }
-    
+
+    .brand-summary-item { flex: 1; min-width: 200px; }
+
     .brand-summary-label {
       font-size: 11px;
       font-weight: 600;
@@ -667,18 +812,35 @@
       opacity: 0.7;
       margin-bottom: 4px;
     }
-    
-    .brand-summary-value {
-      font-size: 18px;
-      font-weight: 600;
-    }
-    
+
+    .brand-summary-value { font-size: 18px; font-weight: 600; }
+
     .brand-summary-alts {
       font-size: 13px;
       opacity: 0.8;
       margin-top: 4px;
     }
-    
+
+    /* Footer buttons */
+    .footer-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+
+    .btn-secondary {
+      padding: 12px 20px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover { background: var(--bg); }
+
     /* Spinner */
     .spinner {
       display: inline-block;
@@ -691,465 +853,751 @@
       vertical-align: middle;
       margin-right: 8px;
     }
-    
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* === SECTION 4: TEASER OUTPUT === */
+    .teaser {
+      background: #ffffff;
+      border-bottom: 1px solid #F3F4F6;
     }
-    
-    footer {
-      text-align: center;
-      padding: 32px 20px;
-      color: var(--muted);
-      font-size: 14px;
+
+    .teaser-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 1000px) {
+      .teaser-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      .teaser-grid { grid-template-columns: 1fr; }
+    }
+
+    .teaser-card {
+      border-radius: 16px;
+      border: 1px solid #E5E7EB;
+      padding: 12px 13px;
+      background: #F9FAFB;
+      font-size: 0.84rem;
       position: relative;
-      z-index: 1;
+      overflow: hidden;
     }
-    
-    footer strong {
-      color: var(--ink);
-    }
-    
-    /* Section 2: About */
-    .about-section {
-      min-height: 100vh;
+
+    .teaser-card.locked::after {
+      content: "Unlock to view";
+      position: absolute;
+      inset: auto 0 0;
+      height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(180deg, var(--cream) 0%, #FEF9E7 50%, #fff 100%);
-      padding: 60px 20px;
-      position: relative;
-      z-index: 1;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: linear-gradient(to top, rgba(15, 23, 42, 0.72), transparent);
+      color: #F9FAFB;
     }
-    
-    .about-container {
-      max-width: 600px;
+
+    .teaser-card.locked .teaser-body {
+      filter: blur(4px);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .teaser-platform {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6B7280;
+      margin-bottom: 4px;
+    }
+
+    .teaser-body { color: #4B5563; }
+
+    .teaser-footer {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .teaser-note {
+      font-size: 0.8rem;
+      color: #9CA3AF;
+    }
+
+    /* === SECTION 5: FOOTER === */
+    .page-footer {
+      background: #F9FAFB;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: #9CA3AF;
       text-align: center;
     }
-    
-    .about-block {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 40px;
-      margin-bottom: 32px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+
+    .back-to-top {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 40;
     }
-    
-    .about-block h3 {
-      font-size: 24px;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 20px;
+
+    /* Photo upload */
+    .upload-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
     }
-    
-    .about-block p {
-      font-size: 16px;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 16px;
+
+    .upload-box {
+      flex: 1;
+      min-width: 200px;
     }
-    
-    .about-block p:last-child {
-      margin-bottom: 0;
-    }
-    
-    .about-divider {
-      width: 60px;
-      height: 2px;
-      background: var(--yolk);
-      margin: 0 auto 32px;
-      opacity: 0.5;
-    }
-    
-    .founder-block {
-      margin-bottom: 40px;
-    }
-    
-    .founder-note {
-      font-style: italic;
-      font-size: 15px;
-      max-width: 500px;
-      margin: 0 auto 12px;
-      line-height: 1.7;
-      color: var(--muted);
-    }
-    
-    .founder-sig {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--ink);
-    }
-    
-    .about-cta {
-      margin-top: 40px;
-    }
-    
-    .about-cta p {
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
-    
-    .btn-back-to-top {
-      display: inline-block;
-      background: var(--yolk);
-      color: var(--ink);
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
+
+    .upload-area {
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
       cursor: pointer;
       transition: all 0.2s;
-      text-decoration: none;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
     }
-    
-    .btn-back-to-top:hover {
-      background: var(--yolk-hover);
-      transform: translateY(-2px);
+
+    .upload-area:hover {
+      border-color: var(--yolk);
+      background: rgba(252, 210, 5, 0.05);
     }
-    
-    .footer-links {
-      margin-top: 8px;
+
+    .upload-area.has-file {
+      border-style: solid;
+      border-color: var(--yolk);
     }
-    
-    .footer-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 13px;
+
+    .upload-icon {
+      font-size: 32px;
+      margin-bottom: 8px;
     }
-    
-    .footer-links a:hover {
-      color: var(--yolk);
-    }
-    
-    .footer-brand {
+
+    .upload-text {
       font-size: 14px;
       color: var(--muted);
+      margin-bottom: 4px;
     }
-    
-    .footer-brand strong {
+
+    .upload-hint {
+      font-size: 12px;
+      color: #9CA3AF;
+    }
+
+    .upload-area input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .upload-preview {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 8px;
+      display: none;
+    }
+
+    .upload-preview.logo {
+      border-radius: 8px;
+    }
+
+    .upload-area.has-file .upload-preview {
+      display: block;
+    }
+
+    .upload-area.has-file .upload-icon,
+    .upload-area.has-file .upload-text {
+      display: none;
+    }
+
+    .upload-filename {
+      font-size: 13px;
       color: var(--ink);
+      font-weight: 500;
+      word-break: break-all;
+      display: none;
+    }
+
+    .upload-area.has-file .upload-filename {
+      display: block;
+    }
+
+    .upload-clear {
+      font-size: 12px;
+      color: var(--yolk-deep);
+      cursor: pointer;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .upload-clear:hover {
+      text-decoration: underline;
+    }
+
+    .upload-area.has-file .upload-clear {
+      display: inline-block;
+    }
+
+    .skip-text {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 8px;
     }
   </style>
 </head>
 <body id="top">
-  <div class="bg-pattern"></div>
-  
-  <header>
-    <div class="logo">
-      <!-- AI Omelette Egg Icon (from official logo) -->
-      <svg class="logo-icon" viewBox="200 100 1100 900" xmlns="http://www.w3.org/2000/svg">
-        <path d="M724.39 153.79c127.06-17.26 217.76 113.38 270.32 211.52 74.99 140.05 117.7 318.21 23.84 460.1-202 305.38-672.67 106.23-573.64-298.79 27.78-113.63 151.23-355.41 279.48-372.83Zm11.05 18.42c-137.98 15.06-258.76 276.59-280.2 397.73-41.36 233.67 145.59 437.45 383.6 368.94 169.09-48.67 238.21-219.44 207.26-383.12-23.83-126.07-155.21-400.53-310.66-383.56Z"/>
-        <path fill="#fff" d="M735.44 172.21c155.47-16.96 286.84 257.49 310.66 383.56 30.94 163.68-38.18 334.45-207.26 383.12-238.01 68.51-424.96-135.28-383.6-368.94 21.44-121.13 142.22-382.67 280.2-397.73Zm199.51 438.75c0-101.61-82.38-183.98-183.98-183.98s-183.98 82.38-183.98 183.98 82.38 183.98 183.98 183.98 183.98-82.38 183.98-183.98Z"/>
-        <path stroke="#000" stroke-miterlimit="10" stroke-width=".92" d="M934.95 610.96c0 101.61-82.38 183.98-183.98 183.98s-183.98-82.38-183.98-183.98 82.38-183.98 183.98-183.98 183.98 82.38 183.98 183.98Zm-14.68-.26c0-93.32-75.65-168.97-168.97-168.97S582.33 517.38 582.33 610.7s75.65 168.97 168.97 168.97 168.97-75.65 168.97-168.97Z"/>
-        <circle cx="751.29" cy="610.7" r="168.97" fill="#fcd205"/>
-      </svg>
-      <span class="logo-text">AiO Profile Omelette</span>
-    </div>
-    <p class="tagline">Your Digital Presence, Sunny Side Up</p>
-    <div class="header-divider"></div>
-    <p class="micro-headline">Build consistent profiles for every platform in seconds.</p>
-    <p class="micro-story">Built by Ai Omelette — Crack open what's new in AI.<br>We help humans use AI the way it should feel: simple, useful, and a little bit fun.</p>
-  </header>
+  <div class="page">
 
-  <!-- Trust Signal -->
-  <div class="trust-bar">
-    <span class="trust-item">🔒 We don't store or share your data</span>
-    <span class="trust-divider">•</span>
-    <span class="trust-item">⚡ Powered by GPT-4o</span>
-    <span class="trust-divider">•</span>
-    <span class="trust-item">🍳 Early Access</span>
-  </div>
-
-  <div class="progress-container">
-    <div class="progress-track">
-      <div class="progress-fill" id="progressFill" style="width: 25%"></div>
-    </div>
-    <div class="progress-steps">
-      <div class="progress-step current">
-        <span class="progress-dot">1</span>
-        <span class="progress-label">Basics</span>
-      </div>
-      <div class="progress-step">
-        <span class="progress-dot">2</span>
-        <span class="progress-label">Brand DNA</span>
-      </div>
-      <div class="progress-step">
-        <span class="progress-dot">3</span>
-        <span class="progress-label">Platforms</span>
-      </div>
-      <div class="progress-step">
-        <span class="progress-dot">4</span>
-        <span class="progress-label">Results</span>
-      </div>
-    </div>
-  </div>
-
-  <main>
-    <!-- Step 1: Basics -->
-    <div class="step-container active" id="step1">
-      <h2 class="step-title">Let's start with the basics</h2>
-      <p class="step-subtitle">Tell us who you are in plain language. You can refine it later.</p>
-      
-      <div class="form-grid">
-        <div class="field-full">
-          <label>Brand or Business Name <span class="required">*</span></label>
-          <input type="text" id="businessName" placeholder="Ai Omelette">
-        </div>
-        
-        <div>
-          <label>Your Name (or main contact)</label>
-          <input type="text" id="founderName" placeholder="Your Name">
-        </div>
-        
-        <div>
-          <label>Industry / Category <span class="required">*</span></label>
-          <input type="text" id="industry" placeholder="AI tools, coaching, ecommerce, SaaS…">
-          <p class="helper-text">Short and simple is best. This helps with platform categories later.</p>
-        </div>
-        
-        <div class="field-full">
-          <label>What do you do? (One line) <span class="required">*</span></label>
-          <input type="text" id="oneLiner" placeholder="We turn AI chaos into practical systems people can actually use.">
-          <p class="helper-text">This becomes the core line behind all your profiles.</p>
-        </div>
-        
-        <div class="field-full">
-          <label>Tell us a bit more</label>
-          <textarea id="longDesc" placeholder="Share a few sentences about your products, services, and what makes you different…"></textarea>
-          <p class="helper-text">Don't overthink it. Bullet points or rough thoughts are fine.</p>
-        </div>
-        
-        <div>
-          <label>Website</label>
-          <input type="text" id="website" placeholder="https://yourwebsite.com">
-          <p class="helper-text">Optional. Leave blank if you don't have one yet.</p>
-        </div>
-        
-        <div>
-          <label>Location</label>
-          <input type="text" id="location" placeholder="City, Country or 'Remote'">
-          <p class="helper-text">Used for profiles like Google Business. You can keep it general.</p>
-        </div>
-      </div>
-      
-      <div class="button-row">
-        <div></div>
-        <button class="btn-next" id="step1Next" onclick="validateAndProceed(1)" disabled>Continue to Brand DNA →</button>
-      </div>
-      <p class="form-hint">You can leave anything blank or rough — AiO will clean it up.</p>
-    </div>
-
-    <!-- Step 2: Brand DNA -->
-    <div class="step-container" id="step2">
-      <h2 class="step-title">Define your brand DNA</h2>
-      <p class="step-subtitle">This helps AiO shape how your profiles sound and feel.</p>
-      
-      <div class="form-grid">
-        <div class="field-full">
-          <label>Who are you speaking to? (select all that apply)</label>
-          <div class="audience-grid" id="audienceGrid">
-            <button class="audience-chip" data-audience="solopreneurs">Solopreneurs</button>
-            <button class="audience-chip" data-audience="creators">Creators & Influencers</button>
-            <button class="audience-chip" data-audience="small-business">Small Business Owners</button>
-            <button class="audience-chip" data-audience="agencies">Agencies</button>
-            <button class="audience-chip" data-audience="tech-enthusiasts">Tech Enthusiasts</button>
-            <button class="audience-chip" data-audience="local-business">Local Businesses</button>
-            <button class="audience-chip" data-audience="marketers">Marketers</button>
-            <button class="audience-chip" data-audience="ecommerce">E-commerce</button>
-            <button class="audience-chip" data-audience="b2b">B2B / Enterprise</button>
-            <button class="audience-chip" data-audience="consumers">Consumers / B2C</button>
-          </div>
-        </div>
-        
-        <div class="field-full">
-          <label>How should your brand feel? (select all that apply)</label>
-          <div class="vibe-grid" id="vibeGrid">
-            <button class="vibe-chip" data-vibe="Professional">Professional</button>
-            <button class="vibe-chip" data-vibe="Minimal">Minimal</button>
-            <button class="vibe-chip" data-vibe="Bold">Bold</button>
-            <button class="vibe-chip" data-vibe="Creative">Creative</button>
-            <button class="vibe-chip" data-vibe="Friendly">Friendly</button>
-            <button class="vibe-chip" data-vibe="Playful">Playful</button>
-            <button class="vibe-chip" data-vibe="Luxury">Luxury</button>
-            <button class="vibe-chip" data-vibe="Warm">Warm</button>
-            <button class="vibe-chip" data-vibe="Edgy">Edgy</button>
-            <button class="vibe-chip" data-vibe="Technical">Technical</button>
-          </div>
-        </div>
-        
-        <div class="field-full">
-          <label>Emoji Preference</label>
-          <div class="emoji-options">
-            <label class="emoji-option">
-              <input type="radio" name="emoji" value="yes"> Yes, use emojis — expressive and fun
-            </label>
-            <label class="emoji-option">
-              <input type="radio" name="emoji" value="minimal" checked> Minimal — 1–2 max
-            </label>
-            <label class="emoji-option">
-              <input type="radio" name="emoji" value="none"> No emojis — clean and serious
-            </label>
-          </div>
-        </div>
-
-        <div class="field-full">
-          <div class="toggle-section">
-            <h3 class="toggle-title">Tagline</h3>
-            <div class="toggle-buttons">
-              <button class="toggle-btn" data-mode="input" onclick="setTaglineMode('input')">I have one</button>
-              <button class="toggle-btn active" data-mode="generate" onclick="setTaglineMode('generate')">Generate one for me</button>
+    <!-- SECTION 1: HERO + VALUE -->
+    <section class="hero">
+      <div class="container">
+        <div class="row">
+          <div class="hero-main">
+            <div class="pill">
+              <span class="pill-dot"></span>
+              AiO Profile Omelette · Early Access
             </div>
-            <input type="text" id="taglineInput" class="toggle-input hidden" placeholder="Your tagline...">
-            <p class="toggle-hint" id="taglineHint">AiO will craft a clean, platform-ready tagline based on your brand.</p>
-          </div>
-        </div>
+            <h1>Crack open a perfect profile for every platform.</h1>
+            <p class="section-subtitle">
+              Answer a few plain-language questions once. AiO turns it into
+              clean, platform-ready bios that actually sound like you—not a robot.
+            </p>
+            <ul class="list-inline">
+              <li>One source of truth for all your profiles</li>
+              <li>LinkedIn ≠ Instagram ≠ TikTok (we format each one)</li>
+              <li>Brand-safe tone, clear positioning, no guesswork</li>
+            </ul>
 
-        <div class="field-full">
-          <div class="toggle-section">
-            <h3 class="toggle-title">Handle / Username</h3>
-            <div class="toggle-buttons">
-              <button class="toggle-btn" data-mode="input" onclick="setHandleMode('input')">I have one</button>
-              <button class="toggle-btn active" data-mode="generate" onclick="setHandleMode('generate')">Suggest options</button>
+            <div style="margin-top:22px; display:flex; gap:12px; flex-wrap:wrap;">
+              <a href="#wizard" class="btn-primary">Start your Omeletized profile</a>
+              <a href="#examples" class="btn-ghost">See examples first</a>
             </div>
-            <input type="text" id="handleInput" class="toggle-input hidden" placeholder="@yourhandle">
-            <p class="toggle-hint" id="handleHint">AiO suggests consistent handles for every platform.</p>
+          </div>
+
+          <div class="hero-side">
+            <div class="hero-examples">
+              <div class="hero-examples-header">
+                <span class="badge">Live Preview</span>
+                <div class="hero-tab-list">
+                  <div class="hero-tab active" onclick="showHeroTab('linkedin')">LinkedIn</div>
+                  <div class="hero-tab" onclick="showHeroTab('instagram')">Instagram</div>
+                  <div class="hero-tab" onclick="showHeroTab('twitter')">X / Twitter</div>
+                </div>
+              </div>
+
+              <div class="hero-example-block" id="heroExampleLinkedin">
+                <div class="hero-example-platform">LinkedIn • Sample</div>
+                <div class="hero-example-headline">Founder · Systems & AI Workflows</div>
+                <p class="hero-example-body">
+                  I help small teams turn AI from "shiny toy" into simple, reliable systems
+                  that save hours a week—without breaking their existing business.
+                </p>
+              </div>
+
+              <div class="hero-example-block" id="heroExampleInstagram" style="display:none;">
+                <div class="hero-example-platform">Instagram • Sample</div>
+                <div class="hero-example-headline">AI for humans 🧠✨</div>
+                <p class="hero-example-body">
+                  Helping solo founders make AI actually useful.<br>
+                  Workflows, tools & experiments from the AiO lab.<br>
+                  New breakdowns every week ↓
+                </p>
+              </div>
+
+              <div class="hero-example-block" id="heroExampleTwitter" style="display:none;">
+                <div class="hero-example-platform">X / Twitter • Sample</div>
+                <div class="hero-example-headline">@aiomelette</div>
+                <p class="hero-example-body">
+                  Turning AI chaos into systems small teams can actually run.
+                  Daily experiments from the Ai Omelette kitchen.
+                </p>
+              </div>
+
+              <div class="hero-example-footer">
+                <span>Built from 4 plain-language answers.</span>
+                <span>Ai Omelette</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      
-      <div class="button-row">
-        <button class="btn-back" onclick="goToStep(1)">← Back</button>
-        <button class="btn-next" onclick="goToStep(3)">Choose Platforms →</button>
-      </div>
-    </div>
+    </section>
 
-    <!-- Step 3: Platforms -->
-    <div class="step-container" id="step3">
-      <h2 class="step-title">Where do you want to be?</h2>
-      <p class="step-subtitle">Select the platforms you use now or plan to use soon.</p>
-      
-      <div class="platform-grid" id="platformGrid">
-        <button class="platform-card active" data-platform="instagram">
-          <span class="platform-icon">📸</span>
-          <span class="platform-label">Instagram</span>
-          <span class="platform-check">✓</span>
-        </button>
-        <button class="platform-card" data-platform="tiktok">
-          <span class="platform-icon">🎵</span>
-          <span class="platform-label">TikTok</span>
-        </button>
-        <button class="platform-card" data-platform="x">
-          <span class="platform-icon">𝕏</span>
-          <span class="platform-label">X / Twitter</span>
-        </button>
-        <button class="platform-card active" data-platform="linkedin">
-          <span class="platform-icon">💼</span>
-          <span class="platform-label">LinkedIn</span>
-          <span class="platform-check">✓</span>
-        </button>
-        <button class="platform-card" data-platform="youtube">
-          <span class="platform-icon">▶️</span>
-          <span class="platform-label">YouTube</span>
-        </button>
-        <button class="platform-card" data-platform="facebook">
-          <span class="platform-icon">👤</span>
-          <span class="platform-label">Facebook</span>
-        </button>
-        <button class="platform-card active" data-platform="google">
-          <span class="platform-icon">📍</span>
-          <span class="platform-label">Google Business</span>
-          <span class="platform-check">✓</span>
-        </button>
-        <button class="platform-card" data-platform="threads">
-          <span class="platform-icon">🧵</span>
-          <span class="platform-label">Threads</span>
-        </button>
-        <button class="platform-card" data-platform="pinterest">
-          <span class="platform-icon">📌</span>
-          <span class="platform-label">Pinterest</span>
-        </button>
-        <button class="platform-card" data-platform="linkinbio">
-          <span class="platform-icon">🔗</span>
-          <span class="platform-label">Link-in-Bio</span>
-        </button>
-      </div>
-      
-      <div class="selected-count" id="selectedCount">3 platforms selected</div>
-      <p class="form-hint">You can always come back and cook more profiles later.</p>
-      
-      <div class="button-row">
-        <button class="btn-back" onclick="goToStep(2)">← Back</button>
-        <button class="btn-generate" id="generateBtn" onclick="generateProfiles()">
-          🍳 Cook My Profiles
-        </button>
-      </div>
-    </div>
+    <!-- SECTION 2: WHAT GOOD PROFILES LOOK LIKE -->
+    <section class="profiles" id="examples">
+      <div class="container">
+        <div class="section-heading">
+          <h2>What "good" actually looks like.</h2>
+        </div>
+        <p class="section-subtitle">
+          Most bios are either vague, overstuffed, or sound like they were
+          written by a random robot. AiO gives you crisp, channel-specific profiles
+          that pass the "would I hire / follow / book this person?" test.
+        </p>
 
-    <!-- Step 4: Results -->
-    <div class="step-container" id="step4">
-      <h2 class="step-title">Your profiles are cooked! 🍳</h2>
-      <p class="step-subtitle">Copy and paste these into each platform</p>
-      
-      <!-- Brand Summary -->
-      <div class="brand-summary" id="brandSummary">
-        <!-- Injected by JS -->
-      </div>
-      
-      <div class="results-container" id="resultsContainer">
-        <!-- Results will be injected here -->
-      </div>
-      
-      <div class="button-row">
-        <button class="btn-back" onclick="goToStep(1)">Start Over</button>
-        <div class="footer-buttons">
-          <button class="btn-secondary" onclick="copyAllProfiles()">📋 Copy All</button>
-          <button class="btn-next" onclick="downloadText()">📄 Download Text</button>
+        <div class="profile-grid">
+          <article class="profile-card">
+            <div class="profile-card-header">
+              <div>
+                <div class="profile-platform">LinkedIn</div>
+                <h3>Clear headline. Concrete value.</h3>
+              </div>
+              <span class="profile-tag">Professional</span>
+            </div>
+            <p class="profile-text">
+              <strong>Headline:</strong> Founder at Brightline Studio · Turning messy AI trends
+              into simple workflows for small teams.<br><br>
+              <strong>About:</strong> I help founders and operators plug AI into how they already
+              work—content, research, operations—without burning hours learning every new tool.
+            </p>
+            <div class="profile-why">
+              <div class="profile-why-title">Why this works</div>
+              <ul class="check-list">
+                <li>Leads with role + value, not buzzwords.</li>
+                <li>Explains <em>who</em> they help and <em>how</em> in one sentence.</li>
+                <li>Sounds human and specific, not like a generic template.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="profile-card">
+            <div class="profile-card-header">
+              <div>
+                <div class="profile-platform">Instagram</div>
+                <h3>Personality plus clarity.</h3>
+              </div>
+              <span class="profile-tag">Creator</span>
+            </div>
+            <p class="profile-text">
+              Helping solo founders make AI actually useful 🧠✨<br>
+              Workflows, tools & experiments from the Ai Omelette lab.<br>
+              New breakdowns every week. <strong>Link ↓</strong>
+            </p>
+            <div class="profile-why">
+              <div class="profile-why-title">Why this works</div>
+              <ul class="check-list">
+                <li>Leads with a promise, not a job title.</li>
+                <li>Mixes emojis sparingly to match the platform.</li>
+                <li>Ends with a clear reason to tap the link.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="profile-card">
+            <div class="profile-card-header">
+              <div>
+                <div class="profile-platform">X / Twitter</div>
+                <h3>Sharp, scroll-stopping line.</h3>
+              </div>
+              <span class="profile-tag">Signal > Noise</span>
+            </div>
+            <p class="profile-text">
+              Turning AI chaos into systems small teams can actually run.
+              Daily experiments from the Ai Omelette kitchen.
+            </p>
+            <div class="profile-why">
+              <div class="profile-why-title">Why this works</div>
+              <ul class="check-list">
+                <li>Short enough to read mid-scroll.</li>
+                <li>Positions a clear niche, not "AI everything."</li>
+                <li>Hints at cadence ("daily experiments") to set expectation.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <div style="margin-top:32px; text-align:center;">
+          <a href="#wizard" class="btn-primary">Okay, I'm ready — build mine</a>
+          <p style="font-size:0.85rem; color:#6B7280; margin-top:10px;">
+            Answer once, AiO formats each platform for you.
+          </p>
         </div>
       </div>
-    </div>
-  </main>
+    </section>
 
-  <!-- Section 2: About -->
-  <section class="about-section" id="about">
-    <div class="about-container">
-      <div class="about-block">
-        <h3>Why we made Profile Omelette</h3>
-        <p>Setting up profiles sucks. We fixed it.</p>
-        <p>AiO blends strategy, brand clarity, and AI into a 60-second identity builder. No templates. No guesswork. No "what should my bio even say?" spirals.</p>
-        <p>Just a clean, consistent digital presence so you can get back to running your business.</p>
-      </div>
-      
-      <div class="about-divider"></div>
-      
-      <div class="founder-block">
-        <p class="founder-note">"We built Ai Omelette as a fun, smart trends-and-insights hub to show you how AI tools actually fit into your work, business, and everyday life. We're not here to replace you with a robot — we're here to help you build an Omeletized version of how you already work, create, and run things."</p>
-        <p class="founder-sig">— Ash, Founder</p>
-      </div>
-      
-      <div class="about-cta">
-        <p>Ready to cook your profiles?</p>
-        <a href="#top" class="btn-back-to-top">↑ Back to Top</a>
-      </div>
-    </div>
-  </section>
+    <!-- SECTION 3: THE WIZARD -->
+    <section class="wizard-section" id="wizard">
+      <div class="wizard-inner">
+        <div class="wizard-intro">
+          <div class="pill" style="justify-content:center;">
+            <span class="pill-dot"></span>
+            Profile Builder
+          </div>
+          <h2>Tell us who you are in plain language.</h2>
+          <p>
+            Don't try to wordsmith it. Type the messy version. AiO will clean it up
+            and turn it into a consistent profile set for every platform you pick.
+          </p>
+        </div>
 
-  <footer>
-    <p class="footer-brand">Built with 🍳 by <strong>Ai Omelette</strong></p>
-    <p class="footer-links">
-      <a href="https://aiomelette.com" target="_blank">aiomelette.com</a>
-    </p>
-  </footer>
+        <div class="wizard-card">
+          <!-- Progress bar -->
+          <div class="progress-container">
+            <div class="progress-track">
+              <div class="progress-fill" id="progressFill" style="width: 25%"></div>
+            </div>
+            <div class="progress-steps">
+              <div class="progress-step current">
+                <span class="progress-dot">1</span>
+                <span class="progress-label">Basics</span>
+              </div>
+              <div class="progress-step">
+                <span class="progress-dot">2</span>
+                <span class="progress-label">Brand DNA</span>
+              </div>
+              <div class="progress-step">
+                <span class="progress-dot">3</span>
+                <span class="progress-label">Platforms</span>
+              </div>
+              <div class="progress-step">
+                <span class="progress-dot">4</span>
+                <span class="progress-label">Results</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 1: Basics -->
+          <div class="step-container active" id="step1">
+            <h2 class="step-title">Let's start with the basics</h2>
+            <p class="step-subtitle">Tell us who you are in plain language. You can refine it later.</p>
+            
+            <div class="form-grid">
+              <div class="field-full">
+                <label>Brand or Business Name <span class="required">*</span></label>
+                <input type="text" id="businessName" placeholder="Ai Omelette">
+              </div>
+              
+              <!-- Photo Uploads -->
+              <div class="field-full">
+                <label>Brand Assets <span style="font-weight: 400; color: var(--muted);">(optional)</span></label>
+                <div class="upload-row">
+                  <div class="upload-box">
+                    <div class="upload-area" id="profilePicArea">
+                      <img class="upload-preview" id="profilePicPreview" alt="Profile preview">
+                      <div class="upload-icon">👤</div>
+                      <div class="upload-text">Profile Photo</div>
+                      <div class="upload-hint">Square works best</div>
+                      <div class="upload-filename" id="profilePicName"></div>
+                      <span class="upload-clear" onclick="clearUpload('profilePic', event)">Remove</span>
+                      <input type="file" id="profilePicInput" accept="image/*" onchange="handleUpload('profilePic', this)">
+                    </div>
+                  </div>
+                  <div class="upload-box">
+                    <div class="upload-area" id="logoArea">
+                      <img class="upload-preview logo" id="logoPreview" alt="Logo preview">
+                      <div class="upload-icon">🏷️</div>
+                      <div class="upload-text">Logo</div>
+                      <div class="upload-hint">PNG or SVG preferred</div>
+                      <div class="upload-filename" id="logoName"></div>
+                      <span class="upload-clear" onclick="clearUpload('logo', event)">Remove</span>
+                      <input type="file" id="logoInput" accept="image/*" onchange="handleUpload('logo', this)">
+                    </div>
+                  </div>
+                </div>
+                <p class="skip-text">No images? No problem — skip this and add them later.</p>
+              </div>
+              
+              <div>
+                <label>Your Name (or main contact)</label>
+                <input type="text" id="founderName" placeholder="Your Name">
+              </div>
+              
+              <div>
+                <label>Industry / Category <span class="required">*</span></label>
+                <input type="text" id="industry" placeholder="AI tools, coaching, ecommerce, SaaS…">
+                <p class="helper-text">Short and simple is best. This helps with platform categories later.</p>
+              </div>
+              
+              <div class="field-full">
+                <label>What do you do? (One line) <span class="required">*</span></label>
+                <input type="text" id="oneLiner" placeholder="We turn AI chaos into practical systems people can actually use.">
+                <p class="helper-text">This becomes the core line behind all your profiles.</p>
+              </div>
+              
+              <div class="field-full">
+                <label>Tell us a bit more</label>
+                <textarea id="longDesc" placeholder="Share a few sentences about your products, services, and what makes you different…"></textarea>
+                <p class="helper-text">Don't overthink it. Bullet points or rough thoughts are fine.</p>
+              </div>
+              
+              <div>
+                <label>Website</label>
+                <input type="text" id="website" placeholder="https://yourwebsite.com">
+                <p class="helper-text">Optional. Leave blank if you don't have one yet.</p>
+              </div>
+              
+              <div>
+                <label>Location</label>
+                <input type="text" id="location" placeholder="City, Country or 'Remote'">
+                <p class="helper-text">Used for profiles like Google Business. You can keep it general.</p>
+              </div>
+            </div>
+            
+            <div class="button-row">
+              <div></div>
+              <button class="btn-next" id="step1Next" onclick="validateAndProceed(1)" disabled>Continue to Brand DNA →</button>
+            </div>
+            <p class="form-hint">You can leave anything blank or rough — AiO will clean it up.</p>
+          </div>
+
+          <!-- Step 2: Brand DNA -->
+          <div class="step-container" id="step2">
+            <h2 class="step-title">Define your brand DNA</h2>
+            <p class="step-subtitle">This helps AiO shape how your profiles sound and feel.</p>
+            
+            <div class="form-grid">
+              <div class="field-full">
+                <label>Who are you speaking to? (select all that apply)</label>
+                <div class="audience-grid" id="audienceGrid">
+                  <button class="audience-chip" data-audience="solopreneurs">Solopreneurs</button>
+                  <button class="audience-chip" data-audience="creators">Creators & Influencers</button>
+                  <button class="audience-chip" data-audience="small-business">Small Business Owners</button>
+                  <button class="audience-chip" data-audience="agencies">Agencies</button>
+                  <button class="audience-chip" data-audience="tech-enthusiasts">Tech Enthusiasts</button>
+                  <button class="audience-chip" data-audience="local-business">Local Businesses</button>
+                  <button class="audience-chip" data-audience="marketers">Marketers</button>
+                  <button class="audience-chip" data-audience="ecommerce">E-commerce</button>
+                  <button class="audience-chip" data-audience="b2b">B2B / Enterprise</button>
+                  <button class="audience-chip" data-audience="consumers">Consumers / B2C</button>
+                </div>
+              </div>
+              
+              <div class="field-full">
+                <label>How should your brand feel? (select all that apply)</label>
+                <div class="vibe-grid" id="vibeGrid">
+                  <button class="vibe-chip" data-vibe="Professional">Professional</button>
+                  <button class="vibe-chip" data-vibe="Minimal">Minimal</button>
+                  <button class="vibe-chip" data-vibe="Bold">Bold</button>
+                  <button class="vibe-chip" data-vibe="Creative">Creative</button>
+                  <button class="vibe-chip" data-vibe="Friendly">Friendly</button>
+                  <button class="vibe-chip" data-vibe="Playful">Playful</button>
+                  <button class="vibe-chip" data-vibe="Luxury">Luxury</button>
+                  <button class="vibe-chip" data-vibe="Warm">Warm</button>
+                  <button class="vibe-chip" data-vibe="Edgy">Edgy</button>
+                  <button class="vibe-chip" data-vibe="Technical">Technical</button>
+                </div>
+              </div>
+              
+              <div class="field-full">
+                <label>Emoji Preference</label>
+                <div class="emoji-options">
+                  <label class="emoji-option">
+                    <input type="radio" name="emoji" value="yes"> Yes, use emojis — expressive and fun
+                  </label>
+                  <label class="emoji-option">
+                    <input type="radio" name="emoji" value="minimal" checked> Minimal — 1–2 max
+                  </label>
+                  <label class="emoji-option">
+                    <input type="radio" name="emoji" value="none"> No emojis — clean and serious
+                  </label>
+                </div>
+              </div>
+
+              <div class="field-full">
+                <div class="toggle-section" id="taglineSection">
+                  <h3 class="toggle-title">Tagline</h3>
+                  <div class="toggle-buttons">
+                    <button class="toggle-btn" data-mode="input" onclick="setTaglineMode('input')">I have one</button>
+                    <button class="toggle-btn active" data-mode="generate" onclick="setTaglineMode('generate')">Generate one for me</button>
+                  </div>
+                  <input type="text" id="taglineInput" class="toggle-input hidden" placeholder="Your tagline...">
+                  <p class="toggle-hint" id="taglineHint">AiO will craft a clean, platform-ready tagline based on your brand.</p>
+                </div>
+              </div>
+
+              <div class="field-full">
+                <div class="toggle-section" id="handleSection">
+                  <h3 class="toggle-title">Handle / Username</h3>
+                  <div class="toggle-buttons">
+                    <button class="toggle-btn" data-mode="input" onclick="setHandleMode('input')">I have one</button>
+                    <button class="toggle-btn active" data-mode="generate" onclick="setHandleMode('generate')">Suggest options</button>
+                  </div>
+                  <input type="text" id="handleInput" class="toggle-input hidden" placeholder="@yourhandle">
+                  <p class="toggle-hint" id="handleHint">AiO suggests consistent handles for every platform.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="button-row">
+              <button class="btn-back" onclick="goToStep(1)">← Back</button>
+              <button class="btn-next" onclick="goToStep(3)">Choose Platforms →</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Platforms -->
+          <div class="step-container" id="step3">
+            <h2 class="step-title">Where do you want to be?</h2>
+            <p class="step-subtitle">Select the platforms you use now or plan to use soon.</p>
+            
+            <div class="platform-grid" id="platformGrid">
+              <button class="platform-card active" data-platform="instagram">
+                <span class="platform-icon">📸</span>
+                <span class="platform-label">Instagram</span>
+                <span class="platform-check">✓</span>
+              </button>
+              <button class="platform-card" data-platform="tiktok">
+                <span class="platform-icon">🎵</span>
+                <span class="platform-label">TikTok</span>
+              </button>
+              <button class="platform-card" data-platform="x">
+                <span class="platform-icon">𝕏</span>
+                <span class="platform-label">X / Twitter</span>
+              </button>
+              <button class="platform-card active" data-platform="linkedin">
+                <span class="platform-icon">💼</span>
+                <span class="platform-label">LinkedIn</span>
+                <span class="platform-check">✓</span>
+              </button>
+              <button class="platform-card" data-platform="youtube">
+                <span class="platform-icon">▶️</span>
+                <span class="platform-label">YouTube</span>
+              </button>
+              <button class="platform-card" data-platform="facebook">
+                <span class="platform-icon">👤</span>
+                <span class="platform-label">Facebook</span>
+              </button>
+              <button class="platform-card active" data-platform="google">
+                <span class="platform-icon">📍</span>
+                <span class="platform-label">Google Business</span>
+                <span class="platform-check">✓</span>
+              </button>
+              <button class="platform-card" data-platform="threads">
+                <span class="platform-icon">🧵</span>
+                <span class="platform-label">Threads</span>
+              </button>
+              <button class="platform-card" data-platform="pinterest">
+                <span class="platform-icon">📌</span>
+                <span class="platform-label">Pinterest</span>
+              </button>
+              <button class="platform-card" data-platform="linkinbio">
+                <span class="platform-icon">🔗</span>
+                <span class="platform-label">Link-in-Bio</span>
+              </button>
+            </div>
+            
+            <div class="selected-count" id="selectedCount">3 platforms selected</div>
+            <p class="form-hint">You can always come back and cook more profiles later.</p>
+            
+            <div class="button-row">
+              <button class="btn-back" onclick="goToStep(2)">← Back</button>
+              <button class="btn-generate" id="generateBtn" onclick="generateProfiles()">
+                🍳 Cook My Profiles
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 4: Results -->
+          <div class="step-container" id="step4">
+            <h2 class="step-title">Your profiles are cooked! 🍳</h2>
+            <p class="step-subtitle">Copy and paste these into each platform</p>
+            
+            <div class="brand-summary" id="brandSummary"></div>
+            
+            <div class="results-container" id="resultsContainer"></div>
+            
+            <div class="button-row">
+              <button class="btn-back" onclick="goToStep(1)">Start Over</button>
+              <div class="footer-buttons">
+                <button class="btn-secondary" onclick="copyAllProfiles()">📋 Copy All</button>
+                <button class="btn-next" onclick="downloadText()">📄 Download Text</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: TEASER OUTPUT -->
+    <section class="teaser">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Your Omeletized profiles, cooking in the background.</h2>
+        </div>
+        <p class="section-subtitle">
+          As soon as you finish the basics, AiO starts drafting your profile set. You'll
+          see one channel fully, and a blurred preview of the rest—ready to unlock when you're happy.
+        </p>
+
+        <div class="teaser-grid">
+          <article class="teaser-card">
+            <div class="teaser-platform">LinkedIn · Unlocked</div>
+            <div class="teaser-body">
+              Founder at Ai Omelette — building simple, repeatable AI systems for small teams.
+              Turning "try every tool" chaos into one clear workflow you actually use.
+            </div>
+          </article>
+
+          <article class="teaser-card locked">
+            <div class="teaser-platform">Instagram · Locked</div>
+            <div class="teaser-body">
+              Helping you make AI feel less like a firehose, more like a sous-chef.
+              Behind-the-scenes tests, tools & tiny experiments from the Ai Omelette lab.
+            </div>
+          </article>
+
+          <article class="teaser-card locked">
+            <div class="teaser-platform">X / Twitter · Locked</div>
+            <div class="teaser-body">
+              Daily notes on AI tools, workflows and "actually shipped" experiments—no doomscroll, just signal.
+            </div>
+          </article>
+
+          <article class="teaser-card locked">
+            <div class="teaser-platform">YouTube · Locked</div>
+            <div class="teaser-body">
+              Short walkthroughs on how to plug AI into your real workflows: research, content, ops and more.
+            </div>
+          </article>
+        </div>
+
+        <div class="teaser-footer">
+          <a href="#wizard" class="btn-primary">Finish your answers to unlock the full pack</a>
+          <span class="teaser-note">
+            You'll see a full preview before you ever pay. No surprise omelettes.
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: FOOTER -->
+    <footer class="page-footer">
+      <div class="container">
+        <div class="footer-inner">
+          <span>Built by <strong>Ai Omelette</strong> · Your digital presence, sunny-side up.</span>
+          <span>We don't store or sell your data; profiles are generated on the fly for this session.</span>
+          <a href="https://aiomelette.com" target="_blank" style="color: var(--yolk-deep); text-decoration: none;">aiomelette.com</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Floating Back-to-top button -->
+    <a href="#top" class="btn-ghost back-to-top">↑ Back to top</a>
+  </div>
 
   <script>
     // State
     let currentStep = 1;
-    
-    // Scroll to top function
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
     let selectedAudiences = [];
     let selectedVibes = [];
     let selectedPlatforms = ['instagram', 'linkedin', 'google'];
@@ -1157,6 +1605,58 @@
     let handleMode = 'generate';
     let generatedResults = null;
     let brandFoundation = null;
+    let uploadedFiles = {
+      profilePic: null,
+      logo: null
+    };
+
+    // File upload handlers
+    function handleUpload(type, input) {
+      const file = input.files[0];
+      if (!file) return;
+      
+      uploadedFiles[type] = file;
+      
+      const area = document.getElementById(type === 'profilePic' ? 'profilePicArea' : 'logoArea');
+      const preview = document.getElementById(type === 'profilePic' ? 'profilePicPreview' : 'logoPreview');
+      const nameEl = document.getElementById(type === 'profilePic' ? 'profilePicName' : 'logoName');
+      
+      // Show preview
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        preview.src = e.target.result;
+        area.classList.add('has-file');
+        nameEl.textContent = file.name;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function clearUpload(type, event) {
+      event.stopPropagation();
+      event.preventDefault();
+      
+      uploadedFiles[type] = null;
+      
+      const area = document.getElementById(type === 'profilePic' ? 'profilePicArea' : 'logoArea');
+      const input = document.getElementById(type === 'profilePic' ? 'profilePicInput' : 'logoInput');
+      const preview = document.getElementById(type === 'profilePic' ? 'profilePicPreview' : 'logoPreview');
+      
+      area.classList.remove('has-file');
+      input.value = '';
+      preview.src = '';
+    }
+
+    // Hero tab switching
+    function showHeroTab(tab) {
+      document.querySelectorAll('.hero-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('[class^="hero-example-block"]').forEach(b => b.style.display = 'none');
+      
+      event.target.classList.add('active');
+      
+      if (tab === 'linkedin') document.getElementById('heroExampleLinkedin').style.display = 'block';
+      if (tab === 'instagram') document.getElementById('heroExampleInstagram').style.display = 'block';
+      if (tab === 'twitter') document.getElementById('heroExampleTwitter').style.display = 'block';
+    }
 
     // Validation for Step 1
     function validateStep1() {
@@ -1179,7 +1679,7 @@
       ['businessName', 'industry', 'oneLiner'].forEach(id => {
         document.getElementById(id).addEventListener('input', validateStep1);
       });
-      validateStep1(); // Initial check
+      validateStep1();
     });
 
     // Navigation
@@ -1196,6 +1696,9 @@
       
       document.getElementById('progressFill').style.width = (step / 4 * 100) + '%';
       currentStep = step;
+      
+      // Scroll wizard into view
+      document.getElementById('wizard').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     // Audience chips
@@ -1259,10 +1762,10 @@
       document.getElementById('selectedCount').textContent = text;
     }
 
-    // Toggle modes
+    // Toggle modes - FIXED
     function setTaglineMode(mode) {
       taglineMode = mode;
-      document.querySelectorAll('#step2 .toggle-section:nth-of-type(1) .toggle-btn').forEach(btn => {
+      document.querySelectorAll('#taglineSection .toggle-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.mode === mode);
       });
       document.getElementById('taglineInput').classList.toggle('hidden', mode !== 'input');
@@ -1271,7 +1774,7 @@
 
     function setHandleMode(mode) {
       handleMode = mode;
-      document.querySelectorAll('#step2 .toggle-section:nth-of-type(2) .toggle-btn').forEach(btn => {
+      document.querySelectorAll('#handleSection .toggle-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.mode === mode);
       });
       document.getElementById('handleInput').classList.toggle('hidden', mode !== 'input');
@@ -1294,7 +1797,6 @@
 
     // Generate profiles - REAL API
     async function generateProfiles() {
-      // Gentle warning if no platforms
       if (selectedPlatforms.length === 0) {
         if (!confirm('No platforms selected — we\'ll still generate your brand summary. Continue?')) {
           return;
@@ -1305,7 +1807,6 @@
       btn.disabled = true;
       btn.innerHTML = '<span class="spinner"></span> Cooking profiles...';
 
-      // Build intake payload
       const payload = {
         business_name: document.getElementById('businessName').value || 'My Business',
         founder_name: document.getElementById('founderName').value || '',
@@ -1329,7 +1830,6 @@
       };
 
       try {
-        // Call API
         const response = await fetch('/api/profile-omelette', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1343,17 +1843,13 @@
         const data = await response.json();
         console.log('API Response:', data);
 
-        // Extract brand foundation (tagline + handle)
         brandFoundation = {
           tagline: data.brand_foundation?.tagline || data.global_tagline || data.tagline || '',
           handle: data.brand_foundation?.core_handle || data.handle || '',
           handleAlts: data.brand_foundation?.handle_alternatives || data.handle_alternatives || []
         };
 
-        // Transform API response to display format
         generatedResults = [];
-        
-        // Handle different response structures
         const profiles = data.profiles || data.platforms || {};
         
         selectedPlatforms.forEach(p => {
@@ -1383,7 +1879,6 @@
     }
 
     function renderResults() {
-      // Render brand summary
       const summaryContainer = document.getElementById('brandSummary');
       if (brandFoundation && (brandFoundation.tagline || brandFoundation.handle)) {
         summaryContainer.innerHTML = `
@@ -1407,14 +1902,13 @@
         summaryContainer.innerHTML = '';
       }
 
-      // Render platform cards
       const container = document.getElementById('resultsContainer');
       container.innerHTML = generatedResults.map(r => `
         <div class="result-card">
           <div class="result-header">
             <span class="result-icon">${r.icon}</span>
             <span class="result-platform">${r.name}</span>
-            <button class="btn-copy" onclick="copyProfile('${r.platform}')">Copy Profile</button>
+            <button class="btn-copy" onclick="copyProfile('${r.platform}', this)">Copy Profile</button>
           </div>
           <div class="result-body">
             <div class="result-field">
@@ -1432,13 +1926,13 @@
       `).join('');
     }
 
-    function copyProfile(platform) {
+    function copyProfile(platform, btn) {
       const result = generatedResults.find(r => r.platform === platform);
       const text = `📱 ${result.name.toUpperCase()} PROFILE\n\nHandle: ${result.handle}\n\nBio:\n${result.bio}\n\n(${result.bio.length}/${result.charLimit} chars)`;
       navigator.clipboard.writeText(text);
       
-      event.target.textContent = '✅ Copied!';
-      setTimeout(() => event.target.textContent = 'Copy Profile', 1500);
+      btn.textContent = '✅ Copied!';
+      setTimeout(() => btn.textContent = 'Copy Profile', 1500);
     }
 
     function copyAllProfiles() {
