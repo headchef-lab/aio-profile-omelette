@@ -24,7 +24,7 @@
     
     body {
       min-height: 100vh;
-      background: linear-gradient(135deg, var(--bg) 0%, var(--accent-soft) 50%, #FDE68A 100%);fetch('/api/profile-omelette'
+      background: linear-gradient(135deg, var(--bg) 0%, var(--accent-soft) 50%, #FDE68A 100%);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       position: relative;
       overflow-x: hidden;
@@ -1146,7 +1146,7 @@
         goToStep(4);
       } catch (error) {
         console.error('Error:', error);
-        alert('Error connecting to API. Make sure the server is running on localhost:4000\n\n' + error.message);
+        alert('Error generating profiles. Please try again.\n\n' + error.message);
       }
 
       btn.disabled = false;
