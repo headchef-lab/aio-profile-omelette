@@ -46,7 +46,15 @@
     .page {
       min-height: 100vh;
     }
-
+      /* NEW: make sure all main sections never overflow */
+      .hero,
+      .profiles,
+      .wizard-section,
+      .teaser,
+      .page-footer {
+       max-width: 100%;
+       overflow-x: hidden;
+    }
     .container {
       max-width: 1120px;
       margin: 0 auto;
@@ -170,14 +178,49 @@
     font-size: 1.9rem;
     line-height: 1.18;
   }
+      
+    /* NEW: hero card goes full width */
+    .hero-side,
+    .hero-examples {
+    width: 100%;
+    }
+  }   
+
+
+
+   @media (max-width: 520px) {
+  h1 {
+    font-size: 1.45rem;
+    line-height: 1.22;
+  }
+
+  /* Fix Live Preview + tabs on small screens */
+  .hero-examples-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .badge {
+    font-size: 0.68rem;
+    padding: 3px 8px;
+  }
+
+  .hero-tab-list {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;   /* scroll instead of forcing page wider */
+    gap: 4px;
+  }
+
+  .hero-tab {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    white-space: nowrap;
+  }
 }
 
-
-    @media (max-width: 520px) {
-      h1 { font-size: 1.45rem;
-      line-height: 1.22;  
-         }
-    }
 
     .section-heading {
       margin-bottom: 10px;
