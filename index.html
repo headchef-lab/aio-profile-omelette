@@ -288,7 +288,7 @@
       .profile-grid { grid-template-columns: 1fr; }
     }
 
-    .profile-card {
+    .profile-card-example {
       border-radius: 18px;
       border: 1px solid #E5E7EB;
       padding: 16px;
@@ -735,87 +735,206 @@
       font-size: 14px;
     }
 
-    /* Results */
-    .results-container {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+    /* === NEW PLATFORM-STYLED RESULT CARDS === */
+    .profiles-result-section {
+      max-width: 840px;
+      margin: 0 auto;
     }
 
-    .result-card {
-      background: var(--bg);
-      border-radius: 12px;
+    .profiles-result-header {
+      margin-bottom: 24px;
+    }
+
+    .profiles-result-title {
+      font-family: "Poppins", system-ui, sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: -0.03em;
+      color: #111827;
+      margin-bottom: 4px;
+    }
+
+    .profiles-result-subtitle {
+      font-size: 0.95rem;
+      color: #6B7280;
+    }
+
+    /* Platform heading row */
+    .profile-platform-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 24px 0 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #111827;
+    }
+
+    /* Generic profile card */
+    .profile-card {
+      border-radius: 22px;
+      border: 1px solid #E5E7EB;
+      background: #FFFFFF;
+      box-shadow: 0 18px 60px rgba(15, 23, 42, 0.06);
+      margin-bottom: 20px;
       overflow: hidden;
     }
 
-    .result-header {
+    .profile-card__header {
+      position: relative;
+      padding: 14px 18px 16px;
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 16px;
-      background: #fff;
-      border-bottom: 1px solid var(--border);
     }
 
-    .result-icon { font-size: 24px; }
-    .result-platform { font-weight: 600; flex: 1; }
+    .profile-card__avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #F3F4F6;
+    }
 
-    .btn-copy {
-      padding: 8px 16px;
-      background: var(--yolk);
+    .profile-card__meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .profile-card__platform {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #F9FAFB;
+      opacity: 0.9;
+    }
+
+    .profile-card__handle {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #F9FAFB;
+    }
+
+    .profile-card__copy {
+      margin-left: auto;
+      padding: 7px 14px;
+      border-radius: 999px;
       border: none;
-      border-radius: 6px;
-      font-size: 13px;
+      font-size: 0.8rem;
       font-weight: 500;
+      background: #FCD205;
+      color: #111827;
       cursor: pointer;
+      box-shadow: 0 8px 20px rgba(252, 210, 5, 0.4);
       transition: all 0.2s;
     }
 
-    .btn-copy:hover { background: #FDE047; }
+    .profile-card__copy:hover {
+      background: #FACC15;
+      transform: translateY(-1px);
+    }
 
-    .result-body { padding: 16px; }
+    .profile-card__body {
+      padding: 16px 18px 20px;
+      font-size: 0.9rem;
+    }
 
-    .result-field { margin-bottom: 12px; }
-    .result-field:last-child { margin-bottom: 0; }
-
-    .result-label {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--muted);
+    .profile-card__label {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      color: #9CA3AF;
+      margin-bottom: 4px;
     }
 
-    .result-value {
-      display: block;
-      margin-top: 4px;
-      font-size: 15px;
+    .profile-card__text {
+      font-size: 0.94rem;
+      color: #374151;
+      margin-bottom: 6px;
       line-height: 1.5;
-      color: var(--ink);
     }
 
-    .char-count {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 4px;
+    .profile-card__alt-handles {
+      font-size: 0.8rem;
+      color: #6B7280;
+    }
+
+    .profile-card__char-count {
+      font-size: 0.76rem;
+      color: #9CA3AF;
+      margin-top: 6px;
+    }
+
+    .profile-card__field {
+      margin-top: 14px;
+    }
+
+    /* Platform-specific header gradients */
+    .profile-card--instagram .profile-card__header {
+      background: linear-gradient(135deg, #FDBA74, #F97316, #EC4899);
+    }
+
+    .profile-card--x .profile-card__header {
+      background: radial-gradient(circle at top left, #111827, #020617);
+    }
+
+    .profile-card--linkedin .profile-card__header {
+      background: linear-gradient(135deg, #2563EB, #0F3B86);
+    }
+
+    .profile-card--tiktok .profile-card__header {
+      background: linear-gradient(135deg, #000000, #25F4EE, #FE2C55);
+    }
+
+    .profile-card--youtube .profile-card__header {
+      background: linear-gradient(135deg, #DC2626, #991B1B);
+    }
+
+    .profile-card--facebook .profile-card__header {
+      background: linear-gradient(135deg, #1877F2, #0D4F8B);
+    }
+
+    .profile-card--google .profile-card__header {
+      background: linear-gradient(135deg, #4285F4, #34A853, #FBBC05, #EA4335);
+    }
+
+    .profile-card--threads .profile-card__header {
+      background: linear-gradient(135deg, #000000, #333333);
+    }
+
+    .profile-card--pinterest .profile-card__header {
+      background: linear-gradient(135deg, #E60023, #BD081C);
+    }
+
+    .profile-card--linkinbio .profile-card__header {
+      background: linear-gradient(135deg, #8B5CF6, #6366F1);
+    }
+
+    /* Ensure text stays light on all headers */
+    .profile-card__handle,
+    .profile-card__platform {
+      color: #F9FAFB;
     }
 
     /* Brand summary */
     .brand-summary {
       background: linear-gradient(135deg, var(--yolk) 0%, var(--yolk-deep) 100%);
-      border-radius: 12px;
+      border-radius: 16px;
       padding: 20px 24px;
-      margin-bottom: 20px;
+      margin-bottom: 28px;
       color: var(--ink);
     }
 
     .brand-summary-row {
       display: flex;
-      gap: 32px;
+      gap: 24px;
       flex-wrap: wrap;
+      align-items: center;
     }
 
-    .brand-summary-item { flex: 1; min-width: 200px; }
+    .brand-summary-item { flex: 1; min-width: 180px; }
 
     .brand-summary-label {
       font-size: 11px;
@@ -965,7 +1084,6 @@
     }
 
     /* Photo upload */
-    /* Single image upload */
     .upload-single {
       max-width: 280px;
     }
@@ -1135,7 +1253,7 @@
         </p>
 
         <div class="profile-grid">
-          <article class="profile-card">
+          <article class="profile-card-example">
             <div class="profile-card-header">
               <div>
                 <div class="profile-platform">LinkedIn</div>
@@ -1159,7 +1277,7 @@
             </div>
           </article>
 
-          <article class="profile-card">
+          <article class="profile-card-example">
             <div class="profile-card-header">
               <div>
                 <div class="profile-platform">Instagram</div>
@@ -1182,7 +1300,7 @@
             </div>
           </article>
 
-          <article class="profile-card">
+          <article class="profile-card-example">
             <div class="profile-card-header">
               <div>
                 <div class="profile-platform">X / Twitter</div>
@@ -1474,20 +1592,26 @@
             </div>
           </div>
 
-          <!-- Step 4: Results -->
+          <!-- Step 4: Results - NEW PLATFORM-STYLED CARDS -->
           <div class="step-container" id="step4">
-            <h2 class="step-title">Your profiles are cooked! 🍳</h2>
-            <p class="step-subtitle">Copy and paste these into each platform</p>
-            
-            <div class="brand-summary" id="brandSummary"></div>
-            
-            <div class="results-container" id="resultsContainer"></div>
-            
-            <div class="button-row">
-              <button class="btn-back" onclick="goToStep(1)">Start Over</button>
-              <div class="footer-buttons">
-                <button class="btn-secondary" onclick="copyAllProfiles()">📋 Copy All</button>
-                <button class="btn-next" onclick="downloadText()">📄 Download Text</button>
+            <div class="profiles-result-section">
+              <header class="profiles-result-header">
+                <h2 class="profiles-result-title">Your profiles are cooked! 🍳</h2>
+                <p class="profiles-result-subtitle">
+                  Copy and paste these into each platform. You can tweak anything before you publish.
+                </p>
+              </header>
+              
+              <div class="brand-summary" id="brandSummary"></div>
+              
+              <div id="resultsContainer"></div>
+              
+              <div class="button-row" style="margin-top: 32px;">
+                <button class="btn-back" onclick="goToStep(1)">Start Over</button>
+                <div class="footer-buttons">
+                  <button class="btn-secondary" onclick="copyAllProfiles()">📋 Copy All</button>
+                  <button class="btn-next" onclick="downloadText()">📄 Download Text</button>
+                </div>
               </div>
             </div>
           </div>
@@ -1573,6 +1697,7 @@
     let generatedResults = null;
     let brandFoundation = null;
     let uploadedImage = null;
+    let uploadedImageDataUrl = null;
 
     // Single image upload handler
     function handleImageUpload(input) {
@@ -1588,6 +1713,7 @@
       
       const reader = new FileReader();
       reader.onload = (e) => {
+        uploadedImageDataUrl = e.target.result;
         preview.src = e.target.result;
         preview.style.display = 'block';
         placeholder.style.display = 'none';
@@ -1599,6 +1725,7 @@
 
     function removeImage() {
       uploadedImage = null;
+      uploadedImageDataUrl = null;
       
       const preview = document.getElementById('brandImagePreview');
       const placeholder = document.getElementById('uploadPlaceholder');
@@ -1635,23 +1762,20 @@
       const btn = document.getElementById('step1Next');
       if (btn) {
         btn.disabled = !isValid;
-        console.log('Validation:', { name, industry, oneLiner, isValid });
       }
       return isValid;
     }
 
     function validateAndProceed(step) {
       if (step === 1) {
-        // Force revalidate and proceed
         const isValid = validateStep1();
-        console.log('validateAndProceed called, isValid:', isValid);
         if (isValid) {
           goToStep(2);
         }
       }
     }
 
-    // Add input listeners for real-time validation - run immediately
+    // Add input listeners for real-time validation
     (function() {
       function setupValidation() {
         const fields = ['businessName', 'industry', 'oneLiner'];
@@ -1666,7 +1790,6 @@
         validateStep1();
       }
       
-      // Try multiple times to ensure it runs
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', setupValidation);
       } else {
@@ -1691,7 +1814,6 @@
       document.getElementById('progressFill').style.width = (step / 4 * 100) + '%';
       currentStep = step;
       
-      // Scroll wizard into view
       document.getElementById('wizard').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
@@ -1756,7 +1878,7 @@
       document.getElementById('selectedCount').textContent = text;
     }
 
-    // Toggle modes - FIXED
+    // Toggle modes
     function setTaglineMode(mode) {
       taglineMode = mode;
       document.querySelectorAll('#taglineSection .toggle-btn').forEach(btn => {
@@ -1846,22 +1968,14 @@
         generatedResults = [];
         const profiles = data.profiles || data.platforms || data;
         
-        console.log('Profiles object:', profiles);
-        
         selectedPlatforms.forEach(p => {
           const meta = platformMeta[p];
-          // Try multiple ways to find the profile data
           let profileData = profiles[p] || {};
           
-          // If profiles is an array, find by platform name
           if (Array.isArray(profiles)) {
             profileData = profiles.find(pr => pr.platform === p || pr.platform?.toLowerCase() === p) || {};
           }
           
-          // Log what we found for debugging
-          console.log(`Platform ${p}:`, profileData);
-          
-          // Extract bio with multiple fallback paths
           const bio = profileData.bio || 
                       profileData.about || 
                       profileData.description || 
@@ -1895,17 +2009,14 @@
 
     function renderResults() {
       const summaryContainer = document.getElementById('brandSummary');
-      
-      // Get brand image if uploaded
-      const brandImagePreview = document.getElementById('brandImagePreview');
-      const hasImage = uploadedImage && brandImagePreview && brandImagePreview.src;
+      const hasImage = uploadedImageDataUrl;
       
       if (brandFoundation && (brandFoundation.tagline || brandFoundation.handle || hasImage)) {
         summaryContainer.innerHTML = `
           <div class="brand-summary-row">
             ${hasImage ? `
               <div class="brand-summary-item" style="flex: 0 0 auto;">
-                <img src="${brandImagePreview.src}" alt="Profile" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.3);">
+                <img src="${uploadedImageDataUrl}" alt="Profile" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.3);">
               </div>
             ` : ''}
             ${brandFoundation.tagline ? `
@@ -1927,27 +2038,45 @@
         summaryContainer.innerHTML = '';
       }
 
+      // NEW: Render platform-styled cards
       const container = document.getElementById('resultsContainer');
+      const avatarSrc = uploadedImageDataUrl || 'https://via.placeholder.com/96';
+      
       container.innerHTML = generatedResults.map(r => `
-        <div class="result-card">
-          <div class="result-header">
-            <span class="result-icon">${r.icon}</span>
-            <span class="result-platform">${r.name}</span>
-            <button class="btn-copy" onclick="copyProfile('${r.platform}', this)">Copy Profile</button>
-          </div>
-          <div class="result-body">
-            <div class="result-field">
-              <span class="result-label">Handle</span>
-              <span class="result-value">${r.handle}</span>
-              <div class="char-count">Alternatives: ${r.handleAlts.join(', ')}</div>
-            </div>
-            <div class="result-field">
-              <span class="result-label">Bio</span>
-              <span class="result-value">${r.bio}</span>
-              <div class="char-count">${r.bio.length}/${r.charLimit} characters</div>
-            </div>
-          </div>
+        <!-- Platform heading -->
+        <div class="profile-platform-heading">
+          <span>${r.icon} ${r.name}</span>
         </div>
+
+        <!-- Platform card -->
+        <article class="profile-card profile-card--${r.platform}">
+          <div class="profile-card__header">
+            <img
+              src="${avatarSrc}"
+              alt="Profile avatar"
+              class="profile-card__avatar"
+            />
+            <div class="profile-card__meta">
+              <div class="profile-card__platform">${r.name}</div>
+              <div class="profile-card__handle">${r.handle}</div>
+            </div>
+            <button class="profile-card__copy" type="button" onclick="copyProfile('${r.platform}', this)">
+              Copy profile
+            </button>
+          </div>
+
+          <div class="profile-card__body">
+            <div class="profile-card__label">Handle</div>
+            <div class="profile-card__text">${r.handle}</div>
+            ${r.handleAlts.length ? `<div class="profile-card__alt-handles">Alternatives: ${r.handleAlts.join(', ')}</div>` : ''}
+
+            <div class="profile-card__field">
+              <div class="profile-card__label">Bio</div>
+              <div class="profile-card__text">${r.bio}</div>
+              <div class="profile-card__char-count">${r.bio.length} / ${r.charLimit} characters</div>
+            </div>
+          </div>
+        </article>
       `).join('');
     }
 
@@ -1957,7 +2086,7 @@
       navigator.clipboard.writeText(text);
       
       btn.textContent = '✅ Copied!';
-      setTimeout(() => btn.textContent = 'Copy Profile', 1500);
+      setTimeout(() => btn.textContent = 'Copy profile', 1500);
     }
 
     function copyAllProfiles() {
