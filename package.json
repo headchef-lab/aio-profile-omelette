@@ -1,7 +1,6 @@
 {
   "name": "aio-profile-omelette",
   "version": "1.0.0",
-  "type": "module",
   "description": "Profile Omelette - Digital Presence Creator by Ai Omelette",
   "private": true,
   "scripts": {
