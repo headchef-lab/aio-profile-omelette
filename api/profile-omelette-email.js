@@ -28,7 +28,7 @@ export default async function handler(req, res) {
 
     // Send the email
     const { data, error } = await resend.emails.send({
-      from: 'Profile Omelette <onboarding@resend.dev>',
+      from: 'Profile Omelette <chef@aiomelette.com>',
       to: email,
       subject: `🍳 Your ${brandName} Profiles Are Ready!`,
       html: `
@@ -70,6 +70,24 @@ export default async function handler(req, res) {
     if (error) {
       console.error('Resend error:', error);
       return res.status(500).json({ error: 'Failed to send email', details: error.message });
+    }
+
+    // Add subscriber to MailPoet list (AiOmelette Fresh AI Served Daily)
+    try {
+      await fetch('https://aiomelette.com/wp-json/aio/v1/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Webhook-Secret': process.env.MAILPOET_WEBHOOK_SECRET,
+        },
+        body: JSON.stringify({
+          email: email,
+          source: 'Profile Omelette',
+        }),
+      });
+    } catch (mailpoetError) {
+      // Log but don't fail - email was still sent successfully
+      console.error('MailPoet webhook error:', mailpoetError);
     }
 
     return res.status(200).json({ success: true, messageId: data?.id });
