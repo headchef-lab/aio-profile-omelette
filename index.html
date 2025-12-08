@@ -26,6 +26,8 @@
 
     html {
       scroll-behavior: smooth;
+      max-width: 100%;
+      overflow-x: hidden;
     }
 
     body {
@@ -33,6 +35,8 @@
       background: var(--bg);
       color: var(--ink);
       line-height: 1.6;
+      max-width: 100%;
+      overflow-x: hidden;
     }
 
     .page {
@@ -390,6 +394,7 @@
       background: #ffffff;
       box-shadow: 0 18px 60px rgba(15, 23, 42, 0.15), 0 0 0 1px rgba(255,255,255,0.65) inset;
       padding: 32px;
+      margin: 0 auto;
     }
 
     @media (max-width: 640px) {
@@ -546,6 +551,7 @@
       justify-content: space-between;
       margin-top: 32px;
       gap: 12px;
+      flex-wrap: wrap;
     }
 
     .btn-back {
@@ -561,7 +567,7 @@
 
     .btn-back:hover { background: var(--border); }
 
-    .btn-next, .btn-generate {
+    .btn-next, .btn-generate, .btn-email {
       padding: 12px 24px;
       background: var(--yolk);
       border: none;
@@ -571,14 +577,19 @@
       cursor: pointer;
       transition: all 0.2s;
       color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      white-space: nowrap;
     }
 
-    .btn-next:hover, .btn-generate:hover {
+    .btn-next:hover, .btn-generate:hover, .btn-email:hover {
       background: #FDE047;
       transform: translateY(-1px);
     }
 
-    .btn-next:disabled, .btn-generate:disabled {
+    .btn-next:disabled, .btn-generate:disabled, .btn-email:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       transform: none;
@@ -848,6 +859,7 @@
       cursor: pointer;
       box-shadow: 0 8px 20px rgba(252, 210, 5, 0.4);
       transition: all 0.2s;
+      white-space: nowrap;
     }
 
     .profile-card__copy:hover {
@@ -974,11 +986,82 @@
       margin-top: 4px;
     }
 
+    /* Email share section */
+    .email-share {
+      margin-top: 24px;
+      padding: 18px 18px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: #F9FAFB;
+    }
+
+    .email-share-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #111827;
+    }
+
+    .email-share-subtitle {
+      font-size: 0.85rem;
+      color: #6B7280;
+      margin-bottom: 14px;
+    }
+
+    .email-share-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .email-share-row .email-input {
+      flex: 1 1 220px;
+      max-width: 280px;
+    }
+
+    .email-checkboxes {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: #4B5563;
+      flex: 2 1 220px;
+    }
+
+    .email-checkboxes label {
+      font-weight: 400;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .email-checkboxes input[type="checkbox"] {
+      margin-top: 2px;
+      width: auto;
+    }
+
+    .email-privacy {
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: #6B7280;
+    }
+
+    .email-privacy strong {
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .human-check-input {
+      max-width: 200px;
+    }
+
     /* Footer buttons */
     .footer-buttons {
       display: flex;
       gap: 12px;
       justify-content: flex-end;
+      flex-wrap: wrap;
     }
 
     .btn-secondary {
@@ -1004,7 +1087,6 @@
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
       vertical-align: middle;
-      margin-right: 8px;
     }
 
     @keyframes spin { to { transform: rotate(360deg); } }
@@ -1654,12 +1736,51 @@
               <div class="brand-summary" id="brandSummary"></div>
               
               <div id="resultsContainer"></div>
+
+              <!-- Email capture / trust block -->
+              <div class="email-share">
+                <div class="email-share-title">Email this full profile pack to yourself</div>
+                <p class="email-share-subtitle">
+                  Skip the copy-paste juggling — we’ll send everything in one tidy email.
+                </p>
+                <div class="email-share-row">
+                  <div class="email-input">
+                    <label for="emailAddress">Email address <span class="required">*</span></label>
+                    <input type="email" id="emailAddress" placeholder="you@example.com">
+                  </div>
+
+                  <div class="human-check-input">
+                    <label for="humanCheck">Quick human check <span class="required">*</span></label>
+                    <input type="text" id="humanCheck" placeholder="Type OMELETTE">
+                    <p class="helper-text">Bots hate breakfast. Humans can type OMELETTE.</p>
+                  </div>
+
+                  <div class="email-checkboxes">
+                    <label>
+                      <input type="checkbox" id="emailConsentRequired">
+                      <span>I agree to receive my profile pack by email and accept that Ai Omelette will store my email for this purpose.</span>
+                    </label>
+                    <label>
+                      <input type="checkbox" id="emailConsentMarketing">
+                      <span>Yes, send me occasional Ai Omelette updates, experiments & new tools (marketing emails).</span>
+                    </label>
+                  </div>
+                </div>
+                <p class="email-privacy">
+                  <strong>Privacy:</strong> No spam. No selling your data. One-click unsubscribe on every marketing email.
+                </p>
+
+                <div style="margin-top:14px; display:flex; justify-content:flex-end;">
+                  <button class="btn-email" id="emailSendBtn" type="button" onclick="sendProfilesByEmail(this)">
+                    ✉️ Email my profiles
+                  </button>
+                </div>
+              </div>
               
               <div class="button-row" style="margin-top: 32px;">
                 <button class="btn-back" onclick="goToStep(1)">Start Over</button>
                 <div class="footer-buttons">
                   <button class="btn-secondary" onclick="copyAllProfiles(this)">📋 Copy All</button>
-                  <button class="btn-next" onclick="downloadText()">📄 Download Text</button>
                 </div>
               </div>
             </div>
@@ -2195,6 +2316,11 @@
     }
 
     function copyAllProfiles(btn) {
+      if (!generatedResults || !generatedResults.length) {
+        alert('Generate your profiles first, then you can copy everything in one go.');
+        return;
+      }
+
       let text = '🍳 AiO PROFILE OMELETTE RESULTS\n';
       text += '═'.repeat(40) + '\n\n';
       
@@ -2228,38 +2354,82 @@
       }
     }
 
-    function downloadText() {
-      let text = '🍳 AiO PROFILE OMELETTE RESULTS\n';
-      text += 'Generated: ' + new Date().toLocaleDateString() + '\n';
-      text += '═'.repeat(50) + '\n\n';
-      
-      const businessName = document.getElementById('businessName').value || 'My Business';
-      text += `Business: ${businessName}\n\n`;
-      
-      generatedResults.forEach(r => {
-        text += `${'─'.repeat(50)}\n`;
-        text += `${r.icon} ${r.name.toUpperCase()}\n`;
-        text += `${'─'.repeat(50)}\n\n`;
-        text += `HANDLE: ${r.handle}\n`;
-        text += `Alternatives: ${(r.handleAlts || []).join(', ')}\n\n`;
-        text += `BIO:\n${r.bio}\n\n`;
-        text += `Character count: ${r.bio.length}/${r.charLimit}\n\n`;
-      });
-      
-      text += '═'.repeat(50) + '\n';
-      text += 'Generated by AiO Profile Omelette™\n';
-      text += 'https://aiomelette.com\n';
-      text += 'Fresh AI Served Daily 🍳\n';
-      
-      const blob = new Blob([text], { type: 'text/plain' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = businessName.toLowerCase().replace(/\s+/g, '-') + '-profiles.txt';
-      a.click();
-      URL.revokeObjectURL(url);
+    async function sendProfilesByEmail(btn) {
+      if (!generatedResults || !generatedResults.length) {
+        alert('Please generate your profiles first, then you can email them.');
+        return;
+      }
+
+      const emailInput = document.getElementById('emailAddress');
+      const humanCheckInput = document.getElementById('humanCheck');
+      const consentRequired = document.getElementById('emailConsentRequired');
+      const consentMarketing = document.getElementById('emailConsentMarketing');
+
+      const email = (emailInput.value || '').trim();
+      const humanValue = (humanCheckInput.value || '').trim().toLowerCase();
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!email || !emailRegex.test(email)) {
+        alert('Please enter a valid email address so we know where to send your profiles.');
+        emailInput.focus();
+        return;
+      }
+
+      if (humanValue !== 'omelette') {
+        alert('Human check failed. Please type OMELETTE exactly (no robots allowed).');
+        humanCheckInput.focus();
+        return;
+      }
+
+      if (!consentRequired.checked) {
+        alert('Please confirm you’re okay with us emailing you this profile pack.');
+        return;
+      }
+
+      const payload = {
+        email,
+        consent: {
+          transactional_profile_email: true,
+          marketing_opt_in: !!consentMarketing.checked
+        },
+        business_name: document.getElementById('businessName').value || '',
+        founder_name: document.getElementById('founderName').value || '',
+        brand_foundation: brandFoundation,
+        profiles: generatedResults,
+        metadata: {
+          source: 'aio-profile-omelette-v1',
+          created_at: new Date().toISOString()
+        }
+      };
+
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> Sending...';
+
+      try {
+        const response = await fetch('/api/profile-omelette-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          throw new Error('Email API request failed: ' + response.status);
+        }
+
+        btn.innerHTML = '✅ Sent to your inbox';
+        setTimeout(() => {
+          btn.innerHTML = '✉️ Email my profiles';
+          btn.disabled = false;
+        }, 2500);
+      } catch (err) {
+        console.error('Email error', err);
+        alert('Something went wrong sending the email. Please try again or copy your profiles as a backup.\n\n' + err.message);
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      }
     }
   </script>
 </body>
 </html>
-
