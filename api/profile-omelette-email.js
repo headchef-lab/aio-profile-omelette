@@ -9,22 +9,41 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { email, profiles, brandName, tagline } = req.body;
+    const { email, profiles, business_name, brand_foundation } = req.body;
+    
+    // Support both naming conventions
+    const brandName = business_name || req.body.brandName || 'Your Brand';
+    const tagline = brand_foundation?.tagline || req.body.tagline || '';
 
     // Validate required fields
-    if (!email || !profiles || !brandName) {
+    if (!email || !profiles) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    // Build the profile HTML
-    const profilesHtml = Object.entries(profiles)
-      .map(([platform, bio]) => `
+    // Build the profile HTML - handle both array and object formats
+    let profilesHtml = '';
+    
+    if (Array.isArray(profiles)) {
+      // Frontend sends array of profile objects
+      profilesHtml = profiles.map(p => `
         <div style="margin-bottom: 24px; padding: 16px; background: #f8f8f8; border-radius: 8px;">
-          <h3 style="margin: 0 0 8px 0; color: #FF6B35; font-size: 16px; text-transform: uppercase;">${platform}</h3>
-          <p style="margin: 0; color: #333; font-size: 14px; line-height: 1.5;">${bio}</p>
+          <h3 style="margin: 0 0 8px 0; color: #FF6B35; font-size: 16px; text-transform: uppercase;">${p.icon || ''} ${p.name || p.platform}</h3>
+          <p style="margin: 0 0 6px 0; color: #666; font-size: 13px;">${p.handle || ''}</p>
+          <p style="margin: 0; color: #333; font-size: 14px; line-height: 1.5;">${p.bio || ''}</p>
+          <p style="margin: 6px 0 0 0; color: #999; font-size: 12px;">${p.bio?.length || 0} / ${p.charLimit || '?'} characters</p>
         </div>
-      `)
-      .join('');
+      `).join('');
+    } else {
+      // Fallback for object format
+      profilesHtml = Object.entries(profiles)
+        .map(([platform, bio]) => `
+          <div style="margin-bottom: 24px; padding: 16px; background: #f8f8f8; border-radius: 8px;">
+            <h3 style="margin: 0 0 8px 0; color: #FF6B35; font-size: 16px; text-transform: uppercase;">${platform}</h3>
+            <p style="margin: 0; color: #333; font-size: 14px; line-height: 1.5;">${bio}</p>
+          </div>
+        `)
+        .join('');
+    }
 
     // Send the email
     const { data, error } = await resend.emails.send({
