@@ -11,7 +11,7 @@
     :root {
       --bg: #f9fafb;
       --bg-alt: #ffffff;
-      --yolk: #ffc93c;
+      --yolk: #fdd835;
       --yolk-deep: #f59e0b;
       --accent-soft: #fef3c7;
       --accent-alt: #14b8a6;
@@ -1638,8 +1638,17 @@
       const reader = new FileReader();
       reader.onload = (e) => {
         preview.src = e.target.result;
+        preview.style.display = 'block';
         area.classList.add('has-file');
         nameEl.textContent = file.name;
+        
+        // Hide upload icon and text
+        const icon = area.querySelector('.upload-icon');
+        const text = area.querySelector('.upload-text');
+        const hint = area.querySelector('.upload-hint');
+        if (icon) icon.style.display = 'none';
+        if (text) text.style.display = 'none';
+        if (hint) hint.style.display = 'none';
       };
       reader.readAsDataURL(file);
     }
@@ -1653,10 +1662,21 @@
       const area = document.getElementById(type === 'profilePic' ? 'profilePicArea' : 'logoArea');
       const input = document.getElementById(type === 'profilePic' ? 'profilePicInput' : 'logoInput');
       const preview = document.getElementById(type === 'profilePic' ? 'profilePicPreview' : 'logoPreview');
+      const filename = document.getElementById(type === 'profilePic' ? 'profilePicName' : 'logoName');
       
       area.classList.remove('has-file');
       input.value = '';
       preview.src = '';
+      preview.style.display = 'none';
+      if (filename) filename.textContent = '';
+      
+      // Show upload icon and text again
+      const icon = area.querySelector('.upload-icon');
+      const text = area.querySelector('.upload-text');
+      const hint = area.querySelector('.upload-hint');
+      if (icon) icon.style.display = 'block';
+      if (text) text.style.display = 'block';
+      if (hint) hint.style.display = 'block';
     }
 
     // Hero tab switching
@@ -1673,11 +1693,12 @@
 
     // Validation for Step 1
     function validateStep1() {
-      const name = document.getElementById('businessName').value.trim();
-      const industry = document.getElementById('industry').value.trim();
-      const oneLiner = document.getElementById('oneLiner').value.trim();
+      const name = document.getElementById('businessName')?.value?.trim() || '';
+      const industry = document.getElementById('industry')?.value?.trim() || '';
+      const oneLiner = document.getElementById('oneLiner')?.value?.trim() || '';
       const isValid = name.length > 0 && industry.length > 0 && oneLiner.length > 0;
-      document.getElementById('step1Next').disabled = !isValid;
+      const btn = document.getElementById('step1Next');
+      if (btn) btn.disabled = !isValid;
       return isValid;
     }
 
@@ -1690,10 +1711,18 @@
     // Add input listeners for real-time validation
     document.addEventListener('DOMContentLoaded', () => {
       ['businessName', 'industry', 'oneLiner'].forEach(id => {
-        document.getElementById(id).addEventListener('input', validateStep1);
+        const el = document.getElementById(id);
+        if (el) {
+          el.addEventListener('input', validateStep1);
+          el.addEventListener('change', validateStep1);
+        }
       });
-      validateStep1();
+      // Run initial validation
+      setTimeout(validateStep1, 100);
     });
+    
+    // Also run on window load as backup
+    window.addEventListener('load', validateStep1);
 
     // Navigation
     function goToStep(step) {
