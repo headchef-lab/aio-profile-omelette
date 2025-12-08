@@ -1431,8 +1431,8 @@
                 <div class="toggle-section" id="taglineSection">
                   <h3 class="toggle-title">Tagline</h3>
                   <div class="toggle-buttons">
-                    <button class="toggle-btn" data-mode="input" onclick="setTaglineMode('input')">I have one</button>
-                    <button class="toggle-btn active" data-mode="generate" onclick="setTaglineMode('generate')">Generate one for me</button>
+                    <button type="button" class="toggle-btn" data-mode="input" onclick="setTaglineMode('input')">I have one</button>
+                    <button type="button" class="toggle-btn active" data-mode="generate" onclick="setTaglineMode('generate')">Generate one for me</button>
                   </div>
                   <input type="text" id="taglineInput" class="toggle-input hidden" placeholder="Your tagline...">
                   <p class="toggle-hint" id="taglineHint">AiO will craft a clean, platform-ready tagline based on your brand.</p>
@@ -1443,8 +1443,8 @@
                 <div class="toggle-section" id="handleSection">
                   <h3 class="toggle-title">Handle / Username</h3>
                   <div class="toggle-buttons">
-                    <button class="toggle-btn" data-mode="input" onclick="setHandleMode('input')">I have one</button>
-                    <button class="toggle-btn active" data-mode="generate" onclick="setHandleMode('generate')">Suggest options</button>
+                    <button type="button" class="toggle-btn" data-mode="input" onclick="setHandleMode('input')">I have one</button>
+                    <button type="button" class="toggle-btn active" data-mode="generate" onclick="setHandleMode('generate')">Suggest options</button>
                   </div>
                   <input type="text" id="handleInput" class="toggle-input hidden" placeholder="@yourhandle">
                   <p class="toggle-hint" id="handleHint">AiO suggests consistent handles for every platform.</p>
@@ -1854,7 +1854,7 @@
         }
 
         const data = await response.json();
-        console.log('API Response:', data);
+        console.log('API Response:', JSON.stringify(data, null, 2));
 
         brandFoundation = {
           tagline: data.brand_foundation?.tagline || data.global_tagline || data.tagline || '',
@@ -1863,20 +1863,41 @@
         };
 
         generatedResults = [];
-        const profiles = data.profiles || data.platforms || {};
+        const profiles = data.profiles || data.platforms || data;
+        
+        console.log('Profiles object:', profiles);
         
         selectedPlatforms.forEach(p => {
           const meta = platformMeta[p];
-          const profileData = profiles[p] || profiles.find?.(pr => pr.platform === p) || {};
+          // Try multiple ways to find the profile data
+          let profileData = profiles[p] || {};
+          
+          // If profiles is an array, find by platform name
+          if (Array.isArray(profiles)) {
+            profileData = profiles.find(pr => pr.platform === p || pr.platform?.toLowerCase() === p) || {};
+          }
+          
+          // Log what we found for debugging
+          console.log(`Platform ${p}:`, profileData);
+          
+          // Extract bio with multiple fallback paths
+          const bio = profileData.bio || 
+                      profileData.about || 
+                      profileData.description || 
+                      profileData.content ||
+                      profileData.text ||
+                      (typeof profileData === 'string' ? profileData : null) ||
+                      data.global_tagline || 
+                      'Profile bio';
           
           generatedResults.push({
             platform: p,
             icon: meta.icon,
             name: meta.name,
             charLimit: meta.charLimit,
-            handle: '@' + (profileData.handle_primary || profileData.handle || data.brand_foundation?.core_handle || payload.business_name.toLowerCase().replace(/\s+/g, '')),
-            bio: profileData.bio || profileData.about || profileData.description || data.global_tagline || 'Profile bio',
-            handleAlts: profileData.handle_alternatives || [profileData.handle_primary + '_co', profileData.handle_primary + '_official']
+            handle: '@' + (profileData.handle_primary || profileData.handle || data.brand_foundation?.core_handle || brandFoundation.handle || payload.business_name.toLowerCase().replace(/\s+/g, '_')),
+            bio: bio,
+            handleAlts: profileData.handle_alternatives || brandFoundation.handleAlts || []
           });
         });
 
@@ -1893,9 +1914,19 @@
 
     function renderResults() {
       const summaryContainer = document.getElementById('brandSummary');
-      if (brandFoundation && (brandFoundation.tagline || brandFoundation.handle)) {
+      
+      // Get profile pic if uploaded
+      const profilePicPreview = document.getElementById('profilePicPreview');
+      const hasProfilePic = uploadedFiles.profilePic && profilePicPreview.src;
+      
+      if (brandFoundation && (brandFoundation.tagline || brandFoundation.handle || hasProfilePic)) {
         summaryContainer.innerHTML = `
           <div class="brand-summary-row">
+            ${hasProfilePic ? `
+              <div class="brand-summary-item" style="flex: 0 0 auto;">
+                <img src="${profilePicPreview.src}" alt="Profile" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.3);">
+              </div>
+            ` : ''}
             ${brandFoundation.tagline ? `
               <div class="brand-summary-item">
                 <div class="brand-summary-label">Your Tagline</div>
