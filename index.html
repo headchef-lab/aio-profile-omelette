@@ -787,14 +787,33 @@
       gap: 12px;
     }
 
-    .profile-card__avatar {
+    /* Avatar wrap + variants */
+    .profile-card__avatar-wrap {
       width: 48px;
       height: 48px;
       border-radius: 999px;
+      overflow: hidden;
       border: 2px solid rgba(255, 255, 255, 0.9);
-      object-fit: cover;
       flex-shrink: 0;
       background: #F3F4F6;
+    }
+
+    .profile-card__avatar {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: inherit;
+    }
+
+    .profile-card__avatar--initials {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top left, #FED7AA 0, #F97316 40%, #EA580C 90%);
+      color: #FFF7ED;
+      font-size: 1rem;
+      font-weight: 600;
     }
 
     .profile-card__meta {
@@ -920,11 +939,13 @@
 
     /* Brand summary */
     .brand-summary {
-      background: linear-gradient(135deg, var(--yolk) 0%, var(--yolk-deep) 100%);
+      background: radial-gradient(circle at top left, #FEF3C7 0, #FFF7ED 45%, #FFFFFF 100%);
       border-radius: 16px;
       padding: 20px 24px;
       margin-bottom: 28px;
-      color: var(--ink);
+      color: #1F2933;
+      border: 1px solid #FBBF24;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
     }
 
     .brand-summary-row {
@@ -1160,6 +1181,34 @@
       text-align: left;
       margin-top: 8px;
     }
+
+    /* Platform-flavour tweaks */
+    .profile-card--instagram .profile-card__body {
+      text-align: left;
+    }
+
+    .profile-card--instagram .profile-card__field {
+      margin-top: 10px;
+    }
+
+    .profile-card--linkedin .profile-card__body {
+      border-top: 1px solid rgba(148, 163, 184, 0.4);
+      margin-top: 6px;
+      padding-top: 10px;
+    }
+
+    .profile-card--x .profile-card__text {
+      line-height: 1.4;
+    }
+
+    .profile-card--x .profile-card__body {
+      font-size: 0.88rem;
+    }
+
+    .profile-card--google .profile-card__label {
+      text-transform: none;
+      letter-spacing: 0.02em;
+    }
   </style>
 </head>
 <body id="top">
@@ -1196,9 +1245,9 @@
               <div class="hero-examples-header">
                 <span class="badge">Live Preview</span>
                 <div class="hero-tab-list">
-                  <div class="hero-tab active" onclick="showHeroTab('linkedin')">LinkedIn</div>
-                  <div class="hero-tab" onclick="showHeroTab('instagram')">Instagram</div>
-                  <div class="hero-tab" onclick="showHeroTab('twitter')">X / Twitter</div>
+                  <div class="hero-tab active" onclick="showHeroTab('linkedin', this)">LinkedIn</div>
+                  <div class="hero-tab" onclick="showHeroTab('instagram', this)">Instagram</div>
+                  <div class="hero-tab" onclick="showHeroTab('twitter', this)">X / Twitter</div>
                 </div>
               </div>
 
@@ -1609,7 +1658,7 @@
               <div class="button-row" style="margin-top: 32px;">
                 <button class="btn-back" onclick="goToStep(1)">Start Over</button>
                 <div class="footer-buttons">
-                  <button class="btn-secondary" onclick="copyAllProfiles()">📋 Copy All</button>
+                  <button class="btn-secondary" onclick="copyAllProfiles(this)">📋 Copy All</button>
                   <button class="btn-next" onclick="downloadText()">📄 Download Text</button>
                 </div>
               </div>
@@ -1742,15 +1791,15 @@
     }
 
     // Hero tab switching
-    function showHeroTab(tab) {
+    function showHeroTab(tab, el) {
       document.querySelectorAll('.hero-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('[class^="hero-example-block"]').forEach(b => b.style.display = 'none');
-      
-      event.target.classList.add('active');
+      document.querySelectorAll('.hero-example-block').forEach(b => b.style.display = 'none');
       
       if (tab === 'linkedin') document.getElementById('heroExampleLinkedin').style.display = 'block';
       if (tab === 'instagram') document.getElementById('heroExampleInstagram').style.display = 'block';
       if (tab === 'twitter') document.getElementById('heroExampleTwitter').style.display = 'block';
+
+      if (el) el.classList.add('active');
     }
 
     // Validation for Step 1
@@ -2009,75 +2058,131 @@
 
     function renderResults() {
       const summaryContainer = document.getElementById('brandSummary');
-      const hasImage = uploadedImageDataUrl;
-      
+      const businessName = (document.getElementById('businessName').value || 'My Business').trim();
+      const initials = businessName
+        .split(/\s+/)
+        .slice(0, 2)
+        .map(w => w[0]?.toUpperCase() || '')
+        .join('') || 'AO';
+
+      const hasImage = !!uploadedImageDataUrl;
+
+      // Brand summary
       if (brandFoundation && (brandFoundation.tagline || brandFoundation.handle || hasImage)) {
         summaryContainer.innerHTML = `
           <div class="brand-summary-row">
-            ${hasImage ? `
+            ${
+              hasImage
+                ? `
               <div class="brand-summary-item" style="flex: 0 0 auto;">
-                <img src="${uploadedImageDataUrl}" alt="Profile" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.3);">
+                <div class="profile-card__avatar-wrap">
+                  <img src="${uploadedImageDataUrl}" alt="Profile" class="profile-card__avatar">
+                </div>
               </div>
-            ` : ''}
-            ${brandFoundation.tagline ? `
+            `
+                : `
+              <div class="brand-summary-item" style="flex: 0 0 auto;">
+                <div class="profile-card__avatar-wrap">
+                  <div class="profile-card__avatar profile-card__avatar--initials">${initials}</div>
+                </div>
+              </div>
+            `
+            }
+            ${
+              brandFoundation.tagline
+                ? `
               <div class="brand-summary-item">
                 <div class="brand-summary-label">Your Tagline</div>
                 <div class="brand-summary-value">${brandFoundation.tagline}</div>
               </div>
-            ` : ''}
-            ${brandFoundation.handle ? `
+            `
+                : ''
+            }
+            ${
+              brandFoundation.handle
+                ? `
               <div class="brand-summary-item">
                 <div class="brand-summary-label">Your Handle</div>
                 <div class="brand-summary-value">@${brandFoundation.handle}</div>
-                ${brandFoundation.handleAlts.length ? `<div class="brand-summary-alts">Also available: ${brandFoundation.handleAlts.map(h => '@' + h).join(', ')}</div>` : ''}
+                ${
+                  brandFoundation.handleAlts?.length
+                    ? `<div class="brand-summary-alts">Also available: ${brandFoundation.handleAlts
+                        .map(h => '@' + h)
+                        .join(', ')}</div>`
+                    : ''
+                }
               </div>
-            ` : ''}
+            `
+                : ''
+            }
           </div>
         `;
       } else {
         summaryContainer.innerHTML = '';
       }
 
-      // NEW: Render platform-styled cards
+      // Profiles
       const container = document.getElementById('resultsContainer');
-      const avatarSrc = uploadedImageDataUrl || 'https://via.placeholder.com/96';
-      
-      container.innerHTML = generatedResults.map(r => `
-        <!-- Platform heading -->
-        <div class="profile-platform-heading">
-          <span>${r.icon} ${r.name}</span>
-        </div>
 
-        <!-- Platform card -->
-        <article class="profile-card profile-card--${r.platform}">
-          <div class="profile-card__header">
-            <img
-              src="${avatarSrc}"
-              alt="Profile avatar"
-              class="profile-card__avatar"
-            />
-            <div class="profile-card__meta">
-              <div class="profile-card__platform">${r.name}</div>
-              <div class="profile-card__handle">${r.handle}</div>
+      container.innerHTML = generatedResults
+        .map(r => {
+          const meta = platformMeta[r.platform] || {};
+          const platformName = meta.name || r.name;
+
+          const avatarBlock = hasImage
+            ? `
+            <div class="profile-card__avatar-wrap">
+              <img
+                src="${uploadedImageDataUrl}"
+                alt="Profile avatar"
+                class="profile-card__avatar"
+              />
             </div>
-            <button class="profile-card__copy" type="button" onclick="copyProfile('${r.platform}', this)">
-              Copy profile
-            </button>
-          </div>
-
-          <div class="profile-card__body">
-            <div class="profile-card__label">Handle</div>
-            <div class="profile-card__text">${r.handle}</div>
-            ${r.handleAlts.length ? `<div class="profile-card__alt-handles">Alternatives: ${r.handleAlts.join(', ')}</div>` : ''}
-
-            <div class="profile-card__field">
-              <div class="profile-card__label">Bio</div>
-              <div class="profile-card__text">${r.bio}</div>
-              <div class="profile-card__char-count">${r.bio.length} / ${r.charLimit} characters</div>
+          `
+            : `
+            <div class="profile-card__avatar-wrap">
+              <div class="profile-card__avatar profile-card__avatar--initials">${initials}</div>
             </div>
-          </div>
-        </article>
-      `).join('');
+          `;
+
+          return `
+            <!-- Platform heading -->
+            <div class="profile-platform-heading">
+              <span>${r.icon} ${platformName}</span>
+            </div>
+
+            <!-- Platform card -->
+            <article class="profile-card profile-card--${r.platform}">
+              <div class="profile-card__header">
+                ${avatarBlock}
+                <div class="profile-card__meta">
+                  <div class="profile-card__platform">${platformName}</div>
+                  <div class="profile-card__handle">${r.handle}</div>
+                </div>
+                <button class="profile-card__copy" type="button" onclick="copyProfile('${r.platform}', this)">
+                  Copy profile
+                </button>
+              </div>
+
+              <div class="profile-card__body">
+                <div class="profile-card__label">Handle</div>
+                <div class="profile-card__text">${r.handle}</div>
+                ${
+                  r.handleAlts && r.handleAlts.length
+                    ? `<div class="profile-card__alt-handles">Alternatives: ${r.handleAlts.join(', ')}</div>`
+                    : ''
+                }
+
+                <div class="profile-card__field">
+                  <div class="profile-card__label">Bio</div>
+                  <div class="profile-card__text">${r.bio}</div>
+                  <div class="profile-card__char-count">${r.bio.length} / ${r.charLimit} characters</div>
+                </div>
+              </div>
+            </article>
+          `;
+        })
+        .join('');
     }
 
     function copyProfile(platform, btn) {
@@ -2089,7 +2194,7 @@
       setTimeout(() => btn.textContent = 'Copy profile', 1500);
     }
 
-    function copyAllProfiles() {
+    function copyAllProfiles(btn) {
       let text = '🍳 AiO PROFILE OMELETTE RESULTS\n';
       text += '═'.repeat(40) + '\n\n';
       
@@ -2098,7 +2203,7 @@
       }
       if (brandFoundation?.handle) {
         text += `HANDLE: @${brandFoundation.handle}\n`;
-        if (brandFoundation.handleAlts.length) {
+        if (brandFoundation.handleAlts && brandFoundation.handleAlts.length) {
           text += `ALTERNATIVES: ${brandFoundation.handleAlts.map(h => '@' + h).join(', ')}\n`;
         }
       }
@@ -2117,9 +2222,10 @@
       
       navigator.clipboard.writeText(text);
       
-      const btn = event.target;
-      btn.textContent = '✅ Copied!';
-      setTimeout(() => btn.textContent = '📋 Copy All', 2000);
+      if (btn) {
+        btn.textContent = '✅ Copied!';
+        setTimeout(() => btn.textContent = '📋 Copy All', 2000);
+      }
     }
 
     function downloadText() {
@@ -2135,7 +2241,7 @@
         text += `${r.icon} ${r.name.toUpperCase()}\n`;
         text += `${'─'.repeat(50)}\n\n`;
         text += `HANDLE: ${r.handle}\n`;
-        text += `Alternatives: ${r.handleAlts.join(', ')}\n\n`;
+        text += `Alternatives: ${(r.handleAlts || []).join(', ')}\n\n`;
         text += `BIO:\n${r.bio}\n\n`;
         text += `Character count: ${r.bio.length}/${r.charLimit}\n\n`;
       });
