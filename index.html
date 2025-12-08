@@ -965,47 +965,36 @@
     }
 
     /* Photo upload */
-    .upload-row {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .upload-box {
-      flex: 1;
-      min-width: 200px;
+    /* Single image upload */
+    .upload-single {
+      max-width: 280px;
     }
 
     .upload-area {
       border: 2px dashed var(--border);
       border-radius: 12px;
-      padding: 20px;
+      padding: 24px;
       text-align: center;
       cursor: pointer;
       transition: all 0.2s;
       background: #fff;
       position: relative;
-      overflow: hidden;
     }
 
     .upload-area:hover {
       border-color: var(--yolk);
-      background: rgba(252, 210, 5, 0.05);
-    }
-
-    .upload-area.has-file {
-      border-style: solid;
-      border-color: var(--yolk);
+      background: rgba(253, 216, 53, 0.05);
     }
 
     .upload-icon {
-      font-size: 32px;
+      font-size: 36px;
       margin-bottom: 8px;
     }
 
     .upload-text {
       font-size: 14px;
-      color: var(--muted);
+      color: var(--ink);
+      font-weight: 500;
       margin-bottom: 4px;
     }
 
@@ -1014,33 +1003,12 @@
       color: #9CA3AF;
     }
 
-    .upload-area input[type="file"] {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      cursor: pointer;
-    }
-
     .upload-preview {
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       object-fit: cover;
       margin: 0 auto 8px;
-      display: none;
-    }
-
-    .upload-preview.logo {
-      border-radius: 8px;
-    }
-
-    .upload-area.has-file .upload-preview {
-      display: block;
-    }
-
-    .upload-area.has-file .upload-icon,
-    .upload-area.has-file .upload-text {
-      display: none;
     }
 
     .upload-filename {
@@ -1048,33 +1016,30 @@
       color: var(--ink);
       font-weight: 500;
       word-break: break-all;
-      display: none;
+      margin-top: 8px;
     }
 
-    .upload-area.has-file .upload-filename {
-      display: block;
-    }
-
-    .upload-clear {
-      font-size: 12px;
-      color: var(--yolk-deep);
+    .upload-remove-btn {
+      margin-top: 10px;
+      padding: 8px 16px;
+      background: #FEE2E2;
+      color: #DC2626;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
       cursor: pointer;
-      margin-top: 6px;
-      display: none;
+      transition: background 0.2s;
     }
 
-    .upload-clear:hover {
-      text-decoration: underline;
-    }
-
-    .upload-area.has-file .upload-clear {
-      display: inline-block;
+    .upload-remove-btn:hover {
+      background: #FECACA;
     }
 
     .skip-text {
       font-size: 12px;
       color: var(--muted);
-      text-align: center;
+      text-align: left;
       margin-top: 8px;
     }
   </style>
@@ -1301,34 +1266,23 @@
                 <input type="text" id="businessName" placeholder="Ai Omelette">
               </div>
               
-              <!-- Photo Uploads -->
+              <!-- Photo Upload - Single Image -->
               <div class="field-full">
-                <label>Brand Assets <span style="font-weight: 400; color: var(--muted);">(optional)</span></label>
-                <div class="upload-row">
-                  <div class="upload-box">
-                    <div class="upload-area" id="profilePicArea">
-                      <img class="upload-preview" id="profilePicPreview" alt="Profile preview">
-                      <div class="upload-icon">👤</div>
-                      <div class="upload-text">Profile Photo</div>
-                      <div class="upload-hint">Square works best</div>
-                      <div class="upload-filename" id="profilePicName"></div>
-                      <span class="upload-clear" onclick="clearUpload('profilePic', event)">Remove</span>
-                      <input type="file" id="profilePicInput" accept="image/*" onchange="handleUpload('profilePic', this)">
+                <label>Brand Image <span style="font-weight: 400; color: var(--muted);">(optional)</span></label>
+                <div class="upload-single">
+                  <div class="upload-area" id="brandImageArea" onclick="document.getElementById('brandImageInput').click()">
+                    <img class="upload-preview" id="brandImagePreview" alt="Brand image preview" style="display: none;">
+                    <div class="upload-placeholder" id="uploadPlaceholder">
+                      <div class="upload-icon">📷</div>
+                      <div class="upload-text">Profile Photo or Logo</div>
+                      <div class="upload-hint">Click to upload (square works best)</div>
                     </div>
+                    <div class="upload-filename" id="brandImageName"></div>
+                    <input type="file" id="brandImageInput" accept="image/*" onchange="handleImageUpload(this)" style="display: none;">
                   </div>
-                  <div class="upload-box">
-                    <div class="upload-area" id="logoArea">
-                      <img class="upload-preview logo" id="logoPreview" alt="Logo preview">
-                      <div class="upload-icon">🏷️</div>
-                      <div class="upload-text">Logo</div>
-                      <div class="upload-hint">PNG or SVG preferred</div>
-                      <div class="upload-filename" id="logoName"></div>
-                      <span class="upload-clear" onclick="clearUpload('logo', event)">Remove</span>
-                      <input type="file" id="logoInput" accept="image/*" onchange="handleUpload('logo', this)">
-                    </div>
-                  </div>
+                  <button type="button" class="upload-remove-btn" id="removeImageBtn" onclick="removeImage()" style="display: none;">Remove image</button>
                 </div>
-                <p class="skip-text">No images? No problem — skip this and add them later.</p>
+                <p class="skip-text">No image? No problem — skip this and add one later.</p>
               </div>
               
               <div>
@@ -1618,65 +1572,46 @@
     let handleMode = 'generate';
     let generatedResults = null;
     let brandFoundation = null;
-    let uploadedFiles = {
-      profilePic: null,
-      logo: null
-    };
+    let uploadedImage = null;
 
-    // File upload handlers
-    function handleUpload(type, input) {
+    // Single image upload handler
+    function handleImageUpload(input) {
       const file = input.files[0];
       if (!file) return;
       
-      uploadedFiles[type] = file;
+      uploadedImage = file;
       
-      const area = document.getElementById(type === 'profilePic' ? 'profilePicArea' : 'logoArea');
-      const preview = document.getElementById(type === 'profilePic' ? 'profilePicPreview' : 'logoPreview');
-      const nameEl = document.getElementById(type === 'profilePic' ? 'profilePicName' : 'logoName');
+      const preview = document.getElementById('brandImagePreview');
+      const placeholder = document.getElementById('uploadPlaceholder');
+      const nameEl = document.getElementById('brandImageName');
+      const removeBtn = document.getElementById('removeImageBtn');
       
-      // Show preview
       const reader = new FileReader();
       reader.onload = (e) => {
         preview.src = e.target.result;
         preview.style.display = 'block';
-        area.classList.add('has-file');
+        placeholder.style.display = 'none';
         nameEl.textContent = file.name;
-        
-        // Hide upload icon and text
-        const icon = area.querySelector('.upload-icon');
-        const text = area.querySelector('.upload-text');
-        const hint = area.querySelector('.upload-hint');
-        if (icon) icon.style.display = 'none';
-        if (text) text.style.display = 'none';
-        if (hint) hint.style.display = 'none';
+        removeBtn.style.display = 'block';
       };
       reader.readAsDataURL(file);
     }
 
-    function clearUpload(type, event) {
-      event.stopPropagation();
-      event.preventDefault();
+    function removeImage() {
+      uploadedImage = null;
       
-      uploadedFiles[type] = null;
+      const preview = document.getElementById('brandImagePreview');
+      const placeholder = document.getElementById('uploadPlaceholder');
+      const nameEl = document.getElementById('brandImageName');
+      const removeBtn = document.getElementById('removeImageBtn');
+      const input = document.getElementById('brandImageInput');
       
-      const area = document.getElementById(type === 'profilePic' ? 'profilePicArea' : 'logoArea');
-      const input = document.getElementById(type === 'profilePic' ? 'profilePicInput' : 'logoInput');
-      const preview = document.getElementById(type === 'profilePic' ? 'profilePicPreview' : 'logoPreview');
-      const filename = document.getElementById(type === 'profilePic' ? 'profilePicName' : 'logoName');
-      
-      area.classList.remove('has-file');
-      input.value = '';
       preview.src = '';
       preview.style.display = 'none';
-      if (filename) filename.textContent = '';
-      
-      // Show upload icon and text again
-      const icon = area.querySelector('.upload-icon');
-      const text = area.querySelector('.upload-text');
-      const hint = area.querySelector('.upload-hint');
-      if (icon) icon.style.display = 'block';
-      if (text) text.style.display = 'block';
-      if (hint) hint.style.display = 'block';
+      placeholder.style.display = 'block';
+      nameEl.textContent = '';
+      removeBtn.style.display = 'none';
+      input.value = '';
     }
 
     // Hero tab switching
@@ -1698,31 +1633,48 @@
       const oneLiner = document.getElementById('oneLiner')?.value?.trim() || '';
       const isValid = name.length > 0 && industry.length > 0 && oneLiner.length > 0;
       const btn = document.getElementById('step1Next');
-      if (btn) btn.disabled = !isValid;
+      if (btn) {
+        btn.disabled = !isValid;
+        console.log('Validation:', { name, industry, oneLiner, isValid });
+      }
       return isValid;
     }
 
     function validateAndProceed(step) {
-      if (step === 1 && validateStep1()) {
-        goToStep(2);
+      if (step === 1) {
+        // Force revalidate and proceed
+        const isValid = validateStep1();
+        console.log('validateAndProceed called, isValid:', isValid);
+        if (isValid) {
+          goToStep(2);
+        }
       }
     }
 
-    // Add input listeners for real-time validation
-    document.addEventListener('DOMContentLoaded', () => {
-      ['businessName', 'industry', 'oneLiner'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-          el.addEventListener('input', validateStep1);
-          el.addEventListener('change', validateStep1);
-        }
-      });
-      // Run initial validation
-      setTimeout(validateStep1, 100);
-    });
-    
-    // Also run on window load as backup
-    window.addEventListener('load', validateStep1);
+    // Add input listeners for real-time validation - run immediately
+    (function() {
+      function setupValidation() {
+        const fields = ['businessName', 'industry', 'oneLiner'];
+        fields.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.addEventListener('input', validateStep1);
+            el.addEventListener('change', validateStep1);
+            el.addEventListener('keyup', validateStep1);
+          }
+        });
+        validateStep1();
+      }
+      
+      // Try multiple times to ensure it runs
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupValidation);
+      } else {
+        setupValidation();
+      }
+      window.addEventListener('load', setupValidation);
+      setTimeout(setupValidation, 500);
+    })();
 
     // Navigation
     function goToStep(step) {
@@ -1944,16 +1896,16 @@
     function renderResults() {
       const summaryContainer = document.getElementById('brandSummary');
       
-      // Get profile pic if uploaded
-      const profilePicPreview = document.getElementById('profilePicPreview');
-      const hasProfilePic = uploadedFiles.profilePic && profilePicPreview.src;
+      // Get brand image if uploaded
+      const brandImagePreview = document.getElementById('brandImagePreview');
+      const hasImage = uploadedImage && brandImagePreview && brandImagePreview.src;
       
-      if (brandFoundation && (brandFoundation.tagline || brandFoundation.handle || hasProfilePic)) {
+      if (brandFoundation && (brandFoundation.tagline || brandFoundation.handle || hasImage)) {
         summaryContainer.innerHTML = `
           <div class="brand-summary-row">
-            ${hasProfilePic ? `
+            ${hasImage ? `
               <div class="brand-summary-item" style="flex: 0 0 auto;">
-                <img src="${profilePicPreview.src}" alt="Profile" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.3);">
+                <img src="${brandImagePreview.src}" alt="Profile" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.3);">
               </div>
             ` : ''}
             ${brandFoundation.tagline ? `
