@@ -9,14 +9,19 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --yolk: #FCD205;
-      --yolk-deep: #F59E0B;
-      --accent-alt: #14B8A6;
+      --bg: #f9fafb;
+      --bg-alt: #ffffff;
+      --yolk: #ffc93c;
+      --yolk-deep: #f59e0b;
+      --accent-soft: #fef3c7;
+      --accent-alt: #14b8a6;
       --ink: #111827;
-      --muted: #6B7280;
-      --border: #E5E7EB;
-      --bg: #F9FAFB;
+      --muted: #6b7280;
+      --border: #e5e7eb;
       --card-bg: #FFFFFF;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
     }
 
     html {
@@ -56,6 +61,13 @@
     h2 { font-size: 1.8rem; margin-bottom: 12px; }
     h3 { font-size: 1.2rem; margin-bottom: 4px; }
 
+    .gradient-text {
+      background: linear-gradient(120deg, var(--yolk-deep), var(--accent-alt));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
     p { color: var(--muted); font-size: 0.98rem; }
 
     .pill {
@@ -82,21 +94,22 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 11px 18px;
-      border-radius: 999px;
+      padding: 12px 28px;
+      border-radius: 24px;
       border: none;
       font-size: 0.95rem;
-      font-weight: 600;
-      background: var(--yolk);
-      color: #1F2933;
+      font-weight: 700;
+      background: #fdd835;
+      color: #1a1a1a;
       cursor: pointer;
       text-decoration: none;
-      transition: transform 0.08s ease, background 0.08s ease;
+      transition: all 0.2s ease;
     }
 
     .btn-primary:hover {
+      background: #E5B93F;
       transform: translateY(-1px);
-      background: #FDE047;
+      box-shadow: 0 4px 10px rgba(253, 216, 53, 0.35);
     }
 
     .btn-ghost {
@@ -1078,7 +1091,7 @@
               <span class="pill-dot"></span>
               AiO Profile Omelette · Early Access
             </div>
-            <h1>Crack open a perfect profile for every platform.</h1>
+            <h1><span class="gradient-text">Crack open a perfect profile</span><br>for every platform.</h1>
             <p class="section-subtitle">
               Answer a few plain-language questions once. AiO turns it into
               clean, platform-ready bios that actually sound like you—not a robot.
