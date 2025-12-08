@@ -609,16 +609,8 @@
 <a href="#top" class="btn-ghost back-to-top">↑ Top</a>
 </div>
 <script>
-// State
-let currentStep = 1;
-let selectedAudiences = [];
-let selectedVibes = [];
-let selectedPlatforms = ['instagram', 'linkedin'];
-let taglineMode = 'generate';
-let handleMode = 'generate';
-let generatedResults = null;
-let brandFoundation = null;
-let uploadedImageDataUrl = null;
+let currentStep = 1, selectedAudiences = [], selectedVibes = [], selectedPlatforms = ['instagram', 'linkedin'];
+let taglineMode = 'generate', handleMode = 'generate', generatedResults = null, brandFoundation = null, uploadedImageDataUrl = null;
 
 function handleImageUpload(input) {
   const file = input.files[0];
@@ -645,34 +637,73 @@ function removeImage() {
 }
 
 function showHeroTab(e, tab) {
-  document.querySelectorAll('.hero-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('[id^="heroExample"]').forEach(b => b.style.display = 'none');
+  document.querySelectorAll('.hero-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.querySelectorAll('[id^="heroExample"]').forEach(function(b) { b.style.display = 'none'; });
   e.target.classList.add('active');
   document.getElementById('heroExample' + tab.charAt(0).toUpperCase() + tab.slice(1)).style.display = 'block';
 }
 
 function validateStep1() {
-  const name = document.getElementById('businessName')?.value?.trim() || '';
-  const industry = document.getElementById('industry')?.value?.trim() || '';
-  const oneLiner = document.getElementById('oneLiner')?.value?.trim() || '';
+  var name = document.getElementById('businessName') ? document.getElementById('businessName').value.trim() : '';
+  var industry = document.getElementById('industry') ? document.getElementById('industry').value.trim() : '';
+  var oneLiner = document.getElementById('oneLiner') ? document.getElementById('oneLiner').value.trim() : '';
   document.getElementById('step1Next').disabled = !(name && industry && oneLiner);
   return name && industry && oneLiner;
 }
 
-function validateAndProceed(step) {
-  if (step === 1 && validateStep1()) goToStep(2);
-}
+function validateAndProceed(step) { if (step === 1 && validateStep1()) goToStep(2); }
 
-['businessName', 'industry', 'oneLiner'].forEach(id => {
-  const el = document.getElementById(id);
-  if (el) el.addEventListener('input', validateStep1);
+document.addEventListener('DOMContentLoaded', function() {
+  ['businessName', 'industry', 'oneLiner'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('input', validateStep1);
+  });
+  validateStep1();
+
+  document.getElementById('audienceGrid').addEventListener('click', function(e) {
+    if (e.target.classList.contains('audience-chip')) {
+      e.target.classList.toggle('active');
+      var val = e.target.dataset.audience;
+      if (e.target.classList.contains('active')) { selectedAudiences.push(val); }
+      else { selectedAudiences = selectedAudiences.filter(function(a) { return a !== val; }); }
+    }
+  });
+
+  document.getElementById('vibeGrid').addEventListener('click', function(e) {
+    if (e.target.classList.contains('vibe-chip')) {
+      e.target.classList.toggle('active');
+      var val = e.target.dataset.vibe;
+      if (e.target.classList.contains('active')) { selectedVibes.push(val); }
+      else { selectedVibes = selectedVibes.filter(function(v) { return v !== val; }); }
+    }
+  });
+
+  document.getElementById('platformGrid').addEventListener('click', function(e) {
+    var card = e.target.closest('.platform-card');
+    if (!card) return;
+    var platform = card.dataset.platform;
+    card.classList.toggle('active');
+    if (card.classList.contains('active')) {
+      selectedPlatforms.push(platform);
+      if (!card.querySelector('.platform-check')) {
+        var check = document.createElement('span');
+        check.className = 'platform-check';
+        check.textContent = '✓';
+        card.appendChild(check);
+      }
+    } else {
+      selectedPlatforms = selectedPlatforms.filter(function(p) { return p !== platform; });
+      var chk = card.querySelector('.platform-check');
+      if (chk) chk.remove();
+    }
+    document.getElementById('selectedCount').textContent = selectedPlatforms.length + ' platforms selected';
+  });
 });
-setTimeout(validateStep1, 100);
 
 function goToStep(step) {
-  document.querySelectorAll('.step-container').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.step-container').forEach(function(s) { s.classList.remove('active'); });
   document.getElementById('step' + step).classList.add('active');
-  document.querySelectorAll('.progress-step').forEach((s, i) => {
+  document.querySelectorAll('.progress-step').forEach(function(s, i) {
     s.classList.remove('current', 'active');
     if (i + 1 < step) s.classList.add('active');
     if (i + 1 === step) s.classList.add('current');
@@ -683,57 +714,21 @@ function goToStep(step) {
   document.getElementById('wizard').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-document.getElementById('audienceGrid').addEventListener('click', e => {
-  if (e.target.classList.contains('audience-chip')) {
-    e.target.classList.toggle('active');
-    const val = e.target.dataset.audience;
-    selectedAudiences = e.target.classList.contains('active') ? [...selectedAudiences, val] : selectedAudiences.filter(a => a !== val);
-  }
-});
-
-document.getElementById('vibeGrid').addEventListener('click', e => {
-  if (e.target.classList.contains('vibe-chip')) {
-    e.target.classList.toggle('active');
-    const val = e.target.dataset.vibe;
-    selectedVibes = e.target.classList.contains('active') ? [...selectedVibes, val] : selectedVibes.filter(v => v !== val);
-  }
-});
-
-document.getElementById('platformGrid').addEventListener('click', e => {
-  const card = e.target.closest('.platform-card');
-  if (!card) return;
-  const platform = card.dataset.platform;
-  card.classList.toggle('active');
-  if (card.classList.contains('active')) {
-    selectedPlatforms.push(platform);
-    if (!card.querySelector('.platform-check')) {
-      const check = document.createElement('span');
-      check.className = 'platform-check';
-      check.textContent = '✓';
-      card.appendChild(check);
-    }
-  } else {
-    selectedPlatforms = selectedPlatforms.filter(p => p !== platform);
-    card.querySelector('.platform-check')?.remove();
-  }
-  document.getElementById('selectedCount').textContent = selectedPlatforms.length + ' platforms selected';
-});
-
 function setTaglineMode(mode) {
   taglineMode = mode;
-  document.querySelectorAll('#taglineSection .toggle-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+  document.querySelectorAll('#taglineSection .toggle-btn').forEach(function(b) { b.classList.toggle('active', b.dataset.mode === mode); });
   document.getElementById('taglineInput').classList.toggle('hidden', mode !== 'input');
   document.getElementById('taglineHint').classList.toggle('hidden', mode === 'input');
 }
 
 function setHandleMode(mode) {
   handleMode = mode;
-  document.querySelectorAll('#handleSection .toggle-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+  document.querySelectorAll('#handleSection .toggle-btn').forEach(function(b) { b.classList.toggle('active', b.dataset.mode === mode); });
   document.getElementById('handleInput').classList.toggle('hidden', mode !== 'input');
   document.getElementById('handleHint').classList.toggle('hidden', mode === 'input');
 }
 
-const platformMeta = {
+var platformMeta = {
   instagram: { icon: '📸', name: 'Instagram', charLimit: 150 },
   tiktok: { icon: '🎵', name: 'TikTok', charLimit: 150 },
   x: { icon: '𝕏', name: 'X / Twitter', charLimit: 160 },
@@ -744,129 +739,179 @@ const platformMeta = {
   threads: { icon: '🧵', name: 'Threads', charLimit: 150 }
 };
 
-async function generateProfiles() {
-  const btn = document.getElementById('generateBtn');
+function generateProfiles() {
+  var btn = document.getElementById('generateBtn');
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span> Cooking...';
 
-  const businessName = document.getElementById('businessName').value || 'My Business';
-  const founderName = document.getElementById('founderName').value || '';
-  const website = document.getElementById('website').value || '';
-  const location = document.getElementById('location').value || 'Remote';
-  const industry = document.getElementById('industry').value || 'General';
+  var businessName = document.getElementById('businessName').value || 'My Business';
+  var founderName = document.getElementById('founderName').value || '';
+  var website = document.getElementById('website').value || '';
+  var location = document.getElementById('location').value || 'Remote';
+  var industry = document.getElementById('industry').value || 'General';
 
-  const payload = {
-    business_name: businessName,
-    founder_name: founderName,
-    industry_category: industry,
+  var payload = {
+    business_name: businessName, founder_name: founderName, industry_category: industry,
     one_line_what_you_do: document.getElementById('oneLiner').value || 'We do great things',
     long_description: document.getElementById('longDesc').value || '',
-    website_url: website,
-    location: location,
-    target_audience: selectedAudiences.join(', '),
-    brand_vibe_keywords: selectedVibes.join(', '),
-    emoji_preference: document.querySelector('input[name="emoji"]:checked')?.value || 'minimal',
+    website_url: website, location: location,
+    target_audience: selectedAudiences.join(', '), brand_vibe_keywords: selectedVibes.join(', '),
+    emoji_preference: document.querySelector('input[name="emoji"]:checked') ? document.querySelector('input[name="emoji"]:checked').value : 'minimal',
     tagline: { mode: taglineMode, value: taglineMode === 'input' ? document.getElementById('taglineInput').value : '' },
     handle: { mode: handleMode, preferred: handleMode === 'input' ? document.getElementById('handleInput').value.replace('@', '') : '' },
     platforms_to_generate: selectedPlatforms
   };
 
-  try {
-    const response = await fetch('/api/profile-omelette', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-
+  fetch('/api/profile-omelette', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(function(response) {
     if (!response.ok) throw new Error('API failed');
-    const data = await response.json();
-
+    return response.json();
+  })
+  .then(function(data) {
     brandFoundation = {
-      tagline: data.brand_foundation?.tagline || data.global_tagline || '',
-      handle: data.brand_foundation?.core_handle || data.handle || businessName.toLowerCase().replace(/\s+/g, ''),
-      handleAlts: data.brand_foundation?.handle_alternatives || [],
+      tagline: (data.brand_foundation && data.brand_foundation.tagline) || data.global_tagline || '',
+      handle: (data.brand_foundation && data.brand_foundation.core_handle) || data.handle || businessName.toLowerCase().replace(/\s+/g, ''),
+      handleAlts: (data.brand_foundation && data.brand_foundation.handle_alternatives) || [],
       displayName: founderName || businessName,
-      website: website,
-      location: location,
-      industry: industry
+      website: website, location: location, industry: industry
     };
 
     generatedResults = [];
-    const profiles = data.profiles || data.platforms || data;
+    var profiles = data.profiles || data.platforms || data;
 
-    selectedPlatforms.forEach(p => {
-      const meta = platformMeta[p];
+    selectedPlatforms.forEach(function(p) {
+      var meta = platformMeta[p];
       if (!meta) return;
-      let profileData = profiles[p] || {};
-      if (Array.isArray(profiles)) profileData = profiles.find(pr => pr.platform === p) || {};
-
+      var profileData = profiles[p] || {};
+      if (Array.isArray(profiles)) {
+        var found = profiles.find(function(pr) { return pr.platform === p; });
+        profileData = found || {};
+      }
       generatedResults.push({
-        platform: p,
-        icon: meta.icon,
-        name: meta.name,
-        charLimit: meta.charLimit,
+        platform: p, icon: meta.icon, name: meta.name, charLimit: meta.charLimit,
         handle: '@' + (profileData.handle_primary || profileData.handle || brandFoundation.handle),
         displayName: brandFoundation.displayName,
         bio: profileData.bio || profileData.about || profileData.description || data.global_tagline || 'Profile bio',
         headline: profileData.headline || brandFoundation.tagline || '',
-        website: brandFoundation.website,
-        location: brandFoundation.location,
-        industry: brandFoundation.industry
+        website: brandFoundation.website, location: brandFoundation.location, industry: brandFoundation.industry
       });
     });
 
     renderResults();
     goToStep(4);
-  } catch (error) {
+  })
+  .catch(function(error) {
     console.error('Error:', error);
     alert('Error: ' + error.message);
-  }
-
-  btn.disabled = false;
-  btn.innerHTML = '🍳 Cook My Profiles';
+  })
+  .finally(function() {
+    btn.disabled = false;
+    btn.innerHTML = '🍳 Cook My Profiles';
+  });
 }
+
+function renderResults() {
+  var summaryContainer = document.getElementById('brandSummary');
+  var avatarSrc = uploadedImageDataUrl || '';
+  var defaultAvatar = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23e5e7eb'/%3E%3Ccircle cx='50' cy='38' r='18' fill='%239ca3af'/%3E%3Cellipse cx='50' cy='80' rx='28' ry='22' fill='%239ca3af'/%3E%3C/svg%3E";
+  var finalAvatar = avatarSrc || defaultAvatar;
+
+  if (brandFoundation && (brandFoundation.tagline || brandFoundation.handle || avatarSrc)) {
+    var html = '<div class="brand-summary-row">';
+    if (avatarSrc) html += '<div style="flex:0 0 auto;"><img src="' + avatarSrc + '" style="width:56px;height:56px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,0.3);"></div>';
+    if (brandFoundation.tagline) html += '<div class="brand-summary-item"><div class="brand-summary-label">Tagline</div><div class="brand-summary-value">' + brandFoundation.tagline + '</div></div>';
+    if (brandFoundation.handle) {
+      html += '<div class="brand-summary-item"><div class="brand-summary-label">Handle</div><div class="brand-summary-value">@' + brandFoundation.handle + '</div>';
+      if (brandFoundation.handleAlts && brandFoundation.handleAlts.length) html += '<div class="brand-summary-alts">Also: ' + brandFoundation.handleAlts.map(function(h) { return '@' + h; }).join(', ') + '</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+    summaryContainer.innerHTML = html;
+  } else {
+    summaryContainer.innerHTML = '';
   }
 
-  // GENERIC fallback
+  document.getElementById('resultsContainer').innerHTML = generatedResults.map(function(r) { return renderPlatformMockup(r, finalAvatar); }).join('');
+}
+
+function renderPlatformMockup(r, avatar) {
+  var p = r.platform;
+
+  if (p === 'instagram') {
+    return '<div class="mockup-card ig-mockup"><div class="mockup-copy-row"><span class="mockup-platform-label">📸 Instagram</span><button class="mockup-copy-btn" onclick="copyProfile(\'' + p + '\', this)">Copy Bio</button></div><div class="ig-profile"><div class="ig-top-row"><div class="ig-avatar"><img src="' + avatar + '"></div><div class="ig-stats"><div><div class="ig-stat-num">128</div><div class="ig-stat-label">posts</div></div><div><div class="ig-stat-num">4.2K</div><div class="ig-stat-label">followers</div></div><div><div class="ig-stat-num">892</div><div class="ig-stat-label">following</div></div></div></div><div class="ig-name">' + r.displayName + '</div><div class="ig-bio">' + r.bio + '</div>' + (r.website ? '<div class="ig-website">' + r.website.replace(/^https?:\/\//, '') + '</div>' : '') + '<button class="ig-edit-btn">Edit profile</button><div class="ig-char-count">' + r.bio.length + ' / ' + r.charLimit + ' characters</div></div></div>';
+  }
+
+  if (p === 'x') {
+    return '<div class="mockup-card x-mockup"><div class="mockup-copy-row"><span class="mockup-platform-label">𝕏 X / Twitter</span><button class="mockup-copy-btn" onclick="copyProfile(\'' + p + '\', this)">Copy Bio</button></div><div class="x-header"></div><div class="x-profile"><div class="x-avatar"><img src="' + avatar + '"></div><div class="x-actions"><button class="x-follow-btn">Follow</button></div><div class="x-name-row"><div class="x-display-name">' + r.displayName + ' <span class="x-verified">✓</span></div><div class="x-handle">' + r.handle + '</div></div><div class="x-bio">' + r.bio + '</div><div class="x-meta">' + (r.location ? '<span>📍 ' + r.location + '</span>' : '') + (r.website ? '<span>🔗 ' + r.website.replace(/^https?:\/\//, '') + '</span>' : '') + '<span>📅 Joined 2024</span></div><div class="x-stats"><span><strong>892</strong> Following</span><span><strong>4.2K</strong> Followers</span></div><div class="x-char-count">' + r.bio.length + ' / ' + r.charLimit + ' characters</div></div></div>';
+  }
+
+  if (p === 'linkedin') {
+    return '<div class="mockup-card li-mockup"><div class="mockup-copy-row"><span class="mockup-platform-label">💼 LinkedIn</span><button class="mockup-copy-btn" onclick="copyProfile(\'' + p + '\', this)">Copy Profile</button></div><div class="li-banner"></div><div class="li-profile"><div class="li-avatar"><img src="' + avatar + '"></div><div class="li-actions"><button class="li-connect-btn">Connect</button><button class="li-message-btn">Message</button></div><div class="li-name">' + r.displayName + '</div><div class="li-headline">' + (r.headline || r.bio.substring(0, 100)) + '</div><div class="li-location">' + (r.location || 'Remote') + ' · <span class="li-connections">500+ connections</span></div><div class="li-about-section"><div class="li-about-title">About</div><div class="li-about-text">' + r.bio + '</div></div><div class="li-char-count">' + r.bio.length + ' / ' + r.charLimit + ' characters</div></div></div>';
+  }
+
+  if (p === 'tiktok') {
+    return '<div class="mockup-card tt-mockup"><div class="mockup-copy-row"><span class="mockup-platform-label">🎵 TikTok</span><button class="mockup-copy-btn" onclick="copyProfile(\'' + p + '\', this)">Copy Bio</button></div><div class="tt-profile"><div class="tt-avatar"><img src="' + avatar + '"></div><div class="tt-handle">' + r.handle + '</div><div class="tt-name">' + r.displayName + '</div><div class="tt-stats"><div class="tt-stat"><div class="tt-stat-num">42</div><div class="tt-stat-label">Following</div></div><div class="tt-stat"><div class="tt-stat-num">8.2K</div><div class="tt-stat-label">Followers</div></div><div class="tt-stat"><div class="tt-stat-num">156K</div><div class="tt-stat-label">Likes</div></div></div><div class="tt-actions"><button class="tt-follow-btn">Follow</button><button class="tt-message-btn">✉</button></div><div class="tt-bio">' + r.bio + '</div><div class="tt-char-count">' + r.bio.length + ' / ' + r.charLimit + ' characters</div></div></div>';
+  }
+
+  if (p === 'youtube') {
+    return '<div class="mockup-card yt-mockup"><div class="mockup-copy-row"><span class="mockup-platform-label">▶️ YouTube</span><button class="mockup-copy-btn" onclick="copyProfile(\'' + p + '\', this)">Copy Bio</button></div><div class="yt-banner"></div><div class="yt-profile"><div class="yt-top-row"><div class="yt-avatar"><img src="' + avatar + '"></div><div class="yt-info"><div class="yt-channel-name">' + r.displayName + ' <span class="yt-verified">✓</span></div><div class="yt-meta"><span>' + r.handle + '</span><span>12.4K subscribers</span><span>142 videos</span></div></div></div><div class="yt-actions"><button class="yt-subscribe-btn">Subscribe</button><button class="yt-join-btn">Join</button></div><div class="yt-about"><div class="yt-about-text">' + r.bio + '</div>' + (r.website ? '<div class="yt-links"><a class="yt-link" href="#">' + r.website.replace(/^https?:\/\//, '') + '</a></div>' : '') + '</div><div class="yt-char-count">' + r.bio.length + ' / ' + r.charLimit + ' characters</div></div></div>';
+  }
+
+  if (p === 'facebook') {
+    return '<div class="mockup-card fb-mockup"><div class="mockup-copy-row"><span class="mockup-platform-label">👤 Facebook</span><button class="mockup-copy-btn" onclick="copyProfile(\'' + p + '\', this)">Copy Bio</button></div><div class="fb-cover"></div><div class="fb-profile"><div class="fb-avatar"><img src="' + avatar + '"></div><div class="fb-actions"><button class="fb-add-btn">➕ Add friend</button><button class="fb-message-btn">Message</button></div><div class="fb-name">' + r.displayName + '</div><div class="fb-friends">4.2K friends · 892 mutual</div><div class="fb-bio-section"><div class="fb-bio-label">Intro</div><div class="fb-bio-text">' + r.bio + '</div><div class="fb-details">' + (r.location ? '<div class="fb-detail"><span class="fb-detail-icon">📍</span> Lives in ' + r.location + '</div>' : '') + (r.website ? '<div class="fb-detail"><span class="fb-detail-icon">🔗</span> ' + r.website.replace(/^https?:\/\//, '') + '</div>' : '') + '</div></div><div class="fb-char-count">' + r.bio.length + ' / ' + r.charLimit + ' characters</div></div></div>';
+  }
+
+  if (p === 'google') {
+    return '<div class="mockup-card gb-mockup"><div class="mockup-copy-row"><span class="mockup-platform-label">📍 Google Business</span><button class="mockup-copy-btn" onclick="copyProfile(\'' + p + '\', this)">Copy Bio</button></div><div class="gb-header"><div class="gb-search-bar"><span class="gb-search-icon">🔍</span><span class="gb-search-text">' + r.displayName + '</span></div></div><div class="gb-profile"><div class="gb-top-row"><div class="gb-avatar"><img src="' + avatar + '"></div><div class="gb-info"><div class="gb-name">' + r.displayName + '</div><div class="gb-category">' + (r.industry || 'Business') + '</div><div class="gb-rating"><span class="gb-stars">★★★★★</span><span class="gb-rating-text">4.9 (128 reviews)</span></div></div></div><div class="gb-actions"><button class="gb-action-btn primary">Directions</button><button class="gb-action-btn">Save</button><button class="gb-action-btn">Share</button></div><div class="gb-about"><div class="gb-about-title">About</div><div class="gb-about-text">' + r.bio + '</div></div><div class="gb-details">' + (r.location ? '<div class="gb-detail"><span class="gb-detail-icon">📍</span> ' + r.location + '</div>' : '') + (r.website ? '<div class="gb-detail"><span class="gb-detail-icon">🌐</span> ' + r.website.replace(/^https?:\/\//, '') + '</div>' : '') + '<div class="gb-detail"><span class="gb-detail-icon">🕐</span> Open · Closes 6 PM</div></div><div class="gb-char-count">' + r.bio.length + ' / ' + r.charLimit + ' characters</div></div></div>';
+  }
+
+  if (p === 'threads') {
+    return '<div class="mockup-card threads-mockup"><div class="mockup-copy-row"><span class="mockup-platform-label">🧵 Threads</span><button class="mockup-copy-btn" onclick="copyProfile(\'' + p + '\', this)">Copy Bio</button></div><div class="threads-profile"><div class="threads-top-row"><div class="threads-info"><div class="threads-name">' + r.displayName + '</div><div class="threads-handle">' + r.handle + '</div></div><div class="threads-avatar"><img src="' + avatar + '"></div></div><div class="threads-bio">' + r.bio + '</div><div class="threads-followers">4.2K followers</div><div class="threads-actions"><button class="threads-follow-btn">Follow</button><button class="threads-mention-btn">Mention</button></div><div class="threads-char-count">' + r.bio.length + ' / ' + r.charLimit + ' characters</div></div></div>';
+  }
+
   return '<div class="mockup-card generic-mockup"><div class="mockup-copy-row"><span class="mockup-platform-label">' + r.icon + ' ' + r.name + '</span><button class="mockup-copy-btn" onclick="copyProfile(\'' + p + '\', this)">Copy Bio</button></div><div class="generic-profile"><div class="generic-avatar"><img src="' + avatar + '"></div><div class="generic-info"><div class="generic-name">' + r.displayName + '</div><div class="generic-handle">' + r.handle + '</div><div class="generic-bio">' + r.bio + '</div><div class="generic-char-count">' + r.bio.length + ' / ' + r.charLimit + ' characters</div></div></div></div>';
 }
 
 function copyProfile(platform, btn) {
-  const result = generatedResults.find(r => r.platform === platform);
+  var result = generatedResults.find(function(r) { return r.platform === platform; });
   if (!result) return;
-  const text = result.name + ' PROFILE\n\nHandle: ' + result.handle + '\n\nBio:\n' + result.bio + '\n\n(' + result.bio.length + '/' + result.charLimit + ' chars)';
+  var text = result.name + ' PROFILE\n\nHandle: ' + result.handle + '\n\nBio:\n' + result.bio + '\n\n(' + result.bio.length + '/' + result.charLimit + ' chars)';
   navigator.clipboard.writeText(text);
   btn.textContent = '✅ Copied!';
-  setTimeout(() => btn.textContent = 'Copy Bio', 1500);
+  setTimeout(function() { btn.textContent = 'Copy Bio'; }, 1500);
 }
 
 function copyAllProfiles(e) {
-  let text = '🍳 AiO PROFILE OMELETTE RESULTS\n' + '═'.repeat(40) + '\n\n';
-  if (brandFoundation?.tagline) text += 'TAGLINE: ' + brandFoundation.tagline + '\n';
-  if (brandFoundation?.handle) text += 'HANDLE: @' + brandFoundation.handle + '\n\n';
-  generatedResults.forEach(r => {
+  var text = '🍳 AiO PROFILE OMELETTE RESULTS\n========================================\n\n';
+  if (brandFoundation && brandFoundation.tagline) text += 'TAGLINE: ' + brandFoundation.tagline + '\n';
+  if (brandFoundation && brandFoundation.handle) text += 'HANDLE: @' + brandFoundation.handle + '\n\n';
+  generatedResults.forEach(function(r) {
     text += r.icon + ' ' + r.name.toUpperCase() + '\n';
     text += 'Handle: ' + r.handle + '\n';
     text += 'Bio: ' + r.bio + '\n';
     text += '(' + r.bio.length + '/' + r.charLimit + ' chars)\n\n';
   });
-  text += '─'.repeat(40) + '\nGenerated by AiO Profile Omelette™\nhttps://aiomelette.com';
+  text += '----------------------------------------\nGenerated by AiO Profile Omelette\nhttps://aiomelette.com';
   navigator.clipboard.writeText(text);
   e.target.textContent = '✅ Copied!';
-  setTimeout(() => e.target.textContent = '📋 Copy All', 2000);
+  setTimeout(function() { e.target.textContent = '📋 Copy All'; }, 2000);
 }
 
 function downloadText() {
-  const businessName = document.getElementById('businessName').value || 'profiles';
-  let text = '🍳 AiO PROFILE OMELETTE RESULTS\nGenerated: ' + new Date().toLocaleDateString() + '\n' + '═'.repeat(50) + '\n\n';
-  generatedResults.forEach(r => {
-    text += '─'.repeat(50) + '\n' + r.icon + ' ' + r.name.toUpperCase() + '\n─'.repeat(50) + '\n\n';
+  var businessName = document.getElementById('businessName').value || 'profiles';
+  var text = '🍳 AiO PROFILE OMELETTE RESULTS\nGenerated: ' + new Date().toLocaleDateString() + '\n==================================================\n\n';
+  generatedResults.forEach(function(r) {
+    text += '--------------------------------------------------\n' + r.icon + ' ' + r.name.toUpperCase() + '\n--------------------------------------------------\n\n';
     text += 'HANDLE: ' + r.handle + '\nBIO:\n' + r.bio + '\n\nCharacters: ' + r.bio.length + '/' + r.charLimit + '\n\n';
   });
-  text += '═'.repeat(50) + '\nGenerated by AiO Profile Omelette™\nhttps://aiomelette.com\n';
-  const blob = new Blob([text], { type: 'text/plain' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  text += '==================================================\nGenerated by AiO Profile Omelette\nhttps://aiomelette.com\n';
+  var blob = new Blob([text], { type: 'text/plain' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
   a.href = url;
   a.download = businessName.toLowerCase().replace(/\s+/g, '-') + '-profiles.txt';
   a.click();
