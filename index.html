@@ -165,6 +165,10 @@
       h1 { font-size: 2rem; }
     }
 
+    @media (max-width: 520px) {
+      h1 { font-size: 1.7rem; }
+    }
+
     .section-heading {
       margin-bottom: 10px;
     }
@@ -202,6 +206,13 @@
     .hero {
       background: #ffffff;
       border-bottom: 1px solid #F3F4F6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero > .container {
+      width: 100%;
     }
 
     .hero-main { flex: 1.2; }
@@ -273,6 +284,84 @@
       color: #9CA3AF;
       display: flex;
       justify-content: space-between;
+    }
+
+    /* Hero extra band */
+    .hero-extra {
+      margin-top: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .hero-benefits-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .hero-benefits-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-benefit-item {
+      flex: 1 1 160px;
+      min-width: 0;
+      background: var(--accent-soft);
+      border-radius: 14px;
+      padding: 12px 14px;
+      border: 1px solid rgba(252, 211, 77, 0.55);
+    }
+
+    .hero-benefit-icon {
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .hero-benefit-heading {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+      color: var(--ink);
+    }
+
+    .hero-benefit-item p {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .hero-platform-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .hero-platform-label {
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .hero-platform-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .hero-platform-chip {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-size: 0.78rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
     /* === SECTION 2: PROFILE EXAMPLES === */
@@ -902,7 +991,7 @@
       margin-top: 14px;
     }
 
-    /* Platform-specific header gradients */
+    /* Platform-specific header gradients (original set) */
     .profile-card--instagram .profile-card__header {
       background: linear-gradient(135deg, #FDBA74, #F97316, #EC4899);
     }
@@ -941,6 +1030,15 @@
 
     .profile-card--linkinbio .profile-card__header {
       background: linear-gradient(135deg, #8B5CF6, #6366F1);
+    }
+
+    /* NEW: Substack & Medium */
+    .profile-card--substack .profile-card__header {
+      background: linear-gradient(135deg, #F97316, #FACC15);
+    }
+
+    .profile-card--medium .profile-card__header {
+      background: linear-gradient(135deg, #16A34A, #4ADE80);
     }
 
     /* Ensure text stays light on all headers */
@@ -1291,6 +1389,15 @@
       text-transform: none;
       letter-spacing: 0.02em;
     }
+
+    @media (max-width: 880px) {
+      .hero {
+        align-items: flex-start;
+      }
+      .hero-benefits-grid {
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 <body id="top">
@@ -1320,6 +1427,41 @@
               <a href="#wizard" class="btn-primary">Start your Omeletized profile</a>
               <a href="#examples" class="btn-ghost">See examples first</a>
             </div>
+
+            <div class="hero-extra">
+              <div class="hero-benefits">
+                <div class="hero-benefits-title">In one run, you walk away with:</div>
+                <div class="hero-benefits-grid">
+                  <div class="hero-benefit-item">
+                    <div class="hero-benefit-icon">🎯</div>
+                    <div class="hero-benefit-heading">One clear core story</div>
+                    <p>Tagline, one-liner and handle ideas that actually match each other.</p>
+                  </div>
+                  <div class="hero-benefit-item">
+                    <div class="hero-benefit-icon">📚</div>
+                    <div class="hero-benefit-heading">Platform-ready bios</div>
+                    <p>Instagram, LinkedIn, X, Google and more, formatted for each channel.</p>
+                  </div>
+                  <div class="hero-benefit-item">
+                    <div class="hero-benefit-icon">✉️</div>
+                    <div class="hero-benefit-heading">Reusable profile pack</div>
+                    <p>Copy all at once or email it to yourself to reuse whenever you like.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hero-platform-strip">
+                <span class="hero-platform-label">Works across:</span>
+                <div class="hero-platform-chips">
+                  <span class="hero-platform-chip">📸 Instagram</span>
+                  <span class="hero-platform-chip">💼 LinkedIn</span>
+                  <span class="hero-platform-chip">𝕏 X</span>
+                  <span class="hero-platform-chip">📍 Google Business</span>
+                  <span class="hero-platform-chip">✉️ Substack</span>
+                  <span class="hero-platform-chip">✍️ Medium</span>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="hero-side">
@@ -1334,7 +1476,7 @@
               </div>
 
               <div class="hero-example-block" id="heroExampleLinkedin">
-                <div class="hero-example-platform">LinkedIn • Sample</div>
+                <div class="hero-example-platform">LinkedIn · Sample</div>
                 <div class="hero-example-headline">Founder · Systems & AI Workflows</div>
                 <p class="hero-example-body">
                   I help small teams turn AI from "shiny toy" into simple, reliable systems
@@ -1343,7 +1485,7 @@
               </div>
 
               <div class="hero-example-block" id="heroExampleInstagram" style="display:none;">
-                <div class="hero-example-platform">Instagram • Sample</div>
+                <div class="hero-example-platform">Instagram · Sample</div>
                 <div class="hero-example-headline">AI for humans 🧠✨</div>
                 <p class="hero-example-body">
                   Helping solo founders make AI actually useful.<br>
@@ -1353,7 +1495,7 @@
               </div>
 
               <div class="hero-example-block" id="heroExampleTwitter" style="display:none;">
-                <div class="hero-example-platform">X / Twitter • Sample</div>
+                <div class="hero-example-platform">X / Twitter · Sample</div>
                 <div class="hero-example-headline">@aiomelette</div>
                 <p class="hero-example-body">
                   Turning AI chaos into systems small teams can actually run.
@@ -1710,6 +1852,14 @@
                 <span class="platform-icon">🔗</span>
                 <span class="platform-label">Link-in-Bio</span>
               </button>
+              <button class="platform-card" data-platform="substack">
+                <span class="platform-icon">✉️</span>
+                <span class="platform-label">Substack</span>
+              </button>
+              <button class="platform-card" data-platform="medium">
+                <span class="platform-icon">✍️</span>
+                <span class="platform-label">Medium</span>
+              </button>
             </div>
             
             <div class="selected-count" id="selectedCount">3 platforms selected</div>
@@ -1723,7 +1873,7 @@
             </div>
           </div>
 
-          <!-- Step 4: Results - NEW PLATFORM-STYLED CARDS -->
+          <!-- Step 4: Results -->
           <div class="step-container" id="step4">
             <div class="profiles-result-section">
               <header class="profiles-result-header">
@@ -1762,7 +1912,7 @@
                     </label>
                     <label>
                       <input type="checkbox" id="emailConsentMarketing">
-                      <span>Yes, send me occasional Ai Omelette updates, experiments & new tools (marketing emails).</span>
+                      <span>Yes, send me occasional Ai Omelette updates, experiments &amp; new tools (marketing emails).</span>
                     </label>
                   </div>
                 </div>
@@ -2078,7 +2228,9 @@
       google: { icon: '📍', name: 'Google Business', charLimit: 750 },
       threads: { icon: '🧵', name: 'Threads', charLimit: 150 },
       pinterest: { icon: '📌', name: 'Pinterest', charLimit: 500 },
-      linkinbio: { icon: '🔗', name: 'Link-in-Bio', charLimit: 80 }
+      linkinbio: { icon: '🔗', name: 'Link-in-Bio', charLimit: 80 },
+      substack: { icon: '✉️', name: 'Substack intro', charLimit: 300 },
+      medium: { icon: '✍️', name: 'Medium bio', charLimit: 160 }
     };
 
     // Generate profiles - REAL API
