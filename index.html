@@ -6,6 +6,7 @@
   <title>AiO Profile Omelette™ - Digital Presence Creator by Ai Omelette</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    html { scroll-behavior: smooth; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
     :root {
@@ -708,53 +709,131 @@
       color: var(--ink);
     }
     
-    .why-block {
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 24px 32px;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(10px);
-      border-radius: 12px;
-      text-align: center;
+    /* Section 2: About */
+    .about-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, var(--cream) 0%, #FEF9E7 50%, #fff 100%);
+      padding: 60px 20px;
       position: relative;
       z-index: 1;
     }
     
-    .why-block h3 {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 8px;
+    .about-container {
+      max-width: 600px;
+      text-align: center;
     }
     
-    .why-block p {
-      font-size: 14px;
+    .about-block {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    
+    .about-block h3 {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    
+    .about-block p {
+      font-size: 16px;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    
+    .about-block p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .about-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--yolk);
+      margin: 0 auto 32px;
+      opacity: 0.5;
+    }
+    
+    .founder-block {
+      margin-bottom: 40px;
     }
     
     .founder-note {
       font-style: italic;
-      font-size: 14px;
-      max-width: 400px;
-      margin: 0 auto 4px;
-      line-height: 1.5;
+      font-size: 15px;
+      max-width: 500px;
+      margin: 0 auto 12px;
+      line-height: 1.7;
+      color: var(--muted);
     }
     
     .founder-sig {
-      font-size: 13px;
-      font-weight: 500;
+      font-size: 14px;
+      font-weight: 600;
       color: var(--ink);
-      margin-bottom: 16px;
+    }
+    
+    .about-cta {
+      margin-top: 40px;
+    }
+    
+    .about-cta p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    
+    .btn-back-to-top {
+      display: inline-block;
+      background: var(--yolk);
+      color: var(--ink);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    
+    .btn-back-to-top:hover {
+      background: var(--yolk-hover);
+      transform: translateY(-2px);
+    }
+    
+    .footer-links {
+      margin-top: 8px;
+    }
+    
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+    }
+    
+    .footer-links a:hover {
+      color: var(--yolk);
     }
     
     .footer-brand {
-      font-size: 13px;
-      opacity: 0.7;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    
+    .footer-brand strong {
+      color: var(--ink);
     }
   </style>
 </head>
-<body>
+<body id="top">
   <div class="bg-pattern"></div>
   
   <header>
@@ -1032,21 +1111,45 @@
     </div>
   </main>
 
-  <!-- Why Block -->
-  <section class="why-block">
-    <h3>Why we made Profile Omelette</h3>
-    <p>Setting up profiles sucks. We fixed it.<br><br>AiO blends strategy, brand clarity, and AI into a 60-second identity builder. No templates. No guesswork. No "what should my bio even say?" spirals.<br><br>Just a clean, consistent digital presence so you can get back to running your business.</p>
+  <!-- Section 2: About -->
+  <section class="about-section" id="about">
+    <div class="about-container">
+      <div class="about-block">
+        <h3>Why we made Profile Omelette</h3>
+        <p>Setting up profiles sucks. We fixed it.</p>
+        <p>AiO blends strategy, brand clarity, and AI into a 60-second identity builder. No templates. No guesswork. No "what should my bio even say?" spirals.</p>
+        <p>Just a clean, consistent digital presence so you can get back to running your business.</p>
+      </div>
+      
+      <div class="about-divider"></div>
+      
+      <div class="founder-block">
+        <p class="founder-note">"We built Ai Omelette as a fun, smart trends-and-insights hub to show you how AI tools actually fit into your work, business, and everyday life. We're not here to replace you with a robot — we're here to help you build an Omeletized version of how you already work, create, and run things."</p>
+        <p class="founder-sig">— Ash, Founder</p>
+      </div>
+      
+      <div class="about-cta">
+        <p>Ready to cook your profiles?</p>
+        <a href="#top" class="btn-back-to-top">↑ Back to Top</a>
+      </div>
+    </div>
   </section>
 
   <footer>
-    <p class="founder-note">"We built Ai Omelette as a fun, smart trends-and-insights hub to show you how AI tools actually fit into your work, business, and everyday life. We're not here to replace you with a robot — we're here to help you build an Omeletized version of how you already work, create, and run things."</p>
-    <p class="founder-sig">— Ash, Founder</p>
     <p class="footer-brand">Built with 🍳 by <strong>Ai Omelette</strong></p>
+    <p class="footer-links">
+      <a href="https://aiomelette.com" target="_blank">aiomelette.com</a>
+    </p>
   </footer>
 
   <script>
     // State
     let currentStep = 1;
+    
+    // Scroll to top function
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
     let selectedAudiences = [];
     let selectedVibes = [];
     let selectedPlatforms = ['instagram', 'linkedin', 'google'];
