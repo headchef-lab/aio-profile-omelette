@@ -112,6 +112,45 @@
       --muted: var(--color-muted);
       --border: var(--color-border);
       --card-bg: var(--color-surface);
+/* CTA row: clean, no inline styles */
+.hero-cta-row {
+  margin-top: 22px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Stack benefit cards 1 → 2 → 3, left aligned with air */
+.hero-benefits-grid {
+  display: flex;
+  flex-direction: column;   /* vertical stack */
+  align-items: flex-start;
+  gap: 16px;                /* adjust to 20/24px if you want more space */
+}
+
+.hero-benefit-item {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 253, 230, 0.9);         /* soft yolk tint */
+  border: 1px solid rgba(250, 204, 21, 0.35);   /* subtle border */
+}
+
+/* If you still want 3-up on mobile, override there; otherwise this stacks everywhere */
+@media (min-width: 960px) {
+  .hero {
+    padding-top: 72px;
+    padding-bottom: 64px;
+  }
+
+  .hero .row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: flex-start;
+  }
+
+      
     }
 
     html { scroll-behavior: smooth; max-width: 100%; overflow-x: hidden; }
