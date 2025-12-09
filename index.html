@@ -6,1570 +6,500 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    /*
+     * ═══════════════════════════════════════════════════════════════════════════
+     * PROFILE OMELETTE V19 – PREMIUM WITH EDUCATION BREAKDOWNS
+     * Updated: 2025-12-09
+     * 
+     * Design System: AI Omelette Unified Design System v1.0
+     * 
+     * KEY CHANGES FROM V18:
+     * - Primary buttons: #111827 (charcoal) with white text
+     * - Button radius: 12px (not pill)
+     * - Button padding: 16px 32px
+     * - Card radius: 16px
+     * - Section padding: 64px
+     * - Dual-layer shadows
+     * - Fixed platform limits (TikTok 80, Facebook 255, Substack 250)
+     * - Added education breakdowns
+     * - Added visual character progress bars
+     * ═══════════════════════════════════════════════════════════════════════════
+     */
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #f9fafb;
-      --bg-alt: #ffffff;
-      --yolk: #fdd835;
-      --yolk-deep: #f59e0b;
-      --accent-soft: #fef3c7;
-      --accent-alt: #14b8a6;
-      --ink: #111827;
-      --muted: #6b7280;
-      --border: #e5e7eb;
-      --card-bg: #FFFFFF;
-      --radius-lg: 18px;
+      /* Surfaces */
+      --color-bg: #F9FAFB;
+      --color-bg-alt: #FFFFFF;
+      --color-surface: #FFFFFF;
+      --color-cream: #FFFDF7;
+      
+      /* Yolk Brand Accent */
+      --color-yolk: #FDD835;
+      --color-yolk-hover: #FBC02D;
+      --color-yolk-deep: #F59E0B;
+      --color-yolk-soft: #FEF3C7;
+      
+      /* Text */
+      --color-ink: #111827;
+      --color-muted: #6B7280;
+      --color-subtle: #9CA3AF;
+      
+      /* Borders */
+      --color-border: #E5E7EB;
+      --color-border-soft: #F3F4F6;
+      
+      /* Buttons - PREMIUM CHARCOAL */
+      --color-btn-primary: #111827;
+      --color-btn-primary-hover: #1F2937;
+      --color-btn-text: #FFFFFF;
+      
+      /* Status */
+      --color-success: #16A34A;
+      --color-warning: #F59E0B;
+      --color-danger: #DC2626;
+      
+      /* Accent */
+      --color-accent-alt: #14b8a6;
+      
+      /* Spacing (8px Grid) */
+      --space-2xs: 4px;
+      --space-xs: 8px;
+      --space-sm: 16px;
+      --space-md: 24px;
+      --space-lg: 32px;
+      --space-xl: 48px;
+      --space-2xl: 64px;
+      --space-3xl: 80px;
+      
+      /* Border Radius */
+      --radius-xs: 4px;
+      --radius-sm: 8px;
       --radius-md: 12px;
-      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
+      --radius-lg: 16px;
+      --radius-pill: 999px;
+      
+      /* Shadows (Dual-Layer) */
+      --shadow-sm: 0 1px 2px rgba(15,23,42,0.05), 0 1px 3px rgba(15,23,42,0.04);
+      --shadow-card: 0 4px 6px rgba(15,23,42,0.05), 0 2px 4px rgba(15,23,42,0.04);
+      --shadow-hover: 0 10px 15px rgba(15,23,42,0.08), 0 4px 6px rgba(15,23,42,0.05);
+      --shadow-elevated: 0 20px 40px rgba(15,23,42,0.12), 0 8px 16px rgba(15,23,42,0.08);
+      
+      /* Typography */
+      --font-heading: "Poppins", system-ui, sans-serif;
+      --font-body: "Inter", system-ui, sans-serif;
+      --text-xs: 0.8125rem;
+      --text-sm: 0.875rem;
+      --text-md: 1rem;
+      --text-lg: 1.125rem;
+      --leading-tight: 1.2;
+      --leading-snug: 1.35;
+      --leading-normal: 1.5;
+      
+      /* Transitions */
+      --transition-fast: 0.15s ease;
+      --transition-normal: 0.2s ease;
+      
+      /* Legacy aliases */
+      --bg: var(--color-bg);
+      --bg-alt: var(--color-bg-alt);
+      --yolk: var(--color-yolk);
+      --yolk-deep: var(--color-yolk-deep);
+      --accent-soft: var(--color-yolk-soft);
+      --accent-alt: var(--color-accent-alt);
+      --ink: var(--color-ink);
+      --muted: var(--color-muted);
+      --border: var(--color-border);
+      --card-bg: var(--color-surface);
     }
 
-    html {
-      scroll-behavior: smooth;
-      max-width: 100%;
-      overflow-x: hidden;
-    }
+    html { scroll-behavior: smooth; max-width: 100%; overflow-x: hidden; }
+    body { font-family: var(--font-body); background: var(--color-bg); color: var(--color-ink); line-height: var(--leading-normal); font-size: var(--text-md); max-width: 100%; overflow-x: hidden; }
+    .page { min-height: 100vh; overflow-x: hidden; }
+    .hero, .profiles, .wizard-section, .teaser, .page-footer { max-width: 100%; overflow-x: hidden; }
+    .container { max-width: 1120px; margin: 0 auto; padding: var(--space-2xl) 20px; }
+    .container-narrow { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
 
-    body {
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.6;
-      max-width: 100%;
-      overflow-x: hidden;
-    }
-      .page {
-      min-height: 100vh;
-      overflow-x: hidden;   /* ← ADD THIS LINE */
-    }
+    h1, h2, h3 { font-family: var(--font-heading); letter-spacing: -0.03em; color: var(--color-ink); }
+    h1 { font-size: 2.25rem; margin-bottom: var(--space-sm); line-height: var(--leading-tight); }
+    h2 { font-size: 1.875rem; margin-bottom: var(--space-sm); line-height: var(--leading-snug); }
+    h3 { font-size: 1.125rem; margin-bottom: var(--space-2xs); }
 
-    .page {
-      min-height: 100vh;
-    }
-      /* NEW: make sure all main sections never overflow */
-      .hero,
-      .profiles,
-      .wizard-section,
-      .teaser,
-      .page-footer {
-       max-width: 100%;
-       overflow-x: hidden;
-    }
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 72px 20px;
-    }
+    .gradient-text { background: linear-gradient(120deg, var(--color-yolk-deep), var(--color-accent-alt)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    p { color: var(--color-muted); font-size: var(--text-md); }
 
-    .container-narrow {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
+    .pill { display: inline-flex; align-items: center; gap: var(--space-xs); padding: var(--space-2xs) 10px; border-radius: var(--radius-pill); font-size: var(--text-xs); font-weight: 500; background: var(--color-yolk-soft); color: #92400E; margin-bottom: 10px; }
+    .pill-dot { width: 6px; height: 6px; border-radius: var(--radius-pill); background: var(--color-yolk-deep); }
+    .badge { display: inline-block; padding: 3px var(--space-xs); border-radius: var(--radius-pill); font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; background: #EFF6FF; color: #1D4ED8; }
 
-    h1, h2, h3 {
-      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      letter-spacing: -0.03em;
-      color: var(--ink);
-    }
+    /* BUTTONS - PREMIUM CHARCOAL */
+    .btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-md); border: none; font-size: var(--text-md); font-weight: 600; background: var(--color-btn-primary); color: var(--color-btn-text); cursor: pointer; text-decoration: none; transition: all var(--transition-normal); box-shadow: var(--shadow-sm); min-height: 48px; }
+    .btn-primary:hover { background: var(--color-btn-primary-hover); transform: translateY(-2px); box-shadow: var(--shadow-card); }
+    .btn-primary:active { transform: translateY(0); }
 
-    h1 { font-size: 2.4rem; margin-bottom: 16px; }
-    h2 { font-size: 1.8rem; margin-bottom: 12px; }
-    h3 { font-size: 1.2rem; margin-bottom: 4px; }
+    .btn-ghost { display: inline-flex; align-items: center; justify-content: center; padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); border: 1px solid var(--color-border); background: var(--color-surface); font-size: var(--text-md); font-weight: 500; color: var(--color-ink); text-decoration: none; cursor: pointer; transition: all var(--transition-normal); min-height: 48px; }
+    .btn-ghost:hover { background: var(--color-bg); box-shadow: var(--shadow-hover); transform: translateY(-2px); }
 
-    .gradient-text {
-      background: linear-gradient(120deg, var(--yolk-deep), var(--accent-alt));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+    .btn-yolk { display: inline-flex; align-items: center; justify-content: center; padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-md); border: none; font-size: var(--text-md); font-weight: 600; background: var(--color-yolk); color: var(--color-ink); cursor: pointer; text-decoration: none; transition: all var(--transition-normal); box-shadow: var(--shadow-sm); min-height: 48px; }
+    .btn-yolk:hover { background: var(--color-yolk-hover); transform: translateY(-2px); box-shadow: var(--shadow-card); }
 
-    p { color: var(--muted); font-size: 0.98rem; }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      background: #FEF3C7;
-      color: #92400E;
-      margin-bottom: 10px;
-    }
-
-    .pill-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--yolk-deep);
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 28px;
-      border-radius: 24px;
-      border: none;
-      font-size: 0.95rem;
-      font-weight: 700;
-      background: #fdd835;
-      color: #1a1a1a;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .btn-primary:hover {
-      background: #E5B93F;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(253, 216, 53, 0.35);
-    }
-
-    .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 16px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: #fff;
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--ink);
-      text-decoration: none;
-      cursor: pointer;
-      transition: background 0.08s ease, box-shadow 0.08s ease, transform 0.08s ease;
-    }
-
-    .btn-ghost:hover {
-      background: #F3F4F6;
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.10);
-      transform: translateY(-1px);
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      background: #EFF6FF;
-      color: #1D4ED8;
-    }
-
-    .row {
-      display: flex;
-      gap: 40px;
-      align-items: center;
-      justify-content: space-between;
-    }
+    .row { display: flex; gap: 40px; align-items: center; justify-content: space-between; }
 
     @media (max-width: 880px) {
-  .row {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-
-      h1 {
-    font-size: 1.9rem;
-    line-height: 1.18;
-  }
-}
-
-      
-    /* NEW: hero card goes full width */
-    .hero-side,
-    .hero-examples {
-    max-width: 100%;
-    width: 100%;
-    }
-  }   
-
-
-
-   @media (max-width: 520px) {
-  h1 {
-    font-size: 1.45rem;
-    line-height: 1.22;
-  }
-
-  /* Fix Live Preview + tabs on small screens */
-  .hero-examples-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
-
-  .badge {
-    font-size: 0.68rem;
-    padding: 3px 8px;
-  }
-
-  .hero-tab-list {
-    width: 100%;
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;   /* scroll instead of forcing page wider */
-    gap: 4px;
-  }
-
-  .hero-tab {
-    font-size: 0.7rem;
-    padding: 3px 8px;
-    white-space: nowrap;
-  }
-}
-
-
-    .section-heading {
-      margin-bottom: 10px;
+      .row { flex-direction: column; align-items: flex-start; }
+      h1 { font-size: 1.875rem; line-height: var(--leading-tight); }
+      .hero-side, .hero-examples { max-width: 100%; width: 100%; }
     }
 
-    .section-subtitle {
-      margin-bottom: 20px;
-      max-width: 560px;
+    @media (max-width: 520px) {
+      h1 { font-size: 1.5rem; line-height: 1.22; }
+      .hero-examples-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .badge { font-size: 0.68rem; padding: 3px var(--space-xs); }
+      .hero-tab-list { width: 100%; display: flex; flex-wrap: nowrap; overflow-x: auto; gap: var(--space-2xs); }
+      .hero-tab { font-size: 0.7rem; padding: 3px var(--space-xs); white-space: nowrap; }
     }
 
-    .list-inline {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 18px;
-      margin-top: 16px;
-      padding: 0;
-    }
+    .section-heading { margin-bottom: 10px; }
+    .section-subtitle { margin-bottom: var(--space-md); max-width: 560px; }
+    .list-inline { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: var(--space-sm); padding: 0; }
+    .list-inline li { list-style: none; font-size: var(--text-sm); color: var(--color-muted); position: relative; padding-left: 18px; }
+    .list-inline li::before { content: "•"; position: absolute; left: 0; top: 0; color: var(--color-yolk-deep); }
 
-    .list-inline li {
-      list-style: none;
-      font-size: 0.9rem;
-      color: var(--muted);
-      position: relative;
-      padding-left: 18px;
-    }
-
-    .list-inline li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      top: 0;
-      color: var(--yolk-deep);
-    }
-
-    /* === SECTION 1: HERO === */
-    .hero {
-      background: #ffffff;
-      border-bottom: 1px solid #F3F4F6;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-    }
-
-    .hero > .container {
-      width: 100%;
-    }
-
+    /* HERO */
+    .hero { background: var(--color-surface); border-bottom: 1px solid var(--color-border-soft); min-height: 100vh; display: flex; align-items: center; }
+    .hero > .container { width: 100%; }
     .hero-main { flex: 1.2; }
     .hero-side { flex: 1; min-width: 280px; }
-
-    .hero-examples {
-      background: #F9FAFB;
-      border-radius: 18px;
-      padding: 16px 18px;
-      border: 1px solid #E5E7EB;
-      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.06);
-      font-size: 0.85rem;
-    }
-
-    .hero-examples-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-
+    .hero-examples { background: var(--color-bg); border-radius: var(--radius-lg); padding: var(--space-sm) 18px; border: 1px solid var(--color-border); box-shadow: var(--shadow-card); font-size: 0.85rem; }
+    .hero-examples-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
     .hero-tab-list { display: flex; gap: 6px; }
+    .hero-tab { padding: var(--space-2xs) var(--space-xs); border-radius: var(--radius-pill); border: 1px solid transparent; font-size: 0.75rem; cursor: pointer; transition: all var(--transition-normal); }
+    .hero-tab.active { border-color: var(--color-border); background: var(--color-surface); font-weight: 500; }
+    .hero-example-block { background: var(--color-surface); border-radius: var(--radius-md); padding: 10px var(--space-sm); border: 1px solid var(--color-border); }
+    .hero-example-platform { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-muted); margin-bottom: var(--space-2xs); }
+    .hero-example-headline { font-weight: 600; font-size: var(--text-sm); margin-bottom: var(--space-2xs); color: var(--color-ink); }
+    .hero-example-body { font-size: 0.82rem; color: #4B5563; }
+    .hero-example-footer { margin-top: 10px; font-size: 0.75rem; color: var(--color-subtle); display: flex; justify-content: space-between; }
+    .hero-extra { margin-top: var(--space-md); display: flex; flex-direction: column; gap: 18px; }
+    .hero-benefits-title { font-size: var(--text-sm); font-weight: 600; color: var(--color-ink); margin-bottom: 6px; }
+    .hero-benefits-grid { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+    .hero-benefit-item { flex: 1 1 160px; min-width: 0; background: var(--color-yolk-soft); border-radius: var(--radius-lg); padding: var(--space-sm); border: 1px solid rgba(252, 211, 77, 0.55); }
+    .hero-benefit-icon { font-size: var(--text-lg); margin-bottom: var(--space-2xs); }
+    .hero-benefit-heading { font-size: var(--text-sm); font-weight: 600; margin-bottom: 2px; color: var(--color-ink); }
+    .hero-benefit-item p { font-size: 0.82rem; color: var(--color-muted); }
+    .hero-platform-strip { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; font-size: 0.84rem; color: var(--color-muted); }
+    .hero-platform-label { font-weight: 500; color: var(--color-ink); }
+    .hero-platform-chips { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+    .hero-platform-chip { padding: var(--space-2xs) 10px; border-radius: var(--radius-pill); border: 1px solid var(--color-border); background: var(--color-surface); font-size: 0.78rem; display: inline-flex; align-items: center; gap: var(--space-2xs); }
 
-    .hero-tab {
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      font-size: 0.75rem;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
+    /* PROFILES SECTION */
+    .profiles { background: var(--color-surface); border-bottom: 1px solid var(--color-border-soft); }
+    .profile-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-md); margin-top: var(--space-lg); }
+    @media (max-width: 960px) { .profile-grid { grid-template-columns: 1fr; } }
+    .profile-card-example { border-radius: var(--radius-lg); border: 1px solid var(--color-border); padding: var(--space-sm); background: var(--color-bg); display: flex; flex-direction: column; gap: 10px; box-shadow: var(--shadow-card); }
+    .profile-card-header { display: flex; align-items: center; justify-content: space-between; }
+    .profile-platform { font-size: 0.78rem; font-weight: 600; color: #374151; }
+    .profile-tag { font-size: 0.72rem; padding: 2px var(--space-xs); border-radius: var(--radius-pill); background: #E0F2FE; color: #0369A1; }
+    .profile-text { font-size: 0.86rem; color: #4B5563; line-height: var(--leading-normal); }
+    .profile-why { border-top: 1px dashed var(--color-border); padding-top: var(--space-xs); margin-top: 6px; }
+    .profile-why-title { font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-subtle); margin-bottom: var(--space-2xs); }
+    .check-list { list-style: none; display: flex; flex-direction: column; gap: var(--space-2xs); padding: 0; }
+    .check-list li { font-size: 0.8rem; color: #4B5563; position: relative; padding-left: 18px; }
+    .check-list li::before { content: "✓"; position: absolute; left: 0; font-size: 0.75rem; color: var(--color-success); }
 
-    .hero-tab.active {
-      border-color: #E5E7EB;
-      background: #fff;
-      font-weight: 500;
-    }
-
-    .hero-example-block {
-      background: #fff;
-      border-radius: 12px;
-      padding: 10px 12px;
-      border: 1px solid #E5E7EB;
-    }
-
-    .hero-example-platform {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #6B7280;
-      margin-bottom: 4px;
-    }
-
-    .hero-example-headline {
-      font-weight: 600;
-      font-size: 0.9rem;
-      margin-bottom: 4px;
-      color: var(--ink);
-    }
-
-    .hero-example-body {
-      font-size: 0.82rem;
-      color: #4B5563;
-    }
-
-    .hero-example-footer {
-      margin-top: 10px;
-      font-size: 0.75rem;
-      color: #9CA3AF;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    /* Hero extra band */
-    .hero-extra {
-      margin-top: 26px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .hero-benefits-title {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 6px;
-    }
-
-    .hero-benefits-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .hero-benefit-item {
-      flex: 1 1 160px;
-      min-width: 0;
-      background: var(--accent-soft);
-      border-radius: 14px;
-      padding: 12px 14px;
-      border: 1px solid rgba(252, 211, 77, 0.55);
-    }
-
-    .hero-benefit-icon {
-      font-size: 1.1rem;
-      margin-bottom: 4px;
-    }
-
-    .hero-benefit-heading {
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 2px;
-      color: var(--ink);
-    }
-
-    .hero-benefit-item p {
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    .hero-platform-strip {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      font-size: 0.84rem;
-      color: var(--muted);
-    }
-
-    .hero-platform-label {
-      font-weight: 500;
-      color: var(--ink);
-    }
-
-    .hero-platform-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .hero-platform-chip {
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: #fff;
-      font-size: 0.78rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    /* === SECTION 2: PROFILE EXAMPLES === */
-    .profiles {
-      background: #ffffff;
-      border-bottom: 1px solid #F3F4F6;
-    }
-
-    .profile-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
-      margin-top: 28px;
-    }
-
-    @media (max-width: 960px) {
-      .profile-grid { grid-template-columns: 1fr; }
-    }
-
-    .profile-card-example {
-      border-radius: 18px;
-      border: 1px solid #E5E7EB;
-      padding: 16px;
-      background: #F9FAFB;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .profile-card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .profile-platform {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: #374151;
-    }
-
-    .profile-tag {
-      font-size: 0.72rem;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #E0F2FE;
-      color: #0369A1;
-    }
-
-    .profile-text {
-      font-size: 0.86rem;
-      color: #4B5563;
-      line-height: 1.6;
-    }
-
-    .profile-why {
-      border-top: 1px dashed #E5E7EB;
-      padding-top: 8px;
-      margin-top: 6px;
-    }
-
-    .profile-why-title {
-      font-size: 0.76rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #9CA3AF;
-      margin-bottom: 4px;
-    }
-
-    .check-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      padding: 0;
-    }
-
-    .check-list li {
-      font-size: 0.8rem;
-      color: #4B5563;
-      position: relative;
-      padding-left: 18px;
-    }
-
-    .check-list li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      font-size: 0.75rem;
-      color: #16A34A;
-    }
-
-    /* === SECTION 3: WIZARD === */
-    .wizard-section {
-      background: radial-gradient(circle at top, #FEF3C7 0, transparent 50%), #FFF7DF;
-      border-top: 1px solid #FEF3C7;
-      border-bottom: 1px solid #FEF3C7;
-      padding: 60px 20px;
-    }
-
-    .wizard-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 18px;
-    }
-
-    .wizard-intro {
-      text-align: center;
-      max-width: 640px;
-      margin-bottom: 12px;
-    }
-
-    .wizard-card {
-      width: 100%;
-      max-width: 760px;
-      border-radius: 24px;
-      border: 1px solid rgba(148, 163, 184, 0.55);
-      background: #ffffff;
-      box-shadow: 0 18px 60px rgba(15, 23, 42, 0.15), 0 0 0 1px rgba(255,255,255,0.65) inset;
-      padding: 32px;
-      margin: 0 auto;
-    }
-
-    @media (max-width: 640px) {
-      .wizard-card { padding: 20px 18px; }
-    }
-
-    /* Progress Bar */
-    .progress-container {
-      margin-bottom: 24px;
-    }
-
-    .progress-track {
-      height: 4px;
-      background: rgba(0,0,0,0.08);
-      border-radius: 2px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--yolk), var(--yolk-deep));
-      border-radius: 2px;
-      transition: width 0.4s ease;
-    }
-
-    .progress-steps {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 12px;
-    }
-
-    .progress-step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      opacity: 0.5;
-      transition: opacity 0.3s;
-    }
-
+    /* WIZARD */
+    .wizard-section { background: radial-gradient(circle at top, var(--color-yolk-soft) 0, transparent 50%), #FFF7DF; border-top: 1px solid var(--color-yolk-soft); border-bottom: 1px solid var(--color-yolk-soft); padding: var(--space-2xl) 20px; }
+    .wizard-inner { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+    .wizard-intro { text-align: center; max-width: 640px; margin-bottom: var(--space-sm); }
+    .wizard-card { width: 100%; max-width: 760px; border-radius: var(--radius-lg); border: 1px solid rgba(148, 163, 184, 0.55); background: var(--color-surface); box-shadow: var(--shadow-elevated); padding: var(--space-lg); margin: 0 auto; }
+    @media (max-width: 640px) { .wizard-card { padding: 20px 18px; } }
+    .progress-container { margin-bottom: var(--space-md); }
+    .progress-track { height: var(--space-2xs); background: rgba(0,0,0,0.08); border-radius: 2px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--color-yolk), var(--color-yolk-deep)); border-radius: 2px; transition: width 0.4s ease; }
+    .progress-steps { display: flex; justify-content: space-between; margin-top: var(--space-sm); }
+    .progress-step { display: flex; flex-direction: column; align-items: center; gap: var(--space-2xs); opacity: 0.5; transition: opacity 0.3s; }
     .progress-step.active, .progress-step.current { opacity: 1; }
-
-    .progress-dot {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: #fff;
-      border: 2px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--muted);
-      transition: all 0.3s;
-    }
-
-    .progress-step.active .progress-dot {
-      background: var(--yolk);
-      border-color: var(--yolk);
-      color: var(--ink);
-    }
-
-    .progress-step.current .progress-dot {
-      border-color: var(--yolk);
-      color: var(--yolk-deep);
-    }
-
-    .progress-label {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    /* Step containers */
+    .progress-dot { width: 28px; height: 28px; border-radius: 50%; background: var(--color-surface); border: 2px solid var(--color-border); display: flex; align-items: center; justify-content: center; font-size: var(--text-xs); font-weight: 600; color: var(--color-muted); transition: all 0.3s; }
+    .progress-step.active .progress-dot { background: var(--color-yolk); border-color: var(--color-yolk); color: var(--color-ink); }
+    .progress-step.current .progress-dot { border-color: var(--color-yolk); color: var(--color-yolk-deep); }
+    .progress-label { font-size: var(--text-xs); color: var(--color-muted); }
     .step-container { display: none; }
     .step-container.active { display: block; animation: fadeIn 0.3s ease; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .step-title {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .step-subtitle {
-      color: var(--muted);
-      margin-bottom: 24px;
-      font-size: 15px;
-    }
-
-    /* Form elements */
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .step-title { font-size: 1.5rem; font-weight: 700; margin-bottom: var(--space-xs); }
+    .step-subtitle { color: var(--color-muted); margin-bottom: var(--space-md); font-size: 15px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-sm); }
     .field-full { grid-column: 1 / -1; }
-
-    @media (max-width: 600px) {
-      .form-grid { grid-template-columns: 1fr; }
-    }
-
-    label {
-      display: block;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 6px;
-    }
-
-    label .required { color: var(--yolk-deep); }
-
-    input, textarea, select {
-      width: 100%;
-      padding: 12px 16px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 15px;
-      font-family: inherit;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    input::placeholder, textarea::placeholder { color: #9CA3AF; }
-
-    input:focus, textarea:focus, select:focus {
-      outline: none;
-      border-color: var(--yolk);
-      box-shadow: 0 0 0 3px rgba(252, 210, 5, 0.2);
-    }
-
+    @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+    label { display: block; font-size: var(--text-sm); font-weight: 500; color: var(--color-ink); margin-bottom: 6px; }
+    label .required { color: var(--color-yolk-deep); }
+    input, textarea, select { width: 100%; padding: var(--space-sm); border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-size: 15px; font-family: inherit; transition: border-color var(--transition-normal), box-shadow var(--transition-normal); }
+    input::placeholder, textarea::placeholder { color: var(--color-subtle); }
+    input:focus, textarea:focus, select:focus { outline: none; border-color: var(--color-yolk); box-shadow: 0 0 0 3px rgba(252, 210, 5, 0.2); }
     textarea { resize: vertical; min-height: 100px; }
-
-    .helper-text {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
-    .form-hint {
-      text-align: center;
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 12px;
-    }
-
-    /* Buttons */
-    .button-row {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 32px;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .btn-back {
-      padding: 12px 24px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-back:hover { background: var(--border); }
-
-    .btn-next, .btn-generate, .btn-email {
-      padding: 12px 24px;
-      background: var(--yolk);
-      border: none;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      color: var(--ink);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
-
-    .btn-next:hover, .btn-generate:hover, .btn-email:hover {
-      background: #FDE047;
-      transform: translateY(-1px);
-    }
-
-    .btn-next:disabled, .btn-generate:disabled, .btn-email:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .btn-generate {
-      padding: 16px 32px;
-      font-size: 17px;
-    }
+    .helper-text { font-size: var(--text-xs); color: var(--color-muted); margin-top: var(--space-2xs); }
+    .form-hint { text-align: center; font-size: var(--text-xs); color: var(--color-muted); margin-top: var(--space-sm); }
+    .button-row { display: flex; justify-content: space-between; margin-top: var(--space-lg); gap: var(--space-sm); flex-wrap: wrap; }
+    .btn-back { padding: var(--space-sm) var(--space-md); background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-size: 15px; font-weight: 500; cursor: pointer; transition: all var(--transition-normal); }
+    .btn-back:hover { background: var(--color-border); }
+    .btn-next, .btn-generate, .btn-email { padding: var(--space-sm) var(--space-md); background: var(--color-yolk); border: none; border-radius: var(--radius-sm); font-size: 15px; font-weight: 600; cursor: pointer; transition: all var(--transition-normal); color: var(--color-ink); display: inline-flex; align-items: center; justify-content: center; gap: 6px; white-space: nowrap; }
+    .btn-next:hover, .btn-generate:hover, .btn-email:hover { background: var(--color-yolk-hover); transform: translateY(-1px); }
+    .btn-next:disabled, .btn-generate:disabled, .btn-email:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .btn-generate { padding: var(--space-sm) var(--space-lg); font-size: 17px; }
 
     /* Chips */
-    .audience-grid, .vibe-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    .audience-chip, .vibe-chip {
-      padding: 8px 16px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.2s;
-      user-select: none;
-    }
-
-    .audience-chip:hover, .vibe-chip:hover { border-color: var(--yolk); }
-
-    .audience-chip.active, .vibe-chip.active {
-      background: var(--yolk);
-      border-color: var(--yolk);
-      color: var(--ink);
-      font-weight: 500;
-    }
-
-    /* Emoji options */
-    .emoji-options {
-      display: flex;
-      gap: 16px;
-      margin-top: 8px;
-      flex-wrap: wrap;
-    }
-
-    .emoji-option {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
+    .audience-grid, .vibe-grid { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-xs); }
+    .audience-chip, .vibe-chip { padding: var(--space-xs) var(--space-sm); background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 20px; font-size: var(--text-sm); cursor: pointer; transition: all var(--transition-normal); user-select: none; }
+    .audience-chip:hover, .vibe-chip:hover { border-color: var(--color-yolk); }
+    .audience-chip.active, .vibe-chip.active { background: var(--color-yolk); border-color: var(--color-yolk); color: var(--color-ink); font-weight: 500; }
+    .emoji-options { display: flex; gap: var(--space-sm); margin-top: var(--space-xs); flex-wrap: wrap; }
+    .emoji-option { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: var(--text-sm); }
     .emoji-option input { width: auto; }
-
-    /* Toggle sections */
-    .toggle-section {
-      background: var(--bg);
-      border-radius: 12px;
-      padding: 16px;
-      margin-top: 16px;
-    }
-
-    .toggle-title {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    .toggle-buttons { display: flex; gap: 8px; }
-
-    .toggle-btn {
-      padding: 8px 16px;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .toggle-btn.active {
-      background: var(--yolk);
-      border-color: var(--yolk);
-      font-weight: 500;
-    }
-
-    .toggle-input { margin-top: 12px; }
+    .toggle-section { background: var(--color-bg); border-radius: var(--radius-md); padding: var(--space-sm); margin-top: var(--space-sm); }
+    .toggle-title { font-size: 15px; font-weight: 600; margin-bottom: var(--space-sm); }
+    .toggle-buttons { display: flex; gap: var(--space-xs); }
+    .toggle-btn { padding: var(--space-xs) var(--space-sm); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 6px; font-size: var(--text-sm); cursor: pointer; transition: all var(--transition-normal); }
+    .toggle-btn.active { background: var(--color-yolk); border-color: var(--color-yolk); font-weight: 500; }
+    .toggle-input { margin-top: var(--space-sm); }
     .toggle-input.hidden { display: none; }
-
-    .toggle-hint {
-      margin-top: 8px;
-      font-size: 13px;
-      color: var(--muted);
-      font-style: italic;
-    }
-
+    .toggle-hint { margin-top: var(--space-xs); font-size: var(--text-xs); color: var(--color-muted); font-style: italic; }
     .toggle-hint.hidden { display: none; }
-
-    /* Platform grid */
-    .platform-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-    }
-
-    @media (max-width: 600px) {
-      .platform-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    .platform-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      padding: 16px 12px;
-      background: #fff;
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.2s;
-      position: relative;
-    }
-
-    .platform-card:hover { border-color: var(--yolk); }
-
-    .platform-card.active {
-      border-color: var(--yolk);
-      background: rgba(252, 210, 5, 0.1);
-    }
-
+    .platform-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-sm); }
+    @media (max-width: 600px) { .platform-grid { grid-template-columns: repeat(2, 1fr); } }
+    .platform-card { display: flex; flex-direction: column; align-items: center; gap: var(--space-xs); padding: var(--space-sm); background: var(--color-surface); border: 2px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer; transition: all var(--transition-normal); position: relative; }
+    .platform-card:hover { border-color: var(--color-yolk); }
+    .platform-card.active { border-color: var(--color-yolk); background: rgba(252, 210, 5, 0.1); }
     .platform-icon { font-size: 28px; }
-    .platform-label { font-size: 13px; font-weight: 500; text-align: center; }
+    .platform-label { font-size: var(--text-xs); font-weight: 500; text-align: center; }
+    .platform-check { position: absolute; top: var(--space-xs); right: var(--space-xs); width: 20px; height: 20px; background: var(--color-yolk); border-radius: 50%; font-size: var(--text-xs); display: flex; align-items: center; justify-content: center; }
+    .selected-count { text-align: center; margin-top: var(--space-sm); color: var(--color-muted); font-size: var(--text-sm); }
 
-    .platform-check {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      width: 20px;
-      height: 20px;
-      background: var(--yolk);
-      border-radius: 50%;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    /* RESULTS SECTION - PREMIUM */
+    .profiles-result-section { max-width: 840px; margin: 0 auto; }
+    .profiles-result-header { margin-bottom: var(--space-md); }
+    .profiles-result-title { font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: -0.03em; color: var(--color-ink); margin-bottom: var(--space-2xs); }
+    .profiles-result-subtitle { font-size: var(--text-md); color: var(--color-muted); }
+    .profile-platform-heading { display: flex; align-items: center; justify-content: space-between; margin: var(--space-md) 0 var(--space-sm); font-weight: 600; font-size: var(--text-md); color: var(--color-ink); }
+    .profile-platform-badge { font-size: 0.7rem; padding: 2px var(--space-xs); border-radius: var(--radius-pill); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
+    .profile-platform-badge--social { background: #DBEAFE; color: #1D4ED8; }
+    .profile-platform-badge--professional { background: #E0E7FF; color: #4338CA; }
+    .profile-platform-badge--content { background: #FEE2E2; color: #DC2626; }
+    .profile-platform-badge--local { background: #D1FAE5; color: #059669; }
+    .profile-platform-badge--visual { background: #FCE7F3; color: #DB2777; }
+    .profile-platform-badge--utility { background: #F3E8FF; color: #7C3AED; }
+    .profile-platform-badge--newsletter { background: #FFEDD5; color: #EA580C; }
+    .profile-platform-badge--writing { background: #DCFCE7; color: #16A34A; }
 
-    .selected-count {
-      text-align: center;
-      margin-top: 16px;
-      color: var(--muted);
-      font-size: 14px;
-    }
+    .profile-card { border-radius: var(--radius-lg); border: 1px solid var(--color-border); background: var(--color-surface); box-shadow: var(--shadow-card); margin-bottom: var(--space-md); overflow: hidden; animation: slideUpFade 0.35s ease backwards; }
+    .profile-card:nth-child(1) { animation-delay: 0.05s; }
+    .profile-card:nth-child(2) { animation-delay: 0.15s; }
+    .profile-card:nth-child(3) { animation-delay: 0.25s; }
+    .profile-card:nth-child(4) { animation-delay: 0.35s; }
+    .profile-card:nth-child(5) { animation-delay: 0.45s; }
+    .profile-card:nth-child(6) { animation-delay: 0.55s; }
+    @keyframes slideUpFade { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* === NEW PLATFORM-STYLED RESULT CARDS === */
-    .profiles-result-section {
-      max-width: 840px;
-      margin: 0 auto;
-    }
+    .profile-card__header { position: relative; padding: var(--space-sm) 18px; display: flex; align-items: center; gap: var(--space-sm); }
+    .profile-card__avatar-wrap { width: 48px; height: 48px; border-radius: var(--radius-pill); overflow: hidden; border: 2px solid rgba(255, 255, 255, 0.9); flex-shrink: 0; background: var(--color-border-soft); }
+    .profile-card__avatar { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; }
+    .profile-card__avatar--initials { display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at top left, #FED7AA 0, #F97316 40%, #EA580C 90%); color: #FFF7ED; font-size: var(--text-md); font-weight: 600; }
+    .profile-card__meta { display: flex; flex-direction: column; gap: 2px; }
+    .profile-card__platform { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: #F9FAFB; opacity: 0.9; }
+    .profile-card__handle { font-size: var(--text-md); font-weight: 600; color: #F9FAFB; }
+    .profile-card__copy { margin-left: auto; padding: 7px var(--space-sm); border-radius: var(--radius-pill); border: none; font-size: 0.8rem; font-weight: 500; background: var(--color-yolk); color: var(--color-ink); cursor: pointer; box-shadow: 0 8px 20px rgba(252, 210, 5, 0.4); transition: all var(--transition-normal); white-space: nowrap; }
+    .profile-card__copy:hover { background: var(--color-yolk-hover); transform: translateY(-1px); }
+    .profile-card__copy--copied { background: var(--color-success) !important; color: white !important; }
+    .profile-card__body { padding: var(--space-sm) 18px var(--space-md); font-size: var(--text-sm); }
+    .profile-card__label { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-subtle); margin-bottom: var(--space-2xs); }
+    .profile-card__text { font-size: var(--text-md); color: #374151; margin-bottom: 6px; line-height: var(--leading-normal); }
+    .profile-card__alt-handles { font-size: 0.8rem; color: var(--color-muted); }
+    .profile-card__field { margin-top: var(--space-sm); }
+    .profile-card__bio-text { background: var(--color-cream); border-radius: var(--radius-sm); padding: var(--space-sm); font-size: var(--text-md); line-height: var(--leading-normal); color: #374151; border: 1px solid rgba(253, 216, 53, 0.2); }
+    .profile-card__char-wrap { margin-top: var(--space-xs); }
+    .profile-card__char-bar { height: 6px; background: var(--color-border); border-radius: 3px; overflow: hidden; margin-bottom: var(--space-2xs); }
+    .profile-card__char-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; }
+    .profile-card__char-fill--safe { background: linear-gradient(90deg, #16A34A, #22C55E); }
+    .profile-card__char-fill--warning { background: linear-gradient(90deg, #F59E0B, #FBBF24); }
+    .profile-card__char-fill--danger { background: linear-gradient(90deg, #DC2626, #EF4444); }
+    .profile-card__char-count { font-size: 0.76rem; color: var(--color-subtle); display: flex; justify-content: space-between; align-items: center; }
+    .profile-card__char-status { font-weight: 500; }
+    .profile-card__char-status--safe { color: var(--color-success); }
+    .profile-card__char-status--warning { color: var(--color-warning); }
+    .profile-card__char-status--danger { color: var(--color-danger); }
 
-    .profiles-result-header {
-      margin-bottom: 24px;
-    }
+    /* EDUCATION BREAKDOWN */
+    .profile-card__education { background: linear-gradient(135deg, #FEFCE8 0%, #FEF3C7 50%, #FFF7ED 100%); border-top: 1px solid rgba(251, 191, 36, 0.25); padding: var(--space-sm) 18px var(--space-md); }
+    .profile-card__education-header { display: flex; align-items: center; gap: var(--space-xs); margin-bottom: var(--space-sm); }
+    .profile-card__education-icon { width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg, var(--color-yolk) 0%, var(--color-yolk-deep) 100%); display: flex; align-items: center; justify-content: center; font-size: var(--text-sm); box-shadow: 0 3px 10px rgba(252, 210, 5, 0.35); }
+    .profile-card__education-title { font-size: var(--text-sm); font-weight: 600; color: #78350F; letter-spacing: -0.01em; }
+    .profile-card__education-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .profile-card__education-item { display: flex; align-items: flex-start; gap: var(--space-xs); }
+    .profile-card__education-check { width: 20px; height: 20px; min-width: 20px; border-radius: 50%; background: linear-gradient(135deg, #16A34A 0%, #22C55E 100%); display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+    .profile-card__education-check svg { width: 12px; height: 12px; color: white; }
+    .profile-card__education-text { font-size: 0.86rem; line-height: 1.55; color: #78350F; }
+    .profile-card__education-text strong { font-weight: 600; color: #451A03; }
+    @media (max-width: 640px) { .profile-card__education { padding: var(--space-sm); } .profile-card__education-text { font-size: 0.82rem; } }
 
-    .profiles-result-title {
-      font-family: "Poppins", system-ui, sans-serif;
-      font-size: 1.6rem;
-      letter-spacing: -0.03em;
-      color: #111827;
-      margin-bottom: 4px;
-    }
-
-    .profiles-result-subtitle {
-      font-size: 0.95rem;
-      color: #6B7280;
-    }
-
-    /* Platform heading row */
-    .profile-platform-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: 24px 0 12px;
-      font-weight: 600;
-      font-size: 1rem;
-      color: #111827;
-    }
-
-    /* Generic profile card */
-    .profile-card {
-      border-radius: 22px;
-      border: 1px solid #E5E7EB;
-      background: #FFFFFF;
-      box-shadow: 0 18px 60px rgba(15, 23, 42, 0.06);
-      margin-bottom: 20px;
-      overflow: hidden;
-    }
-
-    .profile-card__header {
-      position: relative;
-      padding: 14px 18px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    /* Avatar wrap + variants */
-    .profile-card__avatar-wrap {
-      width: 48px;
-      height: 48px;
-      border-radius: 999px;
-      overflow: hidden;
-      border: 2px solid rgba(255, 255, 255, 0.9);
-      flex-shrink: 0;
-      background: #F3F4F6;
-    }
-
-    .profile-card__avatar {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      border-radius: inherit;
-    }
-
-    .profile-card__avatar--initials {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at top left, #FED7AA 0, #F97316 40%, #EA580C 90%);
-      color: #FFF7ED;
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
-    .profile-card__meta {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .profile-card__platform {
-      font-size: 0.8rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #F9FAFB;
-      opacity: 0.9;
-    }
-
-    .profile-card__handle {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #F9FAFB;
-    }
-
-    .profile-card__copy {
-      margin-left: auto;
-      padding: 7px 14px;
-      border-radius: 999px;
-      border: none;
-      font-size: 0.8rem;
-      font-weight: 500;
-      background: #FCD205;
-      color: #111827;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(252, 210, 5, 0.4);
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
-
-    .profile-card__copy:hover {
-      background: #FACC15;
-      transform: translateY(-1px);
-    }
-
-    .profile-card__body {
-      padding: 16px 18px 20px;
-      font-size: 0.9rem;
-    }
-
-    .profile-card__label {
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #9CA3AF;
-      margin-bottom: 4px;
-    }
-
-    .profile-card__text {
-      font-size: 0.94rem;
-      color: #374151;
-      margin-bottom: 6px;
-      line-height: 1.5;
-    }
-
-    .profile-card__alt-handles {
-      font-size: 0.8rem;
-      color: #6B7280;
-    }
-
-    .profile-card__char-count {
-      font-size: 0.76rem;
-      color: #9CA3AF;
-      margin-top: 6px;
-    }
-
-    .profile-card__field {
-      margin-top: 14px;
-    }
-
-    /* Platform-specific header gradients (original set) */
-    .profile-card--instagram .profile-card__header {
-      background: linear-gradient(135deg, #FDBA74, #F97316, #EC4899);
-    }
-
-    .profile-card--x .profile-card__header {
-      background: radial-gradient(circle at top left, #111827, #020617);
-    }
-
-    .profile-card--linkedin .profile-card__header {
-      background: linear-gradient(135deg, #2563EB, #0F3B86);
-    }
-
-    .profile-card--tiktok .profile-card__header {
-      background: linear-gradient(135deg, #000000, #25F4EE, #FE2C55);
-    }
-
-    .profile-card--youtube .profile-card__header {
-      background: linear-gradient(135deg, #DC2626, #991B1B);
-    }
-
-    .profile-card--facebook .profile-card__header {
-      background: linear-gradient(135deg, #1877F2, #0D4F8B);
-    }
-
-    .profile-card--google .profile-card__header {
-      background: linear-gradient(135deg, #4285F4, #34A853, #FBBC05, #EA4335);
-    }
-
-    .profile-card--threads .profile-card__header {
-      background: linear-gradient(135deg, #000000, #333333);
-    }
-
-    .profile-card--pinterest .profile-card__header {
-      background: linear-gradient(135deg, #E60023, #BD081C);
-    }
-
-    .profile-card--linkinbio .profile-card__header {
-      background: linear-gradient(135deg, #8B5CF6, #6366F1);
-    }
-
-    /* NEW: Substack & Medium */
-    .profile-card--substack .profile-card__header {
-      background: linear-gradient(135deg, #F97316, #FACC15);
-    }
-
-    .profile-card--medium .profile-card__header {
-      background: linear-gradient(135deg, #16A34A, #4ADE80);
-    }
-
-    /* Ensure text stays light on all headers */
-    .profile-card__handle,
-    .profile-card__platform {
-      color: #F9FAFB;
-    }
+    /* Platform header gradients */
+    .profile-card--instagram .profile-card__header { background: linear-gradient(135deg, #FDBA74, #F97316, #EC4899); }
+    .profile-card--x .profile-card__header { background: radial-gradient(circle at top left, #111827, #020617); }
+    .profile-card--linkedin .profile-card__header { background: linear-gradient(135deg, #2563EB, #0F3B86); }
+    .profile-card--tiktok .profile-card__header { background: linear-gradient(135deg, #000000, #25F4EE, #FE2C55); }
+    .profile-card--youtube .profile-card__header { background: linear-gradient(135deg, #DC2626, #991B1B); }
+    .profile-card--facebook .profile-card__header { background: linear-gradient(135deg, #1877F2, #0D4F8B); }
+    .profile-card--google .profile-card__header { background: linear-gradient(135deg, #4285F4, #34A853, #FBBC05, #EA4335); }
+    .profile-card--threads .profile-card__header { background: linear-gradient(135deg, #000000, #333333); }
+    .profile-card--pinterest .profile-card__header { background: linear-gradient(135deg, #E60023, #BD081C); }
+    .profile-card--linkinbio .profile-card__header { background: linear-gradient(135deg, #8B5CF6, #6366F1); }
+    .profile-card--substack .profile-card__header { background: linear-gradient(135deg, #F97316, #FACC15); }
+    .profile-card--medium .profile-card__header { background: linear-gradient(135deg, #16A34A, #4ADE80); }
+    .profile-card__handle, .profile-card__platform { color: #F9FAFB; }
 
     /* Brand summary */
-    .brand-summary {
-      background: radial-gradient(circle at top left, #FEF3C7 0, #FFF7ED 45%, #FFFFFF 100%);
-      border-radius: 16px;
-      padding: 20px 24px;
-      margin-bottom: 28px;
-      color: #1F2933;
-      border: 1px solid #FBBF24;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
-    }
-
-    .brand-summary-row {
-      display: flex;
-      gap: 24px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
+    .brand-summary { background: radial-gradient(circle at top left, var(--color-yolk-soft) 0, #FFF7ED 45%, var(--color-surface) 100%); border-radius: var(--radius-lg); padding: var(--space-md); margin-bottom: var(--space-lg); color: #1F2933; border: 1px solid #FBBF24; box-shadow: var(--shadow-card); }
+    .brand-summary-row { display: flex; gap: var(--space-md); flex-wrap: wrap; align-items: center; }
     .brand-summary-item { flex: 1; min-width: 180px; }
-
-    .brand-summary-label {
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      opacity: 0.7;
-      margin-bottom: 4px;
-    }
-
+    .brand-summary-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; margin-bottom: var(--space-2xs); }
     .brand-summary-value { font-size: 18px; font-weight: 600; }
+    .brand-summary-alts { font-size: var(--text-xs); opacity: 0.8; margin-top: var(--space-2xs); }
 
-    .brand-summary-alts {
-      font-size: 13px;
-      opacity: 0.8;
-      margin-top: 4px;
-    }
-
-    /* Email share section */
-    .email-share {
-      margin-top: 24px;
-      padding: 18px 18px 16px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: #F9FAFB;
-    }
-
-    .email-share-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #111827;
-    }
-
-    .email-share-subtitle {
-      font-size: 0.85rem;
-      color: #6B7280;
-      margin-bottom: 14px;
-    }
-
-    .email-share-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: flex-start;
-    }
-
-    .email-share-row .email-input {
-      flex: 1 1 220px;
-      max-width: 280px;
-    }
-
-    .email-checkboxes {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      font-size: 0.8rem;
-      color: #4B5563;
-      flex: 2 1 220px;
-    }
-
-    .email-checkboxes label {
-      font-weight: 400;
-      display: flex;
-      align-items: flex-start;
-      gap: 6px;
-    }
-
-    .email-checkboxes input[type="checkbox"] {
-      margin-top: 2px;
-      width: auto;
-    }
-
-    .email-privacy {
-      margin-top: 10px;
-      font-size: 0.78rem;
-      color: #6B7280;
-    }
-
-    .email-privacy strong {
-      font-weight: 600;
-      color: #111827;
-    }
-
-    .human-check-input {
-      max-width: 200px;
-    }
-
-    /* Footer buttons */
-    .footer-buttons {
-      display: flex;
-      gap: 12px;
-      justify-content: flex-end;
-      flex-wrap: wrap;
-    }
-
-    .btn-secondary {
-      padding: 12px 20px;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-secondary:hover { background: var(--bg); }
-
-    /* Spinner */
-    .spinner {
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-      border: 2px solid var(--ink);
-      border-top-color: transparent;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      vertical-align: middle;
-    }
-
+    /* Email share */
+    .email-share { margin-top: var(--space-md); padding: 18px; border-radius: var(--radius-lg); border: 1px solid var(--color-border); background: var(--color-bg); }
+    .email-share-title { font-size: var(--text-md); font-weight: 600; margin-bottom: var(--space-xs); color: var(--color-ink); }
+    .email-share-subtitle { font-size: 0.85rem; color: var(--color-muted); margin-bottom: var(--space-sm); }
+    .email-share-row { display: flex; flex-wrap: wrap; gap: var(--space-sm); align-items: flex-start; }
+    .email-share-row .email-input { flex: 1 1 220px; max-width: 280px; }
+    .email-checkboxes { display: flex; flex-direction: column; gap: 6px; font-size: 0.8rem; color: #4B5563; flex: 2 1 220px; }
+    .email-checkboxes label { font-weight: 400; display: flex; align-items: flex-start; gap: 6px; }
+    .email-checkboxes input[type="checkbox"] { margin-top: 2px; width: auto; }
+    .email-privacy { margin-top: 10px; font-size: 0.78rem; color: var(--color-muted); }
+    .email-privacy strong { font-weight: 600; color: var(--color-ink); }
+    .human-check-input { max-width: 200px; }
+    .footer-buttons { display: flex; gap: var(--space-sm); justify-content: flex-end; flex-wrap: wrap; }
+    .btn-secondary { padding: var(--space-sm) var(--space-md); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-size: var(--text-sm); font-weight: 500; cursor: pointer; transition: all var(--transition-normal); }
+    .btn-secondary:hover { background: var(--color-bg); }
+    .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid var(--color-ink); border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* === SECTION 4: TEASER OUTPUT === */
-    .teaser {
-      background: #ffffff;
-      border-bottom: 1px solid #F3F4F6;
-    }
-
-    .teaser-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 20px;
-    }
-
-    @media (max-width: 1000px) {
-      .teaser-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-
-    @media (max-width: 640px) {
-      .teaser-grid { grid-template-columns: 1fr; }
-    }
-
-    .teaser-card {
-      border-radius: 16px;
-      border: 1px solid #E5E7EB;
-      padding: 12px 13px;
-      background: #F9FAFB;
-      font-size: 0.84rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .teaser-card.locked::after {
-      content: "Unlock to view";
-      position: absolute;
-      inset: auto 0 0;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 500;
-      background: linear-gradient(to top, rgba(15, 23, 42, 0.72), transparent);
-      color: #F9FAFB;
-    }
-
-    .teaser-card.locked .teaser-body {
-      filter: blur(4px);
-      opacity: 0.7;
-      pointer-events: none;
-    }
-
-    .teaser-platform {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #6B7280;
-      margin-bottom: 4px;
-    }
-
+    /* Teaser */
+    .teaser { background: var(--color-surface); border-bottom: 1px solid var(--color-border-soft); }
+    .teaser-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-top: var(--space-md); }
+    @media (max-width: 1000px) { .teaser-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 640px) { .teaser-grid { grid-template-columns: 1fr; } }
+    .teaser-card { border-radius: var(--radius-lg); border: 1px solid var(--color-border); padding: var(--space-sm); background: var(--color-bg); font-size: 0.84rem; position: relative; overflow: hidden; }
+    .teaser-card.locked::after { content: "Unlock to view"; position: absolute; inset: auto 0 0; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 500; background: linear-gradient(to top, rgba(15, 23, 42, 0.72), transparent); color: #F9FAFB; }
+    .teaser-card.locked .teaser-body { filter: blur(4px); opacity: 0.7; pointer-events: none; }
+    .teaser-platform { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-muted); margin-bottom: var(--space-2xs); }
     .teaser-body { color: #4B5563; }
+    .teaser-footer { margin-top: var(--space-md); display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+    .teaser-note { font-size: 0.8rem; color: var(--color-subtle); }
 
-    .teaser-footer {
-      margin-top: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-    }
+    /* Footer */
+    .page-footer { background: var(--color-bg); }
+    .footer-inner { display: flex; flex-direction: column; gap: 6px; font-size: 0.82rem; color: var(--color-subtle); text-align: center; }
+    .back-to-top { position: fixed; right: 20px; bottom: 20px; z-index: 40; }
 
-    .teaser-note {
-      font-size: 0.8rem;
-      color: #9CA3AF;
-    }
+    /* Upload */
+    .upload-single { max-width: 280px; }
+    .upload-area { border: 2px dashed var(--color-border); border-radius: var(--radius-md); padding: var(--space-md); text-align: center; cursor: pointer; transition: all var(--transition-normal); background: var(--color-surface); position: relative; }
+    .upload-area:hover { border-color: var(--color-yolk); background: rgba(253, 216, 53, 0.05); }
+    .upload-icon { font-size: 36px; margin-bottom: var(--space-xs); }
+    .upload-text { font-size: var(--text-sm); color: var(--color-ink); font-weight: 500; margin-bottom: var(--space-2xs); }
+    .upload-hint { font-size: var(--text-xs); color: var(--color-subtle); }
+    .upload-preview { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto var(--space-xs); }
+    .upload-filename { font-size: var(--text-xs); color: var(--color-ink); font-weight: 500; word-break: break-all; margin-top: var(--space-xs); }
+    .upload-remove-btn { margin-top: 10px; padding: 6px var(--space-sm); background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-size: var(--text-xs); cursor: pointer; }
+    .upload-remove-btn:hover { background: #FEE2E2; border-color: #FECACA; color: #DC2626; }
+    .upload-area.drag-over { border-color: var(--color-yolk); background: rgba(253, 216, 53, 0.1); }
 
-    /* === SECTION 5: FOOTER === */
-    .page-footer {
-      background: #F9FAFB;
-    }
-
-    .footer-inner {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      font-size: 0.82rem;
-      color: #9CA3AF;
-      text-align: center;
-    }
-
-    .back-to-top {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      z-index: 40;
-    }
-
-    /* Photo upload */
-    .upload-single {
-      max-width: 280px;
-    }
-
-    .upload-area {
-      border: 2px dashed var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s;
-      background: #fff;
-      position: relative;
-    }
-
-    .upload-area:hover {
-      border-color: var(--yolk);
-      background: rgba(253, 216, 53, 0.05);
-    }
-
-    .upload-icon {
-      font-size: 36px;
-      margin-bottom: 8px;
-    }
-
-    .upload-text {
-      font-size: 14px;
-      color: var(--ink);
-      font-weight: 500;
-      margin-bottom: 4px;
-    }
-
-    .upload-hint {
-      font-size: 12px;
-      color: #9CA3AF;
-    }
-
-    .upload-preview {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: 0 auto 8px;
-    }
-
-    .upload-filename {
-      font-size: 13px;
-      color: var(--ink);
-      font-weight: 500;
-      word-break: break-all;
-      margin-top: 8px;
-    }
-
-    .upload-remove-btn {
-      margin-top: 10px;
-      padding: 8px 16px;
-      background: #FEE2E2;
-      color: #DC2626;
-      border: none;
-      border-radius: 6px;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .upload-remove-btn:hover {
-      background: #FECACA;
-    }
-
-    .skip-text {
-      font-size: 12px;
-      color: var(--muted);
-      text-align: left;
-      margin-top: 8px;
-    }
-
-    /* Platform-flavour tweaks */
-    .profile-card--instagram .profile-card__body {
-      text-align: left;
-    }
-
-    .profile-card--instagram .profile-card__field {
-      margin-top: 10px;
-    }
-
-    .profile-card--linkedin .profile-card__body {
-      border-top: 1px solid rgba(148, 163, 184, 0.4);
-      margin-top: 6px;
-      padding-top: 10px;
-    }
-
-    .profile-card--x .profile-card__text {
-      line-height: 1.4;
-    }
-
-    .profile-card--x .profile-card__body {
-      font-size: 0.88rem;
-    }
-
-    .profile-card--google .profile-card__label {
-      text-transform: none;
-      letter-spacing: 0.02em;
-    }
-
-    @media (max-width: 880px) {
-      .hero {
-        align-items: flex-start;
-      }
-      .hero-benefits-grid {
-        flex-direction: column;
-      }
-    }
+    /* Platform tweaks */
+    .profile-card--instagram .profile-card__body { text-align: left; }
+    .profile-card--instagram .profile-card__field { margin-top: 10px; }
+    .profile-card--linkedin .profile-card__body { border-top: 1px solid rgba(148, 163, 184, 0.4); margin-top: 6px; padding-top: 10px; }
+    .profile-card--x .profile-card__text { line-height: 1.4; }
+    .profile-card--x .profile-card__body { font-size: 0.88rem; }
+    .profile-card--google .profile-card__label { text-transform: none; letter-spacing: 0.02em; }
+    @media (max-width: 880px) { .hero { align-items: flex-start; } .hero-benefits-grid { flex-direction: column; } }
   </style>
 </head>
 <body id="top">
   <div class="page">
 
-    <!-- SECTION 1: HERO + VALUE -->
+<!-- SECTION 1: HERO -->
     <section class="hero">
       <div class="container">
-        <div class="row">
-          <div class="hero-main">
-            <div class="pill">
-              <span class="pill-dot"></span>
-              AiO Profile Omelette · Early Access
-            </div>
-            <h1><span class="gradient-text">Crack open a perfect profile</span><br>for every platform.</h1>
-            <p class="section-subtitle">
-              Answer a few plain-language questions once. AiO turns it into
-              clean, platform-ready bios that actually sound like you—not a robot.
-            </p>
-            <ul class="list-inline">
-              <li>One source of truth for all your profiles</li>
-              <li>LinkedIn ≠ Instagram ≠ TikTok (we format each one)</li>
-              <li>Brand-safe tone, clear positioning, no guesswork</li>
-            </ul>
+        <div class="hero-main" style="max-width: 720px; margin: 0 auto; text-align: center;">
+          <div class="pill">
+            <span class="pill-dot"></span>
+            AiO Profile Omelette · Early Access
+          </div>
+          <h1><span class="gradient-text">Crack open a perfect profile</span><br>for every platform.</h1>
+          <p class="section-subtitle" style="margin-left: auto; margin-right: auto;">
+            Answer a few plain-language questions once. AiO turns it into
+            clean, platform-ready bios that actually sound like you—not a robot.
+          </p>
+          <ul class="list-inline" style="justify-content: center;">
+            <li>One source of truth for all your profiles</li>
+            <li>LinkedIn ≠ Instagram ≠ TikTok (we format each one)</li>
+            <li>Brand-safe tone, clear positioning, no guesswork</li>
+          </ul>
 
-            <div style="margin-top:22px; display:flex; gap:12px; flex-wrap:wrap;">
-              <a href="#wizard" class="btn-primary">Start your Omeletized profile</a>
-              <a href="#examples" class="btn-ghost">See examples first</a>
-            </div>
+          <div style="margin-top: 22px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+            <a href="#wizard" class="btn-primary">Start your Omeletized profile</a>
+            <a href="#examples" class="btn-ghost">See examples first</a>
+          </div>
 
-            <div class="hero-extra">
-              <div class="hero-benefits">
-                <div class="hero-benefits-title">In one run, you walk away with:</div>
-                <div class="hero-benefits-grid">
-                  <div class="hero-benefit-item">
-                    <div class="hero-benefit-icon">🎯</div>
-                    <div class="hero-benefit-heading">One clear core story</div>
-                    <p>Tagline, one-liner and handle ideas that actually match each other.</p>
-                  </div>
-                  <div class="hero-benefit-item">
-                    <div class="hero-benefit-icon">📚</div>
-                    <div class="hero-benefit-heading">Platform-ready bios</div>
-                    <p>Instagram, LinkedIn, X, Google and more, formatted for each channel.</p>
-                  </div>
-                  <div class="hero-benefit-item">
-                    <div class="hero-benefit-icon">✉️</div>
-                    <div class="hero-benefit-heading">Reusable profile pack</div>
-                    <p>Copy all at once or email it to yourself to reuse whenever you like.</p>
-                  </div>
-                </div>
+          <!-- Live Preview (now full-width, below CTAs) -->
+          <div class="hero-examples" style="margin-top: var(--space-lg); text-align: left;">
+            <div class="hero-examples-header">
+              <span class="badge">Live Preview</span>
+              <div class="hero-tab-list">
+                <div class="hero-tab active" onclick="showHeroTab('linkedin', this)">LinkedIn</div>
+                <div class="hero-tab" onclick="showHeroTab('instagram', this)">Instagram</div>
+                <div class="hero-tab" onclick="showHeroTab('twitter', this)">X / Twitter</div>
               </div>
+            </div>
 
-              <div class="hero-platform-strip">
-                <span class="hero-platform-label">Complete profiles for:</span>
-                <div class="hero-platform-chips">
-                  <span class="hero-platform-chip">📸 Instagram</span>
-                  <span class="hero-platform-chip">💼 LinkedIn</span>
-                  <span class="hero-platform-chip">📍 Google Business</span>
-                  <span class="hero-platform-chip">...and more!</span>
-                </div>
-              </div>
+            <div class="hero-example-block" id="heroExampleLinkedin">
+              <div class="hero-example-platform">LinkedIn · Sample</div>
+              <div class="hero-example-headline">Founder · Systems & AI Workflows</div>
+              <p class="hero-example-body">
+                I help small teams turn AI from "shiny toy" into simple, reliable systems
+                that save hours a week—without breaking their existing business.
+              </p>
+            </div>
+
+            <div class="hero-example-block" id="heroExampleInstagram" style="display:none;">
+              <div class="hero-example-platform">Instagram · Sample</div>
+              <div class="hero-example-headline">AI for humans 🧠✨</div>
+              <p class="hero-example-body">
+                Helping solo founders make AI actually useful.<br>
+                Workflows, tools & experiments from the AiO lab.<br>
+                New breakdowns every week ↓
+              </p>
+            </div>
+
+            <div class="hero-example-block" id="heroExampleTwitter" style="display:none;">
+              <div class="hero-example-platform">X / Twitter · Sample</div>
+              <div class="hero-example-headline">@aiomelette</div>
+              <p class="hero-example-body">
+                Turning AI chaos into systems small teams can actually run.
+                Daily experiments from the Ai Omelette kitchen.
+              </p>
+            </div>
+
+            <div class="hero-example-footer">
+              <span>Built from 4 plain-language answers.</span>
+              <span>Ai Omelette</span>
             </div>
           </div>
 
-          <div class="hero-side">
-            <div class="hero-examples">
-              <div class="hero-examples-header">
-                <span class="badge">Live Preview</span>
-                <div class="hero-tab-list">
-                  <div class="hero-tab active" onclick="showHeroTab('linkedin', this)">LinkedIn</div>
-                  <div class="hero-tab" onclick="showHeroTab('instagram', this)">Instagram</div>
-                  <div class="hero-tab" onclick="showHeroTab('twitter', this)">X / Twitter</div>
-                </div>
-              </div>
-
-              <div class="hero-example-block" id="heroExampleLinkedin">
-                <div class="hero-example-platform">LinkedIn · Sample</div>
-                <div class="hero-example-headline">Founder · Systems & AI Workflows</div>
-                <p class="hero-example-body">
-                  I help small teams turn AI from "shiny toy" into simple, reliable systems
-                  that save hours a week—without breaking their existing business.
-                </p>
-              </div>
-
-              <div class="hero-example-block" id="heroExampleInstagram" style="display:none;">
-                <div class="hero-example-platform">Instagram · Sample</div>
-                <div class="hero-example-headline">AI for humans 🧠✨</div>
-                <p class="hero-example-body">
-                  Helping solo founders make AI actually useful.<br>
-                  Workflows, tools & experiments from the AiO lab.<br>
-                  New breakdowns every week ↓
-                </p>
-              </div>
-
-              <div class="hero-example-block" id="heroExampleTwitter" style="display:none;">
-                <div class="hero-example-platform">X / Twitter · Sample</div>
-                <div class="hero-example-headline">@aiomelette</div>
-                <p class="hero-example-body">
-                  Turning AI chaos into systems small teams can actually run.
-                  Daily experiments from the Ai Omelette kitchen.
-                </p>
-              </div>
-
-              <div class="hero-example-footer">
-                <span>Built from 4 plain-language answers.</span>
-                <span>Ai Omelette</span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 2: WHAT GOOD PROFILES LOOK LIKE -->
+    <!-- SECTION 2: PROFILE EXAMPLES -->
     <section class="profiles" id="examples">
       <div class="container">
         <div class="section-heading">
@@ -1633,624 +563,485 @@
             <div class="profile-card-header">
               <div>
                 <div class="profile-platform">X / Twitter</div>
-                <h3>Sharp, scroll-stopping line.</h3>
+                <h3>Punchy. One glance tells the story.</h3>
               </div>
-              <span class="profile-tag">Signal > Noise</span>
+              <span class="profile-tag">Social</span>
             </div>
             <p class="profile-text">
-              Turning AI chaos into systems small teams can actually run.
-              Daily experiments from the Ai Omelette kitchen.
+              Turning AI chaos into systems small teams can actually run.<br>
+              Daily experiments from the Ai Omelette kitchen.<br>
+              Father of two, lifelong tinkerer.
             </p>
             <div class="profile-why">
               <div class="profile-why-title">Why this works</div>
               <ul class="check-list">
-                <li>Short enough to read mid-scroll.</li>
-                <li>Positions a clear niche, not "AI everything."</li>
-                <li>Hints at cadence ("daily experiments") to set expectation.</li>
+                <li>Conveys expertise and tone in under 160 chars.</li>
+                <li>Adds a personal touch (father, tinkerer) for relatability.</li>
+                <li>Works standalone or as a hook for deep-dives.</li>
               </ul>
             </div>
           </article>
         </div>
-
-        <div style="margin-top:32px; text-align:center;">
-          <a href="#wizard" class="btn-primary">Okay, I'm ready — build mine</a>
-          <p style="font-size:0.85rem; color:#6B7280; margin-top:10px;">
-            Answer once, AiO formats each platform for you.
-          </p>
-        </div>
       </div>
     </section>
 
-    <!-- SECTION 3: THE WIZARD -->
+    <!-- SECTION 3: WIZARD -->
     <section class="wizard-section" id="wizard">
       <div class="wizard-inner">
         <div class="wizard-intro">
-          <div class="pill" style="justify-content:center;">
-            <span class="pill-dot"></span>
-            Profile Builder
-          </div>
-          <h2>Tell us who you are in plain language.</h2>
-          <p>
-            Don't try to wordsmith it. Type the messy version. AiO will clean it up
-            and turn it into a consistent profile set for every platform you pick.
+          <h2>Build your Omeletized profile.</h2>
+          <p class="section-subtitle" style="max-width:100%;">
+            Answer a few quick questions and we'll turn your story into
+            platform-ready bios—one source, many outputs.
           </p>
         </div>
 
         <div class="wizard-card">
-          <!-- Progress bar -->
+          <!-- Progress -->
           <div class="progress-container">
             <div class="progress-track">
-              <div class="progress-fill" id="progressFill" style="width: 25%"></div>
+              <div class="progress-fill" id="progressFill" style="width: 25%;"></div>
             </div>
             <div class="progress-steps">
               <div class="progress-step current">
-                <span class="progress-dot">1</span>
+                <div class="progress-dot">1</div>
                 <span class="progress-label">Basics</span>
               </div>
               <div class="progress-step">
-                <span class="progress-dot">2</span>
-                <span class="progress-label">Brand DNA</span>
+                <div class="progress-dot">2</div>
+                <span class="progress-label">Tone</span>
               </div>
               <div class="progress-step">
-                <span class="progress-dot">3</span>
+                <div class="progress-dot">3</div>
                 <span class="progress-label">Platforms</span>
               </div>
               <div class="progress-step">
-                <span class="progress-dot">4</span>
+                <div class="progress-dot">4</div>
                 <span class="progress-label">Results</span>
               </div>
             </div>
           </div>
 
-          <!-- Step 1: Basics -->
+          <!-- STEP 1: Basics -->
           <div class="step-container active" id="step1">
-            <h2 class="step-title">Let's start with the basics</h2>
-            <p class="step-subtitle">Tell us who you are in plain language. You can refine it later.</p>
-            
+            <h3 class="step-title">1 · The basics</h3>
+            <p class="step-subtitle">Start with who you are and what you do. Plain language, no jargon—just speak like you would to a new friend at a coffee shop.</p>
+
             <div class="form-grid">
-              <div class="field-full">
-                <label>Brand or Business Name <span class="required">*</span></label>
-                <input type="text" id="businessName" placeholder="Ai Omelette">
-              </div>
-              
-              <!-- Photo Upload - Single Image -->
-              <div class="field-full">
-                <label>Brand Image <span style="font-weight: 400; color: var(--muted);">(optional)</span></label>
-                <div class="upload-single">
-                  <div class="upload-area" id="brandImageArea" onclick="document.getElementById('brandImageInput').click()">
-                    <img class="upload-preview" id="brandImagePreview" alt="Brand image preview" style="display: none;">
-                    <div class="upload-placeholder" id="uploadPlaceholder">
-                      <div class="upload-icon">📷</div>
-                      <div class="upload-text">Profile Photo or Logo</div>
-                      <div class="upload-hint">Click to upload (square works best)</div>
-                    </div>
-                    <div class="upload-filename" id="brandImageName"></div>
-                    <input type="file" id="brandImageInput" accept="image/*" onchange="handleImageUpload(this)" style="display: none;">
-                  </div>
-                  <button type="button" class="upload-remove-btn" id="removeImageBtn" onclick="removeImage()" style="display: none;">Remove image</button>
-                </div>
-                <p class="skip-text">No image? No problem — skip this and add one later.</p>
-              </div>
-              
               <div>
-                <label>Your Name (or main contact)</label>
-                <input type="text" id="founderName" placeholder="Your Name">
+                <label for="businessName">Business / Brand Name <span class="required">*</span></label>
+                <input type="text" id="businessName" placeholder="Brightline Studio">
+                <div class="helper-text">Your business or personal brand name.</div>
               </div>
-              
               <div>
-                <label>Industry / Category <span class="required">*</span></label>
-                <input type="text" id="industry" placeholder="AI tools, coaching, ecommerce, SaaS…">
-                <p class="helper-text">Short and simple is best. This helps with platform categories later.</p>
+                <label for="founderName">Founder / Your Name</label>
+                <input type="text" id="founderName" placeholder="Jordan Smith">
               </div>
-              
+              <div>
+                <label for="industry">Industry / Category</label>
+                <select id="industry">
+                  <option value="">Select an industry</option>
+                  <option value="AI & Technology">AI & Technology</option>
+                  <option value="Marketing & Advertising">Marketing & Advertising</option>
+                  <option value="Education & Coaching">Education & Coaching</option>
+                  <option value="E-commerce & Retail">E-commerce & Retail</option>
+                  <option value="Health & Wellness">Health & Wellness</option>
+                  <option value="Food & Beverage">Food & Beverage</option>
+                  <option value="Entertainment & Media">Entertainment & Media</option>
+                  <option value="Professional Services">Professional Services</option>
+                  <option value="Nonprofits & Social Impact">Nonprofits & Social Impact</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div>
+                <label for="location">Location</label>
+                <input type="text" id="location" placeholder="San Francisco, CA">
+              </div>
               <div class="field-full">
-                <label>What do you do? (One line) <span class="required">*</span></label>
-                <input type="text" id="oneLiner" placeholder="We turn AI chaos into practical systems people can actually use.">
-                <p class="helper-text">This becomes the core line behind all your profiles.</p>
+                <label for="oneLiner">What do you do? (One sentence) <span class="required">*</span></label>
+                <input type="text" id="oneLiner" placeholder="We build AI systems that save solo founders 10+ hours a week.">
+                <div class="helper-text">Write this as if you only have one breath to explain your work.</div>
               </div>
-              
               <div class="field-full">
-                <label>Tell us a bit more</label>
-                <textarea id="longDesc" placeholder="Share a few sentences about your products, services, and what makes you different…"></textarea>
-                <p class="helper-text">Don't overthink it. Bullet points or rough thoughts are fine.</p>
+                <label for="longDesc">Longer description (optional, but helpful)</label>
+                <textarea id="longDesc" rows="4" placeholder="Add more detail about your history, what makes you different, or anything else you'd like us to include."></textarea>
               </div>
-              
-              <div>
-                <label>Website</label>
-                <input type="text" id="website" placeholder="https://yourwebsite.com">
-                <p class="helper-text">Optional. Leave blank if you don't have one yet.</p>
-              </div>
-              
-              <div>
-                <label>Location</label>
-                <input type="text" id="location" placeholder="City, Country or 'Remote'">
-                <p class="helper-text">Used for profiles like Google Business. You can keep it general.</p>
+              <div class="field-full">
+                <label for="website">Website URL</label>
+                <input type="url" id="website" placeholder="https://aiomelette.com">
               </div>
             </div>
-            
+
+            <p class="form-hint">✨ Tip: Speak in plain English. AiO will translate that into smart, platform-ready copy.</p>
+
             <div class="button-row">
-              <div></div>
-              <button class="btn-next" id="step1Next" onclick="validateAndProceed(1)" disabled>Continue to Brand DNA →</button>
+              <span></span>
+              <button class="btn-next" onclick="goToStep(2)">Continue → Tone & style</button>
             </div>
-            <p class="form-hint">You can leave anything blank or rough — AiO will clean it up.</p>
           </div>
 
-          <!-- Step 2: Brand DNA -->
+          <!-- STEP 2: Tone & Style -->
           <div class="step-container" id="step2">
-            <h2 class="step-title">Define your brand DNA</h2>
-            <p class="step-subtitle">This helps AiO shape how your profiles sound and feel.</p>
-            
+            <h3 class="step-title">2 · Tone & style</h3>
+            <p class="step-subtitle">Help us match your voice. Who's your audience? What vibe should your profiles give off?</p>
+
             <div class="form-grid">
               <div class="field-full">
-                <label>Who are you speaking to? (select all that apply)</label>
-                <div class="audience-grid" id="audienceGrid">
-                  <button class="audience-chip" data-audience="solopreneurs">Solopreneurs</button>
-                  <button class="audience-chip" data-audience="creators">Creators & Influencers</button>
-                  <button class="audience-chip" data-audience="small-business">Small Business Owners</button>
-                  <button class="audience-chip" data-audience="agencies">Agencies</button>
-                  <button class="audience-chip" data-audience="tech-enthusiasts">Tech Enthusiasts</button>
-                  <button class="audience-chip" data-audience="local-business">Local Businesses</button>
-                  <button class="audience-chip" data-audience="marketers">Marketers</button>
-                  <button class="audience-chip" data-audience="ecommerce">E-commerce</button>
-                  <button class="audience-chip" data-audience="b2b">B2B / Enterprise</button>
-                  <button class="audience-chip" data-audience="consumers">Consumers / B2C</button>
+                <label>Target audience (pick up to 3)</label>
+                <div class="audience-grid">
+                  <span class="audience-chip" onclick="toggleAudience(this)">Solo founders</span>
+                  <span class="audience-chip" onclick="toggleAudience(this)">Small businesses</span>
+                  <span class="audience-chip" onclick="toggleAudience(this)">Enterprise teams</span>
+                  <span class="audience-chip" onclick="toggleAudience(this)">Creators</span>
+                  <span class="audience-chip" onclick="toggleAudience(this)">Marketers</span>
+                  <span class="audience-chip" onclick="toggleAudience(this)">Developers</span>
+                  <span class="audience-chip" onclick="toggleAudience(this)">Consultants</span>
+                  <span class="audience-chip" onclick="toggleAudience(this)">Local customers</span>
                 </div>
               </div>
-              
+
               <div class="field-full">
-                <label>How should your brand feel? (select all that apply)</label>
-                <div class="vibe-grid" id="vibeGrid">
-                  <button class="vibe-chip" data-vibe="Professional">Professional</button>
-                  <button class="vibe-chip" data-vibe="Minimal">Minimal</button>
-                  <button class="vibe-chip" data-vibe="Bold">Bold</button>
-                  <button class="vibe-chip" data-vibe="Creative">Creative</button>
-                  <button class="vibe-chip" data-vibe="Friendly">Friendly</button>
-                  <button class="vibe-chip" data-vibe="Playful">Playful</button>
-                  <button class="vibe-chip" data-vibe="Luxury">Luxury</button>
-                  <button class="vibe-chip" data-vibe="Warm">Warm</button>
-                  <button class="vibe-chip" data-vibe="Edgy">Edgy</button>
-                  <button class="vibe-chip" data-vibe="Technical">Technical</button>
+                <label>Brand vibe (pick up to 3)</label>
+                <div class="vibe-grid">
+                  <span class="vibe-chip" onclick="toggleVibe(this)">Professional</span>
+                  <span class="vibe-chip" onclick="toggleVibe(this)">Friendly</span>
+                  <span class="vibe-chip" onclick="toggleVibe(this)">Playful</span>
+                  <span class="vibe-chip" onclick="toggleVibe(this)">Bold</span>
+                  <span class="vibe-chip" onclick="toggleVibe(this)">Minimal</span>
+                  <span class="vibe-chip" onclick="toggleVibe(this)">Luxurious</span>
+                  <span class="vibe-chip" onclick="toggleVibe(this)">Techy</span>
+                  <span class="vibe-chip" onclick="toggleVibe(this)">Warm</span>
                 </div>
               </div>
-              
+
               <div class="field-full">
-                <label>Emoji Preference</label>
+                <label>Emoji preference</label>
                 <div class="emoji-options">
                   <label class="emoji-option">
-                    <input type="radio" name="emoji" value="yes"> Yes, use emojis — expressive and fun
+                    <input type="radio" name="emoji" value="none"> None at all
                   </label>
                   <label class="emoji-option">
-                    <input type="radio" name="emoji" value="minimal" checked> Minimal — 1–2 max
+                    <input type="radio" name="emoji" value="minimal" checked> Minimal ✨
                   </label>
                   <label class="emoji-option">
-                    <input type="radio" name="emoji" value="none"> No emojis — clean and serious
+                    <input type="radio" name="emoji" value="moderate"> Moderate 🎯🚀
                   </label>
+                  <label class="emoji-option">
+                    <input type="radio" name="emoji" value="heavy"> Heavy 🔥💪⚡🎉
+                  </label>
+                </div>
+              </div>
+
+              <div class="field-full">
+                <div class="upload-single">
+                  <label>Profile photo / logo (optional)</label>
+                  <div class="upload-area" onclick="document.getElementById('photoUpload').click()">
+                    <input type="file" id="photoUpload" accept="image/*" style="display:none" onchange="handlePhotoUpload(this)">
+                    <div id="uploadContent">
+                      <div class="upload-icon">📷</div>
+                      <div class="upload-text">Click to upload</div>
+                      <div class="upload-hint">JPG, PNG up to 5MB</div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
               <div class="field-full">
                 <div class="toggle-section" id="taglineSection">
-                  <h3 class="toggle-title">Tagline</h3>
+                  <div class="toggle-title">Do you have a tagline?</div>
                   <div class="toggle-buttons">
-                    <button type="button" class="toggle-btn" data-mode="input" onclick="setTaglineMode('input')">I have one</button>
-                    <button type="button" class="toggle-btn active" data-mode="generate" onclick="setTaglineMode('generate')">Generate one for me</button>
+                    <button class="toggle-btn active" data-mode="generate" onclick="setTaglineMode('generate')">Generate one for me</button>
+                    <button class="toggle-btn" data-mode="input" onclick="setTaglineMode('input')">I have one</button>
                   </div>
-                  <input type="text" id="taglineInput" class="toggle-input hidden" placeholder="Your tagline...">
-                  <p class="toggle-hint" id="taglineHint">AiO will craft a clean, platform-ready tagline based on your brand.</p>
+                  <input type="text" id="taglineInput" class="toggle-input hidden" placeholder="Your existing tagline">
+                  <p class="toggle-hint" id="taglineHint">We'll create a few options based on your inputs.</p>
                 </div>
               </div>
 
               <div class="field-full">
                 <div class="toggle-section" id="handleSection">
-                  <h3 class="toggle-title">Handle / Username</h3>
+                  <div class="toggle-title">Preferred handle / username?</div>
                   <div class="toggle-buttons">
-                    <button type="button" class="toggle-btn" data-mode="input" onclick="setHandleMode('input')">I have one</button>
-                    <button type="button" class="toggle-btn active" data-mode="generate" onclick="setHandleMode('generate')">Suggest options</button>
+                    <button class="toggle-btn active" data-mode="generate" onclick="setHandleMode('generate')">Suggest handles</button>
+                    <button class="toggle-btn" data-mode="input" onclick="setHandleMode('input')">I have one</button>
                   </div>
                   <input type="text" id="handleInput" class="toggle-input hidden" placeholder="@yourhandle">
-                  <p class="toggle-hint" id="handleHint">AiO suggests consistent handles for every platform.</p>
+                  <p class="toggle-hint" id="handleHint">We'll suggest a few options; you can pick or override.</p>
                 </div>
               </div>
             </div>
-            
+
             <div class="button-row">
               <button class="btn-back" onclick="goToStep(1)">← Back</button>
-              <button class="btn-next" onclick="goToStep(3)">Choose Platforms →</button>
+              <button class="btn-next" onclick="goToStep(3)">Continue → Pick platforms</button>
             </div>
           </div>
 
-          <!-- Step 3: Platforms -->
+          <!-- STEP 3: Platforms -->
           <div class="step-container" id="step3">
-            <h2 class="step-title">Where do you want to be?</h2>
-            <p class="step-subtitle">Select the platforms you use now or plan to use soon.</p>
-            
-            <div class="platform-grid" id="platformGrid">
-              <button class="platform-card active" data-platform="instagram">
-                <span class="platform-icon">📸</span>
-                <span class="platform-label">Instagram</span>
-                <span class="platform-check">✓</span>
-              </button>
-              <button class="platform-card" data-platform="tiktok">
-                <span class="platform-icon">🎵</span>
-                <span class="platform-label">TikTok</span>
-              </button>
-              <button class="platform-card" data-platform="x">
-                <span class="platform-icon">𝕏</span>
-                <span class="platform-label">X / Twitter</span>
-              </button>
-              <button class="platform-card active" data-platform="linkedin">
-                <span class="platform-icon">💼</span>
-                <span class="platform-label">LinkedIn</span>
-                <span class="platform-check">✓</span>
-              </button>
-              <button class="platform-card" data-platform="youtube">
-                <span class="platform-icon">▶️</span>
-                <span class="platform-label">YouTube</span>
-              </button>
-              <button class="platform-card" data-platform="facebook">
-                <span class="platform-icon">👤</span>
-                <span class="platform-label">Facebook</span>
-              </button>
-              <button class="platform-card active" data-platform="google">
-                <span class="platform-icon">📍</span>
-                <span class="platform-label">Google Business</span>
-                <span class="platform-check">✓</span>
-              </button>
-              <button class="platform-card" data-platform="threads">
-                <span class="platform-icon">🧵</span>
-                <span class="platform-label">Threads</span>
-              </button>
-              <button class="platform-card" data-platform="pinterest">
-                <span class="platform-icon">📌</span>
-                <span class="platform-label">Pinterest</span>
-              </button>
-              <button class="platform-card" data-platform="linkinbio">
-                <span class="platform-icon">🔗</span>
-                <span class="platform-label">Link-in-Bio</span>
-              </button>
-              <button class="platform-card" data-platform="substack">
-                <span class="platform-icon">✉️</span>
-                <span class="platform-label">Substack</span>
-              </button>
-              <button class="platform-card" data-platform="medium">
-                <span class="platform-icon">✍️</span>
-                <span class="platform-label">Medium</span>
-              </button>
+            <h3 class="step-title">3 · Choose your platforms</h3>
+            <p class="step-subtitle">Select every platform where you want an optimized profile. We'll write one bio per platform, fitted to character limits and style norms.</p>
+
+            <div class="platform-grid">
+              <div class="platform-card" onclick="togglePlatform('instagram', this)">
+                <div class="platform-icon">📸</div>
+                <div class="platform-label">Instagram</div>
+              </div>
+              <div class="platform-card" onclick="togglePlatform('tiktok', this)">
+                <div class="platform-icon">🎵</div>
+                <div class="platform-label">TikTok</div>
+              </div>
+              <div class="platform-card" onclick="togglePlatform('x', this)">
+                <div class="platform-icon">𝕏</div>
+                <div class="platform-label">X / Twitter</div>
+              </div>
+              <div class="platform-card" onclick="togglePlatform('linkedin', this)">
+                <div class="platform-icon">💼</div>
+                <div class="platform-label">LinkedIn</div>
+              </div>
+              <div class="platform-card" onclick="togglePlatform('youtube', this)">
+                <div class="platform-icon">▶️</div>
+                <div class="platform-label">YouTube</div>
+              </div>
+              <div class="platform-card" onclick="togglePlatform('facebook', this)">
+                <div class="platform-icon">👤</div>
+                <div class="platform-label">Facebook</div>
+              </div>
+              <div class="platform-card" onclick="togglePlatform('google', this)">
+                <div class="platform-icon">📍</div>
+                <div class="platform-label">Google Business</div>
+              </div>
+              <div class="platform-card" onclick="togglePlatform('threads', this)">
+                <div class="platform-icon">🧵</div>
+                <div class="platform-label">Threads</div>
+              </div>
+              <div class="platform-card" onclick="togglePlatform('pinterest', this)">
+                <div class="platform-icon">📌</div>
+                <div class="platform-label">Pinterest</div>
+              </div>
+              <div class="platform-card" onclick="togglePlatform('linkinbio', this)">
+                <div class="platform-icon">🔗</div>
+                <div class="platform-label">Link-in-Bio</div>
+              </div>
+              <div class="platform-card" onclick="togglePlatform('substack', this)">
+                <div class="platform-icon">✉️</div>
+                <div class="platform-label">Substack</div>
+              </div>
+              <div class="platform-card" onclick="togglePlatform('medium', this)">
+                <div class="platform-icon">✍️</div>
+                <div class="platform-label">Medium</div>
+              </div>
             </div>
-            
-            <div class="selected-count" id="selectedCount">3 platforms selected</div>
-            <p class="form-hint">You can always come back and cook more profiles later.</p>
-            
+
+            <div class="selected-count" id="selectedCount">No platforms selected</div>
+
             <div class="button-row">
               <button class="btn-back" onclick="goToStep(2)">← Back</button>
-              <button class="btn-generate" id="generateBtn" onclick="generateProfiles()">
-                🍳 Cook My Profiles
-              </button>
+              <button class="btn-generate" id="generateBtn" onclick="generateProfiles()">🍳 Cook My Profiles</button>
             </div>
           </div>
 
-          <!-- Step 4: Results -->
+          <!-- STEP 4: Results -->
           <div class="step-container" id="step4">
             <div class="profiles-result-section">
-              <header class="profiles-result-header">
-                <h2 class="profiles-result-title">Your profiles are cooked! 🍳</h2>
-                <p class="profiles-result-subtitle">
-                  Copy and paste these into each platform. You can tweak anything before you publish.
-                </p>
-              </header>
-              
+              <div class="profiles-result-header">
+                <h3 class="profiles-result-title">Your Omeletized Profiles</h3>
+                <p class="profiles-result-subtitle">Copy any profile or email the whole pack to yourself.</p>
+              </div>
+
+              <!-- Brand summary -->
               <div class="brand-summary" id="brandSummary"></div>
-              
+
+              <!-- Generated profiles -->
               <div id="resultsContainer"></div>
 
-              <!-- Email capture / trust block -->
+              <!-- Email share -->
               <div class="email-share">
-                <div class="email-share-title">Email this full profile pack to yourself</div>
-                <p class="email-share-subtitle">
-                  Skip the copy-paste juggling — we’ll send everything in one tidy email.
-                </p>
+                <div class="email-share-title">📬 Email me this pack</div>
+                <p class="email-share-subtitle">Save your profiles for later. We'll send a nicely formatted email you can reference anytime.</p>
                 <div class="email-share-row">
-                  <div class="email-input">
-                    <label for="emailAddress">Email address <span class="required">*</span></label>
-                    <input type="email" id="emailAddress" placeholder="you@example.com">
-                  </div>
-
-                  <div class="human-check-input">
-                    <label for="humanCheck">Quick human check <span class="required">*</span></label>
-                    <input type="text" id="humanCheck" placeholder="Type OMELETTE">
-                    <p class="helper-text">Bots hate breakfast. Humans can type OMELETTE.</p>
-                  </div>
-
-                  <div class="email-checkboxes">
-                    <label>
-                      <input type="checkbox" id="emailConsentRequired">
-                      <span>I agree to receive my profile pack by email and accept that Ai Omelette will store my email for this purpose.</span>
+                  <input type="email" class="email-input" id="emailAddress" placeholder="you@company.com">
+                  <div style="display: flex; flex-direction: column; gap: 6px;">
+                    <label style="font-size: 0.8rem; color: #4B5563; display: flex; align-items: center; gap: 6px;">
+                      <span>Type OMELETTE to prove you're human:</span>
                     </label>
-                    <label>
-                      <input type="checkbox" id="emailConsentMarketing">
-                      <span>Yes, send me occasional Ai Omelette updates, experiments &amp; new tools (marketing emails).</span>
-                    </label>
+                    <input type="text" id="humanCheck" class="human-check-input" placeholder="OMELETTE" autocomplete="off">
                   </div>
+                </div>
+                <div class="email-checkboxes" style="margin-top: 12px;">
+                  <label>
+                    <input type="checkbox" id="emailConsentRequired">
+                    Yes, send me my profile pack <span class="required">*</span>
+                  </label>
+                  <label>
+                    <input type="checkbox" id="emailConsentMarketing">
+                    Also sign me up for Ai Omelette updates (optional)
+                  </label>
                 </div>
                 <p class="email-privacy">
-                  <strong>Privacy:</strong> No spam. No selling your data. One-click unsubscribe on every marketing email.
+                  <strong>Your data stays safe.</strong> We only use your email to send this pack and (if checked) occasional tips.
                 </p>
-
-                <div style="margin-top:14px; display:flex; justify-content:flex-end;">
-                  <button class="btn-email" id="emailSendBtn" type="button" onclick="sendProfilesByEmail(this)">
-                    ✉️ Email my profiles
-                  </button>
+                <div style="margin-top: 12px;">
+                  <button class="btn-email" onclick="sendProfilesByEmail(this)">✉️ Email my profiles</button>
                 </div>
               </div>
-              
-              <div class="button-row" style="margin-top: 32px;">
-                <button class="btn-back" onclick="goToStep(1)">Start Over</button>
-                <div class="footer-buttons">
-                  <button class="btn-secondary" onclick="copyAllProfiles(this)">📋 Copy All</button>
-                </div>
+
+              <div class="footer-buttons" style="margin-top: 24px;">
+                <button class="btn-secondary" onclick="copyAllProfiles(this)">📋 Copy All</button>
+                <button class="btn-back" onclick="goToStep(3)">← Edit selections</button>
+                <button class="btn-yolk" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Start Over</button>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
 
-    <!-- SECTION 4: TEASER OUTPUT -->
-    <section class="teaser">
+    <!-- SECTION 4: TEASER -->
+    <section class="teaser" id="teaser">
       <div class="container">
         <div class="section-heading">
-          <h2>Your Omeletized profiles, cooking in the background.</h2>
+          <h2>Coming soon: Full Brand Kit</h2>
         </div>
         <p class="section-subtitle">
-          As soon as you finish the basics, AiO starts drafting your profile set. You'll
-          see one channel fully, and a blurred preview of the rest—ready to unlock when you're happy.
+          Profiles are just the start. We're building tools to help you craft
+          every piece of your brand presence—consistently.
         </p>
 
         <div class="teaser-grid">
-          <article class="teaser-card">
-            <div class="teaser-platform">LinkedIn · Unlocked</div>
-            <div class="teaser-body">
-              Founder at Ai Omelette — building simple, repeatable AI systems for small teams.
-              Turning "try every tool" chaos into one clear workflow you actually use.
-            </div>
-          </article>
-
-          <article class="teaser-card locked">
-            <div class="teaser-platform">Instagram · Locked</div>
-            <div class="teaser-body">
-              Helping you make AI feel less like a firehose, more like a sous-chef.
-              Behind-the-scenes tests, tools & tiny experiments from the Ai Omelette lab.
-            </div>
-          </article>
-
-          <article class="teaser-card locked">
-            <div class="teaser-platform">X / Twitter · Locked</div>
-            <div class="teaser-body">
-              Daily notes on AI tools, workflows and "actually shipped" experiments—no doomscroll, just signal.
-            </div>
-          </article>
-
-          <article class="teaser-card locked">
-            <div class="teaser-platform">YouTube · Locked</div>
-            <div class="teaser-body">
-              Short walkthroughs on how to plug AI into your real workflows: research, content, ops and more.
-            </div>
-          </article>
+          <div class="teaser-card">
+            <div class="teaser-platform">Email Signatures</div>
+            <div class="teaser-body">Professional email signatures that match your brand voice.</div>
+          </div>
+          <div class="teaser-card locked">
+            <div class="teaser-platform">Intro Scripts</div>
+            <div class="teaser-body">30-second elevator pitches for networking and calls.</div>
+          </div>
+          <div class="teaser-card locked">
+            <div class="teaser-platform">About Page Copy</div>
+            <div class="teaser-body">Website "About" section that actually converts.</div>
+          </div>
+          <div class="teaser-card locked">
+            <div class="teaser-platform">Media Kit</div>
+            <div class="teaser-body">One-pager for press, podcasts, and partnerships.</div>
+          </div>
         </div>
 
         <div class="teaser-footer">
-          <a href="#wizard" class="btn-primary">Finish your answers to unlock the full pack</a>
-          <span class="teaser-note">
-            You'll see a full preview before you ever pay. No surprise omelettes.
-          </span>
+          <span class="teaser-note">Want early access? Drop your email above.</span>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 5: FOOTER -->
+    <!-- FOOTER -->
     <footer class="page-footer">
-      <div class="container">
+      <div class="container-narrow">
         <div class="footer-inner">
-          <span>Built by <strong>Ai Omelette</strong> · Your digital presence, sunny-side up.</span>
-          <span>We don't store or sell your data; profiles are generated on the fly for this session.</span>
-          <a href="https://aiomelette.com" target="_blank" style="color: var(--yolk-deep); text-decoration: none;">aiomelette.com</a>
+          <p>Made with 🍳 by <strong>Ai Omelette</strong></p>
+          <p>© 2025 Ai Omelette. All rights reserved.</p>
         </div>
       </div>
     </footer>
 
-    <!-- Floating Back-to-top button -->
-    <a href="#top" class="btn-ghost back-to-top">↑ Back to top</a>
+    <div class="back-to-top">
+      <a href="#top" class="btn-ghost" style="padding: 10px 14px;">↑</a>
+    </div>
+
   </div>
 
   <script>
+    /*
+     * ═══════════════════════════════════════════════════════════════════════════
+     * PROFILE OMELETTE V19 – JAVASCRIPT
+     * Updated: 2025-12-09
+     * 
+     * KEY CHANGES FROM V18:
+     * - Fixed platform character limits (TikTok 80, Facebook 255, Substack 250)
+     * - Added education breakdown rendering
+     * - Added visual character count progress bars
+     * - Enhanced copy functions with education content
+     * - Added escapeHtml() for XSS protection
+     * ═══════════════════════════════════════════════════════════════════════════
+     */
+
     // State
     let currentStep = 1;
+    let selectedPlatforms = [];
     let selectedAudiences = [];
     let selectedVibes = [];
-    let selectedPlatforms = ['instagram', 'linkedin', 'google'];
     let taglineMode = 'generate';
     let handleMode = 'generate';
-    let generatedResults = null;
+    let generatedResults = [];
     let brandFoundation = null;
-    let uploadedImage = null;
     let uploadedImageDataUrl = null;
 
-    // Single image upload handler
-    function handleImageUpload(input) {
-      const file = input.files[0];
-      if (!file) return;
-      
-      uploadedImage = file;
-      
-      const preview = document.getElementById('brandImagePreview');
-      const placeholder = document.getElementById('uploadPlaceholder');
-      const nameEl = document.getElementById('brandImageName');
-      const removeBtn = document.getElementById('removeImageBtn');
-      
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        uploadedImageDataUrl = e.target.result;
-        preview.src = e.target.result;
-        preview.style.display = 'block';
-        placeholder.style.display = 'none';
-        nameEl.textContent = file.name;
-        removeBtn.style.display = 'block';
-      };
-      reader.readAsDataURL(file);
-    }
-
-    function removeImage() {
-      uploadedImage = null;
-      uploadedImageDataUrl = null;
-      
-      const preview = document.getElementById('brandImagePreview');
-      const placeholder = document.getElementById('uploadPlaceholder');
-      const nameEl = document.getElementById('brandImageName');
-      const removeBtn = document.getElementById('removeImageBtn');
-      const input = document.getElementById('brandImageInput');
-      
-      preview.src = '';
-      preview.style.display = 'none';
-      placeholder.style.display = 'block';
-      nameEl.textContent = '';
-      removeBtn.style.display = 'none';
-      input.value = '';
-    }
-
-    // Hero tab switching
-    function showHeroTab(tab, el) {
+    // Hero tab switcher
+    function showHeroTab(platform, tabEl) {
       document.querySelectorAll('.hero-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.hero-example-block').forEach(b => b.style.display = 'none');
-      
-      if (tab === 'linkedin') document.getElementById('heroExampleLinkedin').style.display = 'block';
-      if (tab === 'instagram') document.getElementById('heroExampleInstagram').style.display = 'block';
-      if (tab === 'twitter') document.getElementById('heroExampleTwitter').style.display = 'block';
-
-      if (el) el.classList.add('active');
+      tabEl.classList.add('active');
+      document.getElementById('heroExampleLinkedin').style.display = platform === 'linkedin' ? 'block' : 'none';
+      document.getElementById('heroExampleInstagram').style.display = platform === 'instagram' ? 'block' : 'none';
+      document.getElementById('heroExampleTwitter').style.display = platform === 'twitter' ? 'block' : 'none';
     }
 
-    // Validation for Step 1
-    function validateStep1() {
-      const name = document.getElementById('businessName')?.value?.trim() || '';
-      const industry = document.getElementById('industry')?.value?.trim() || '';
-      const oneLiner = document.getElementById('oneLiner')?.value?.trim() || '';
-      const isValid = name.length > 0 && industry.length > 0 && oneLiner.length > 0;
-      const btn = document.getElementById('step1Next');
-      if (btn) {
-        btn.disabled = !isValid;
-      }
-      return isValid;
-    }
-
-    function validateAndProceed(step) {
-      if (step === 1) {
-        const isValid = validateStep1();
-        if (isValid) {
-          goToStep(2);
-        }
-      }
-    }
-
-    // Add input listeners for real-time validation
-    (function() {
-      function setupValidation() {
-        const fields = ['businessName', 'industry', 'oneLiner'];
-        fields.forEach(id => {
-          const el = document.getElementById(id);
-          if (el) {
-            el.addEventListener('input', validateStep1);
-            el.addEventListener('change', validateStep1);
-            el.addEventListener('keyup', validateStep1);
-          }
-        });
-        validateStep1();
-      }
-      
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setupValidation);
-      } else {
-        setupValidation();
-      }
-      window.addEventListener('load', setupValidation);
-      setTimeout(setupValidation, 500);
-    })();
-
-    // Navigation
+    // Step navigation
     function goToStep(step) {
+      currentStep = step;
       document.querySelectorAll('.step-container').forEach(s => s.classList.remove('active'));
       document.getElementById('step' + step).classList.add('active');
-      
+      const progress = (step / 4) * 100;
+      document.getElementById('progressFill').style.width = progress + '%';
       document.querySelectorAll('.progress-step').forEach((s, i) => {
-        s.classList.remove('current', 'active');
+        s.classList.remove('active', 'current');
         if (i + 1 < step) s.classList.add('active');
         if (i + 1 === step) s.classList.add('current');
-        s.querySelector('.progress-dot').textContent = i + 1 < step ? '✓' : i + 1;
       });
-      
-      document.getElementById('progressFill').style.width = (step / 4 * 100) + '%';
-      currentStep = step;
-      
-      document.getElementById('wizard').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     // Audience chips
-    document.getElementById('audienceGrid').addEventListener('click', (e) => {
-      if (e.target.classList.contains('audience-chip')) {
-        e.target.classList.toggle('active');
-        const audience = e.target.dataset.audience;
-        if (selectedAudiences.includes(audience)) {
-          selectedAudiences = selectedAudiences.filter(a => a !== audience);
-        } else {
-          selectedAudiences.push(audience);
-        }
+    function toggleAudience(chip) {
+      const text = chip.textContent;
+      chip.classList.toggle('active');
+      if (chip.classList.contains('active')) {
+        selectedAudiences.push(text);
+      } else {
+        selectedAudiences = selectedAudiences.filter(a => a !== text);
       }
-    });
+    }
 
     // Vibe chips
-    document.getElementById('vibeGrid').addEventListener('click', (e) => {
-      if (e.target.classList.contains('vibe-chip')) {
-        e.target.classList.toggle('active');
-        const vibe = e.target.dataset.vibe;
-        if (selectedVibes.includes(vibe)) {
-          selectedVibes = selectedVibes.filter(v => v !== vibe);
-        } else {
-          selectedVibes.push(vibe);
-        }
+    function toggleVibe(chip) {
+      const text = chip.textContent;
+      chip.classList.toggle('active');
+      if (chip.classList.contains('active')) {
+        selectedVibes.push(text);
+      } else {
+        selectedVibes = selectedVibes.filter(v => v !== text);
       }
-    });
+    }
 
     // Platform selection
-    document.getElementById('platformGrid').addEventListener('click', (e) => {
-      const card = e.target.closest('.platform-card');
-      if (card) {
-        const platform = card.dataset.platform;
-        card.classList.toggle('active');
-        
-        if (selectedPlatforms.includes(platform)) {
-          selectedPlatforms = selectedPlatforms.filter(p => p !== platform);
-          card.querySelector('.platform-check')?.remove();
-        } else {
-          selectedPlatforms.push(platform);
-          const check = document.createElement('span');
-          check.className = 'platform-check';
-          check.textContent = '✓';
-          card.appendChild(check);
-        }
-        
-        updateSelectedCount();
+    function togglePlatform(platform, card) {
+      card.classList.toggle('active');
+      const isActive = card.classList.contains('active');
+      if (isActive) {
+        selectedPlatforms.push(platform);
+        card.innerHTML += '<span class="platform-check">✓</span>';
+      } else {
+        selectedPlatforms = selectedPlatforms.filter(p => p !== platform);
+        const check = card.querySelector('.platform-check');
+        if (check) check.remove();
       }
-    });
+      updateSelectedCount();
+    }
 
     function updateSelectedCount() {
       const count = selectedPlatforms.length;
       let text;
-      if (count === 0) {
-        text = 'No platforms selected yet';
-      } else if (count === 1) {
-        text = '1 platform selected';
-      } else {
-        text = count + ' platforms selected';
-      }
+      if (count === 0) text = 'No platforms selected';
+      else if (count === 1) text = '1 platform selected';
+      else text = count + ' platforms selected';
       document.getElementById('selectedCount').textContent = text;
     }
 
@@ -2273,23 +1064,68 @@
       document.getElementById('handleHint').classList.toggle('hidden', mode === 'input');
     }
 
-    // Platform metadata
+    // Photo upload
+    function handlePhotoUpload(input) {
+      const file = input.files[0];
+      if (!file) return;
+      if (file.size > 5 * 1024 * 1024) {
+        alert('File too large. Please choose an image under 5MB.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        uploadedImageDataUrl = e.target.result;
+        document.getElementById('uploadContent').innerHTML = `
+          <img src="${uploadedImageDataUrl}" alt="Preview" class="upload-preview">
+          <div class="upload-filename">${file.name}</div>
+          <button type="button" class="upload-remove-btn" onclick="removePhoto(event)">Remove</button>
+        `;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removePhoto(e) {
+      e.stopPropagation();
+      uploadedImageDataUrl = null;
+      document.getElementById('photoUpload').value = '';
+      document.getElementById('uploadContent').innerHTML = `
+        <div class="upload-icon">📷</div>
+        <div class="upload-text">Click to upload</div>
+        <div class="upload-hint">JPG, PNG up to 5MB</div>
+      `;
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════════
+    // PLATFORM METADATA – V19 CORRECTED LIMITS
+    // ═══════════════════════════════════════════════════════════════════════════
     const platformMeta = {
-      instagram: { icon: '📸', name: 'Instagram', charLimit: 150 },
-      tiktok: { icon: '🎵', name: 'TikTok', charLimit: 150 },
-      x: { icon: '𝕏', name: 'X / Twitter', charLimit: 160 },
-      linkedin: { icon: '💼', name: 'LinkedIn', charLimit: 2000 },
-      youtube: { icon: '▶️', name: 'YouTube', charLimit: 1000 },
-      facebook: { icon: '👤', name: 'Facebook', charLimit: 500 },
-      google: { icon: '📍', name: 'Google Business', charLimit: 750 },
-      threads: { icon: '🧵', name: 'Threads', charLimit: 150 },
-      pinterest: { icon: '📌', name: 'Pinterest', charLimit: 500 },
-      linkinbio: { icon: '🔗', name: 'Link-in-Bio', charLimit: 80 },
-      substack: { icon: '✉️', name: 'Substack intro', charLimit: 300 },
-      medium: { icon: '✍️', name: 'Medium bio', charLimit: 160 }
+      instagram:  { icon: '📸', name: 'Instagram',        charLimit: 150,  category: 'social' },
+      tiktok:     { icon: '🎵', name: 'TikTok',           charLimit: 80,   category: 'social' },
+      x:          { icon: '𝕏',  name: 'X / Twitter',      charLimit: 160,  category: 'social' },
+      linkedin:   { icon: '💼', name: 'LinkedIn',         charLimit: 2600, category: 'professional' },
+      youtube:    { icon: '▶️', name: 'YouTube',          charLimit: 1000, category: 'content' },
+      facebook:   { icon: '👤', name: 'Facebook',         charLimit: 255,  category: 'social' },
+      google:     { icon: '📍', name: 'Google Business',  charLimit: 750,  category: 'local' },
+      threads:    { icon: '🧵', name: 'Threads',          charLimit: 150,  category: 'social' },
+      pinterest:  { icon: '📌', name: 'Pinterest',        charLimit: 500,  category: 'visual' },
+      linkinbio:  { icon: '🔗', name: 'Link-in-Bio',      charLimit: 80,   category: 'utility' },
+      substack:   { icon: '✉️', name: 'Substack',         charLimit: 250,  category: 'newsletter' },
+      medium:     { icon: '✍️', name: 'Medium',           charLimit: 160,  category: 'writing' }
     };
 
-    // Generate profiles - REAL API
+    // ═══════════════════════════════════════════════════════════════════════════
+    // UTILITY: Escape HTML for XSS protection
+    // ═══════════════════════════════════════════════════════════════════════════
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════════
+    // GENERATE PROFILES – API CALL
+    // ═══════════════════════════════════════════════════════════════════════════
     async function generateProfiles() {
       if (selectedPlatforms.length === 0) {
         if (!confirm('No platforms selected — we\'ll still generate your brand summary. Continue?')) {
@@ -2363,14 +1199,23 @@
                       data.global_tagline || 
                       'Profile bio';
           
+          // V19: Capture education data from API response
+          const education = profileData.education ||
+                           profileData.why_this_works ||
+                           profileData.breakdown ||
+                           profileData.reasoning ||
+                           [];
+          
           generatedResults.push({
             platform: p,
             icon: meta.icon,
             name: meta.name,
             charLimit: meta.charLimit,
+            category: meta.category,
             handle: '@' + (profileData.handle_primary || profileData.handle || data.brand_foundation?.core_handle || brandFoundation.handle || payload.business_name.toLowerCase().replace(/\s+/g, '_')),
             bio: bio,
-            handleAlts: profileData.handle_alternatives || brandFoundation.handleAlts || []
+            handleAlts: profileData.handle_alternatives || brandFoundation.handleAlts || [],
+            education: Array.isArray(education) ? education : []
           });
         });
 
@@ -2385,6 +1230,9 @@
       btn.innerHTML = '🍳 Cook My Profiles';
     }
 
+    // ═══════════════════════════════════════════════════════════════════════════
+    // RENDER RESULTS – V19 PREMIUM WITH EDUCATION BREAKDOWNS
+    // ═══════════════════════════════════════════════════════════════════════════
     function renderResults() {
       const summaryContainer = document.getElementById('brandSummary');
       const businessName = (document.getElementById('businessName').value || 'My Business').trim();
@@ -2400,49 +1248,35 @@
       if (brandFoundation && (brandFoundation.tagline || brandFoundation.handle || hasImage)) {
         summaryContainer.innerHTML = `
           <div class="brand-summary-row">
-            ${
-              hasImage
-                ? `
-              <div class="brand-summary-item" style="flex: 0 0 auto;">
-                <div class="profile-card__avatar-wrap">
-                  <img src="${uploadedImageDataUrl}" alt="Profile" class="profile-card__avatar">
-                </div>
-              </div>
-            `
-                : `
-              <div class="brand-summary-item" style="flex: 0 0 auto;">
-                <div class="profile-card__avatar-wrap">
-                  <div class="profile-card__avatar profile-card__avatar--initials">${initials}</div>
-                </div>
-              </div>
-            `
+            ${hasImage
+              ? `<div class="brand-summary-item" style="flex: 0 0 auto;">
+                  <div class="profile-card__avatar-wrap">
+                    <img src="${uploadedImageDataUrl}" alt="Profile" class="profile-card__avatar">
+                  </div>
+                </div>`
+              : `<div class="brand-summary-item" style="flex: 0 0 auto;">
+                  <div class="profile-card__avatar-wrap">
+                    <div class="profile-card__avatar profile-card__avatar--initials">${escapeHtml(initials)}</div>
+                  </div>
+                </div>`
             }
-            ${
-              brandFoundation.tagline
-                ? `
-              <div class="brand-summary-item">
-                <div class="brand-summary-label">Your Tagline</div>
-                <div class="brand-summary-value">${brandFoundation.tagline}</div>
-              </div>
-            `
-                : ''
+            ${brandFoundation.tagline
+              ? `<div class="brand-summary-item">
+                  <div class="brand-summary-label">Your Tagline</div>
+                  <div class="brand-summary-value">${escapeHtml(brandFoundation.tagline)}</div>
+                </div>`
+              : ''
             }
-            ${
-              brandFoundation.handle
-                ? `
-              <div class="brand-summary-item">
-                <div class="brand-summary-label">Your Handle</div>
-                <div class="brand-summary-value">@${brandFoundation.handle}</div>
-                ${
-                  brandFoundation.handleAlts?.length
-                    ? `<div class="brand-summary-alts">Also available: ${brandFoundation.handleAlts
-                        .map(h => '@' + h)
-                        .join(', ')}</div>`
+            ${brandFoundation.handle
+              ? `<div class="brand-summary-item">
+                  <div class="brand-summary-label">Your Handle</div>
+                  <div class="brand-summary-value">@${escapeHtml(brandFoundation.handle)}</div>
+                  ${brandFoundation.handleAlts?.length
+                    ? `<div class="brand-summary-alts">Also available: ${brandFoundation.handleAlts.map(h => '@' + escapeHtml(h)).join(', ')}</div>`
                     : ''
-                }
-              </div>
-            `
-                : ''
+                  }
+                </div>`
+              : ''
             }
           </div>
         `;
@@ -2450,77 +1284,155 @@
         summaryContainer.innerHTML = '';
       }
 
-      // Profiles
+      // Profiles with education breakdowns
       const container = document.getElementById('resultsContainer');
 
-      container.innerHTML = generatedResults
-        .map(r => {
-          const meta = platformMeta[r.platform] || {};
-          const platformName = meta.name || r.name;
+      container.innerHTML = generatedResults.map((r, index) => {
+        const meta = platformMeta[r.platform] || {};
+        const platformName = meta.name || r.name;
+        const charLimit = r.charLimit || meta.charLimit || 150;
+        const bioLength = r.bio.length;
+                const rawPercent = (bioLength / charLimit) * 100;
+        const charPercent = Math.min(rawPercent, 100);
 
-          const avatarBlock = hasImage
-            ? `
-            <div class="profile-card__avatar-wrap">
-              <img
-                src="${uploadedImageDataUrl}"
-                alt="Profile avatar"
-                class="profile-card__avatar"
-              />
-            </div>
-          `
-            : `
-            <div class="profile-card__avatar-wrap">
-              <div class="profile-card__avatar profile-card__avatar--initials">${initials}</div>
+        let charStatus = 'safe';
+        let charStatusText = '';
+        if (rawPercent > 100) {
+          charStatus = 'danger';
+          charStatusText = '⚠️ Over limit!';
+        } else if (rawPercent >= 90) {
+          charStatus = 'warning';
+          charStatusText = '⚡ Almost full';
+        } else if (rawPercent >= 75) {
+          charStatus = 'safe';
+          charStatusText = '✓ Perfect';
+        }
+
+        const avatarBlock = hasImage
+          ? `<div class="profile-card__avatar-wrap">
+              <img src="${uploadedImageDataUrl}" alt="Profile avatar" class="profile-card__avatar" />
+            </div>`
+          : `<div class="profile-card__avatar-wrap">
+              <div class="profile-card__avatar profile-card__avatar--initials">${escapeHtml(initials)}</div>
+            </div>`;
+
+        // Build education section if we have education data
+        let educationBlock = '';
+        if (r.education && r.education.length > 0) {
+          const educationItems = r.education.map(item => {
+            const formatted = escapeHtml(item)
+              .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+              .replace(/—/g, '—');
+            
+            return `<li class="profile-card__education-item">
+              <span class="profile-card__education-check">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </span>
+              <span class="profile-card__education-text">${formatted}</span>
+            </li>`;
+          }).join('');
+
+          educationBlock = `
+            <div class="profile-card__education">
+              <div class="profile-card__education-header">
+                <div class="profile-card__education-icon">💡</div>
+                <div class="profile-card__education-title">Why This Works</div>
+              </div>
+              <ul class="profile-card__education-list">
+                ${educationItems}
+              </ul>
             </div>
           `;
+        }
 
-          return `
-            <!-- Platform heading -->
-            <div class="profile-platform-heading">
-              <span>${r.icon} ${platformName}</span>
+        // Category badge
+        const categoryBadge = r.category 
+          ? `<span class="profile-platform-badge profile-platform-badge--${r.category}">${r.category}</span>`
+          : '';
+
+        return `
+          <div class="profile-platform-heading">
+            <span>${r.icon} ${escapeHtml(platformName)}</span>
+            ${categoryBadge}
+          </div>
+
+          <article class="profile-card profile-card--${r.platform}" style="animation-delay: ${index * 0.1}s;">
+            <div class="profile-card__header">
+              ${avatarBlock}
+              <div class="profile-card__meta">
+                <div class="profile-card__platform">${escapeHtml(platformName)}</div>
+                <div class="profile-card__handle">${escapeHtml(r.handle)}</div>
+              </div>
+              <button class="profile-card__copy" type="button" onclick="copyProfile('${r.platform}', this)">
+                Copy profile
+              </button>
             </div>
 
-            <!-- Platform card -->
-            <article class="profile-card profile-card--${r.platform}">
-              <div class="profile-card__header">
-                ${avatarBlock}
-                <div class="profile-card__meta">
-                  <div class="profile-card__platform">${platformName}</div>
-                  <div class="profile-card__handle">${r.handle}</div>
-                </div>
-                <button class="profile-card__copy" type="button" onclick="copyProfile('${r.platform}', this)">
-                  Copy profile
-                </button>
-              </div>
+            <div class="profile-card__body">
+              <div class="profile-card__label">Handle</div>
+              <div class="profile-card__text">${escapeHtml(r.handle)}</div>
+              ${r.handleAlts && r.handleAlts.length
+                ? `<div class="profile-card__alt-handles">Alternatives: ${r.handleAlts.map(h => escapeHtml(h)).join(', ')}</div>`
+                : ''
+              }
 
-              <div class="profile-card__body">
-                <div class="profile-card__label">Handle</div>
-                <div class="profile-card__text">${r.handle}</div>
-                ${
-                  r.handleAlts && r.handleAlts.length
-                    ? `<div class="profile-card__alt-handles">Alternatives: ${r.handleAlts.join(', ')}</div>`
-                    : ''
-                }
-
-                <div class="profile-card__field">
-                  <div class="profile-card__label">Bio</div>
-                  <div class="profile-card__text">${r.bio}</div>
-                  <div class="profile-card__char-count">${r.bio.length} / ${r.charLimit} characters</div>
+              <div class="profile-card__field">
+                <div class="profile-card__label">Bio</div>
+                <div class="profile-card__bio-text">${escapeHtml(r.bio)}</div>
+                
+                <div class="profile-card__char-wrap">
+                  <div class="profile-card__char-bar">
+                    <div class="profile-card__char-fill profile-card__char-fill--${charStatus}" style="width: ${charPercent}%"></div>
+                  </div>
+                  <div class="profile-card__char-count">
+                    <span>${bioLength} / ${charLimit} characters</span>
+                    <span class="profile-card__char-status profile-card__char-status--${charStatus}">${charStatusText}</span>
+                  </div>
                 </div>
               </div>
-            </article>
-          `;
-        })
-        .join('');
+            </div>
+
+            ${educationBlock}
+          </article>
+        `;
+      }).join('');
     }
 
+    // ═══════════════════════════════════════════════════════════════════════════
+    // COPY FUNCTIONS – V19 WITH EDUCATION CONTENT
+    // ═══════════════════════════════════════════════════════════════════════════
     function copyProfile(platform, btn) {
       const result = generatedResults.find(r => r.platform === platform);
-      const text = `📱 ${result.name.toUpperCase()} PROFILE\n\nHandle: ${result.handle}\n\nBio:\n${result.bio}\n\n(${result.bio.length}/${result.charLimit} chars)`;
+      if (!result) return;
+
+      let text = `📱 ${result.name.toUpperCase()} PROFILE\n`;
+      text += '───────────────────────────────────\n\n';
+      text += `Handle: ${result.handle}\n\n`;
+      text += `Bio:\n${result.bio}\n\n`;
+      text += `(${result.bio.length}/${result.charLimit} characters)\n`;
+
+      if (result.education && result.education.length > 0) {
+        text += '\n───────────────────────────────────\n';
+        text += '💡 WHY THIS WORKS\n\n';
+        result.education.forEach(item => {
+          const cleanItem = item.replace(/\*\*/g, '');
+          text += `✓ ${cleanItem}\n`;
+        });
+      }
+
+      text += '\n───────────────────────────────────\n';
+      text += 'Generated by AiO Profile Omelette™';
+
       navigator.clipboard.writeText(text);
       
       btn.textContent = '✅ Copied!';
-      setTimeout(() => btn.textContent = 'Copy profile', 1500);
+      btn.classList.add('profile-card__copy--copied');
+      setTimeout(() => {
+        btn.textContent = 'Copy profile';
+        btn.classList.remove('profile-card__copy--copied');
+      }, 2000);
     }
 
     function copyAllProfiles(btn) {
@@ -2544,13 +1456,24 @@
       text += '\n';
       
       generatedResults.forEach(r => {
+        text += '─'.repeat(40) + '\n';
         text += `${r.icon} ${r.name.toUpperCase()}\n`;
+        text += '─'.repeat(40) + '\n';
         text += `Handle: ${r.handle}\n`;
         text += `Bio: ${r.bio}\n`;
-        text += `(${r.bio.length}/${r.charLimit} chars)\n\n`;
+        text += `(${r.bio.length}/${r.charLimit} chars)\n`;
+        
+        if (r.education && r.education.length > 0) {
+          text += '\n💡 Why This Works:\n';
+          r.education.forEach(item => {
+            const cleanItem = item.replace(/\*\*/g, '');
+            text += `  ✓ ${cleanItem}\n`;
+          });
+        }
+        text += '\n';
       });
       
-      text += '─'.repeat(40) + '\n';
+      text += '═'.repeat(40) + '\n';
       text += 'Generated by AiO Profile Omelette™\n';
       text += 'https://aiomelette.com';
       
@@ -2562,6 +1485,9 @@
       }
     }
 
+    // ═══════════════════════════════════════════════════════════════════════════
+    // EMAIL PROFILES
+    // ═══════════════════════════════════════════════════════════════════════════
     async function sendProfilesByEmail(btn) {
       if (!generatedResults || !generatedResults.length) {
         alert('Please generate your profiles first, then you can email them.');
@@ -2591,7 +1517,7 @@
       }
 
       if (!consentRequired.checked) {
-        alert('Please confirm you’re okay with us emailing you this profile pack.');
+        alert('Please confirm you\'re okay with us emailing you this profile pack.');
         return;
       }
 
@@ -2606,7 +1532,7 @@
         brand_foundation: brandFoundation,
         profiles: generatedResults,
         metadata: {
-          source: 'aio-profile-omelette-v1',
+          source: 'aio-profile-omelette-v19',
           created_at: new Date().toISOString()
         }
       };
