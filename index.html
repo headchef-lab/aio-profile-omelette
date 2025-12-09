@@ -112,45 +112,6 @@
       --muted: var(--color-muted);
       --border: var(--color-border);
       --card-bg: var(--color-surface);
-/* CTA row: clean, no inline styles */
-.hero-cta-row {
-  margin-top: 22px;
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-/* Stack benefit cards 1 → 2 → 3, left aligned with air */
-.hero-benefits-grid {
-  display: flex;
-  flex-direction: column;   /* vertical stack */
-  align-items: flex-start;
-  gap: 16px;                /* adjust to 20/24px if you want more space */
-}
-
-.hero-benefit-item {
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: 12px;
-  background: rgba(255, 253, 230, 0.9);         /* soft yolk tint */
-  border: 1px solid rgba(250, 204, 21, 0.35);   /* subtle border */
-}
-
-/* If you still want 3-up on mobile, override there; otherwise this stacks everywhere */
-@media (min-width: 960px) {
-  .hero {
-    padding-top: 72px;
-    padding-bottom: 64px;
-  }
-
-  .hero .row {
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-    gap: 40px;
-    align-items: flex-start;
-  }
-
-      
     }
 
     html { scroll-behavior: smooth; max-width: 100%; overflow-x: hidden; }
@@ -465,123 +426,113 @@
 <body id="top">
   <div class="page">
 
- <!-- SECTION 1: HERO -->
-<section class="hero">
-  <div class="container">
-    <div class="row">
-      <div class="hero-main">
-        <div class="pill">
-          <span class="pill-dot"></span>
-          AiO Profile Omelette · Early Access
-        </div>
+    <!-- SECTION 1: HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="row">
+          <div class="hero-main">
+            <div class="pill">
+              <span class="pill-dot"></span>
+              AiO Profile Omelette · Early Access
+            </div>
+            <h1><span class="gradient-text">Crack open a perfect profile</span><br>for every platform.</h1>
+            <p class="section-subtitle">
+              Answer a few plain-language questions once. AiO turns it into
+              clean, platform-ready bios that actually sound like you—not a robot.
+            </p>
+            <ul class="list-inline">
+              <li>One source of truth for all your profiles</li>
+              <li>LinkedIn ≠ Instagram ≠ TikTok (we format each one)</li>
+              <li>Brand-safe tone, clear positioning, no guesswork</li>
+            </ul>
 
-        <h1>
-          <span class="gradient-text">Crack open a perfect profile</span><br>
-          for every platform.
-        </h1>
+            <div style="margin-top:22px; display:flex; gap:12px; flex-wrap:wrap;">
+              <a href="#wizard" class="btn-primary">Start your Omeletized profile</a>
+              <a href="#examples" class="btn-ghost">See examples first</a>
+            </div>
 
-        <p class="section-subtitle">
-          Answer a few plain-language questions once. AiO turns it into
-          clean, platform-ready bios that actually sound like you—not a robot.
-        </p>
-
-        <ul class="list-inline">
-          <li>One source of truth for all your profiles</li>
-          <li>LinkedIn ≠ Instagram ≠ TikTok (we format each one)</li>
-          <li>Brand-safe tone, clear positioning, no guesswork</li>
-        </ul>
-
-        <div class="hero-cta-row">
-          <a href="#wizard" class="btn-primary">Start your Omeletized profile</a>
-          <a href="#examples" class="btn-ghost">See examples first</a>
-        </div>
-
-        <div class="hero-extra">
-          <div class="hero-benefits">
-            <div class="hero-benefits-title">In one run, you walk away with:</div>
-
-            <div class="hero-benefits-grid">
-              <div class="hero-benefit-item">
-                <div class="hero-benefit-icon">🎯</div>
-                <div class="hero-benefit-heading">One clear core story</div>
-                <p>Tagline, one-liner and handle ideas that actually match each other.</p>
+            <div class="hero-extra">
+              <div class="hero-benefits">
+                <div class="hero-benefits-title">In one run, you walk away with:</div>
+                <div class="hero-benefits-grid">
+                  <div class="hero-benefit-item">
+                    <div class="hero-benefit-icon">🎯</div>
+                    <div class="hero-benefit-heading">One clear core story</div>
+                    <p>Tagline, one-liner and handle ideas that actually match each other.</p>
+                  </div>
+                  <div class="hero-benefit-item">
+                    <div class="hero-benefit-icon">📚</div>
+                    <div class="hero-benefit-heading">Platform-ready bios</div>
+                    <p>Instagram, LinkedIn, X, Google and more, formatted for each channel.</p>
+                  </div>
+                  <div class="hero-benefit-item">
+                    <div class="hero-benefit-icon">✉️</div>
+                    <div class="hero-benefit-heading">Reusable profile pack</div>
+                    <p>Copy all at once or email it to yourself to reuse whenever you like.</p>
+                  </div>
+                </div>
               </div>
 
-              <div class="hero-benefit-item">
-                <div class="hero-benefit-icon">📚</div>
-                <div class="hero-benefit-heading">Platform-ready bios</div>
-                <p>Instagram, LinkedIn, X, Google and more, formatted for each channel.</p>
-              </div>
-
-              <div class="hero-benefit-item">
-                <div class="hero-benefit-icon">✉️</div>
-                <div class="hero-benefit-heading">Reusable profile pack</div>
-                <p>Copy all at once or email it to yourself to reuse whenever you like.</p>
+              <div class="hero-platform-strip">
+                <span class="hero-platform-label">Complete profiles for:</span>
+                <div class="hero-platform-chips">
+                  <span class="hero-platform-chip">📸 Instagram</span>
+                  <span class="hero-platform-chip">💼 LinkedIn</span>
+                  <span class="hero-platform-chip">📍 Google Business</span>
+                  <span class="hero-platform-chip">...and more!</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="hero-platform-strip">
-            <span class="hero-platform-label">Complete profiles for:</span>
-            <div class="hero-platform-chips">
-              <span class="hero-platform-chip">📸 Instagram</span>
-              <span class="hero-platform-chip">💼 LinkedIn</span>
-              <span class="hero-platform-chip">📍 Google Business</span>
-              <span class="hero-platform-chip">...and more!</span>
+          <div class="hero-side">
+            <div class="hero-examples">
+              <div class="hero-examples-header">
+                <span class="badge">Live Preview</span>
+                <div class="hero-tab-list">
+                  <div class="hero-tab active" onclick="showHeroTab('linkedin', this)">LinkedIn</div>
+                  <div class="hero-tab" onclick="showHeroTab('instagram', this)">Instagram</div>
+                  <div class="hero-tab" onclick="showHeroTab('twitter', this)">X / Twitter</div>
+                </div>
+              </div>
+
+              <div class="hero-example-block" id="heroExampleLinkedin">
+                <div class="hero-example-platform">LinkedIn · Sample</div>
+                <div class="hero-example-headline">Founder · Systems & AI Workflows</div>
+                <p class="hero-example-body">
+                  I help small teams turn AI from "shiny toy" into simple, reliable systems
+                  that save hours a week—without breaking their existing business.
+                </p>
+              </div>
+
+              <div class="hero-example-block" id="heroExampleInstagram" style="display:none;">
+                <div class="hero-example-platform">Instagram · Sample</div>
+                <div class="hero-example-headline">AI for humans 🧠✨</div>
+                <p class="hero-example-body">
+                  Helping solo founders make AI actually useful.<br>
+                  Workflows, tools & experiments from the AiO lab.<br>
+                  New breakdowns every week ↓
+                </p>
+              </div>
+
+              <div class="hero-example-block" id="heroExampleTwitter" style="display:none;">
+                <div class="hero-example-platform">X / Twitter · Sample</div>
+                <div class="hero-example-headline">@aiomelette</div>
+                <p class="hero-example-body">
+                  Turning AI chaos into systems small teams can actually run.
+                  Daily experiments from the Ai Omelette kitchen.
+                </p>
+              </div>
+
+              <div class="hero-example-footer">
+                <span>Built from 4 plain-language answers.</span>
+                <span>Ai Omelette</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="hero-side">
-        <div class="hero-examples">
-          <div class="hero-examples-header">
-            <span class="badge">Live Preview</span>
-            <div class="hero-tab-list">
-              <button class="hero-tab active" type="button" onclick="showHeroTab('linkedin', this)">LinkedIn</button>
-              <button class="hero-tab" type="button" onclick="showHeroTab('instagram', this)">Instagram</button>
-              <button class="hero-tab" type="button" onclick="showHeroTab('twitter', this)">X / Twitter</button>
-            </div>
-          </div>
-
-          <div class="hero-example-block" id="heroExampleLinkedin">
-            <div class="hero-example-platform">LinkedIn · Sample</div>
-            <div class="hero-example-headline">Founder · Systems &amp; AI Workflows</div>
-            <p class="hero-example-body">
-              I help small teams turn AI from “shiny toy” into simple, reliable systems
-              that save hours a week—without breaking their existing business.
-            </p>
-          </div>
-
-          <div class="hero-example-block" id="heroExampleInstagram" style="display:none;">
-            <div class="hero-example-platform">Instagram · Sample</div>
-            <div class="hero-example-headline">AI for humans 🧠✨</div>
-            <p class="hero-example-body">
-              Helping solo founders make AI actually useful.<br>
-              Workflows, tools &amp; experiments from the AiO lab.<br>
-              New breakdowns every week ↓
-            </p>
-          </div>
-
-          <div class="hero-example-block" id="heroExampleTwitter" style="display:none;">
-            <div class="hero-example-platform">X / Twitter · Sample</div>
-            <div class="hero-example-headline">@aiomelette</div>
-            <p class="hero-example-body">
-              Turning AI chaos into systems small teams can actually run.
-              Daily experiments from the Ai Omelette kitchen.
-            </p>
-          </div>
-
-          <div class="hero-example-footer">
-            <span>Built from 4 plain-language answers.</span>
-            <span>Ai Omelette</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
+    </section>
 
     <!-- SECTION 2: PROFILE EXAMPLES -->
     <section class="profiles" id="examples">
